@@ -3,6 +3,3 @@
 #
 git fetch origin
 git reset --hard origin/main
-
-# Make the new file executable
-chmod +x ~/www/laraProject/autodeploy
