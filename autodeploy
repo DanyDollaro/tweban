@@ -1,5 +1,0 @@
-#
-# Fetch the origin and force the synchronization
-#
-git fetch origin
-git reset --hard origin/main
