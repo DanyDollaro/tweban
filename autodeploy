@@ -1,2 +1,5 @@
+#
+# Fetch the origin and force the synchronization
+#
 git fetch origin
-git reset --hard origin/main  # o origin/master
+git reset --hard origin/main
