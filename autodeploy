@@ -1,1 +1,2 @@
-git clone https://github.com/DanyDollaro/tweban.git /home/grp_06/www/laraProject
+git fetch origin
+git reset --hard origin/main  # o origin/master
