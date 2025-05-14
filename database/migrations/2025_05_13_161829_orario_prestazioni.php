@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('orario_prestazioni', function(Blueprint $table){
+            $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione');
+            $table->foreign('orario')->references('valore_orario')->on('orari');
+            $table->primary(['tipologia_prestazione','orario']);
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('orario_prestazioni');
     }
 };

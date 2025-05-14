@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('giorni_settimana', function(Blueprint $table){
+            $table->enum('valore_giorno', ['lunedi', 'martedi', 'mercoledi', 'giovedi','venerdi'])->primary();
+        });
     }
 
     /**
@@ -19,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('giorni_settimana');
     }
 };

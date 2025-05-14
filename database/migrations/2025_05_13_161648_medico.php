@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('medico', function(Blueprint $table){
+            $table->string('codice_fiscale', 16)->primary();
+            $table->string('nome',30);
+            $table->string('cognome',30);
+            $table->string('email',100)->unique();
+            $table->string('password',255);
+            $table->foreign('prestazione_assegnata')->references('tipologia')->on('prestazione');
+        });
     }
 
     /**
@@ -19,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('medico');
     }
 };

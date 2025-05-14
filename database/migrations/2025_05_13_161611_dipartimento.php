@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('dipartimento', function(Blueprint $table){
+            $table->string('specializzazione',100)->primary();
+            $table->string('descrizione',2000);
+        });
     }
 
     /**
@@ -19,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('dipartimento');
     }
 };
