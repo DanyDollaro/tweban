@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('giorni_prestazioni', function(Blueprint $table){
-            $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione');
-            $table->foreign('giorno')->references('valore_giorno')->on('giorni_settimana');
+            $table->string('tipologia_prestazione',100);
+            $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione')->onUpdate('cascade')->onDelete('cascade');
+            $table->enum('giorno', ['lunedi', 'martedi', 'mercoledi', 'giovedi','venerdi']);
+            $table->foreign('giorno')->references('valore_giorno')->on('giorni_settimana')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['tipologia_prestazione','giorno']);
         });
     }

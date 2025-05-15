@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orario_prestazioni', function(Blueprint $table){
-            $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione');
-            $table->foreign('orario')->references('valore_orario')->on('orari');
+            $table->string('tipologia_prestazione',100);
+            $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione')->onUpdate('cascade')->onDelete('cascade');
+            $table->time('orario');
+            $table->foreign('orario')->references('valore_orario')->on('orari')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['tipologia_prestazione','orario']);
         });
     }

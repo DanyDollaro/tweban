@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orari',function(Blueprint $table){
-            $table->time('orario')->primary();
+            $table->time('valore_orario')->primary();
         });
     }
 

@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('prestazione', function(Blueprint $table){
             $table->string('tipologia', 100)->primary();
             $table->string('descrizione',2000);
-            $table->foreign('sp_dipartimento')->references('specializzazione')->on('dipartimento');
+            $table->string('sp_dipartimento',100);
+            $table->foreign('sp_dipartimento')->references('specializzazione')->on('dipartimento')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('mail_staff',100);
             $table->foreign('mail_staff')->references('business_mail')->on('membro_staff');
         });
     }
