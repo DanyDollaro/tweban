@@ -14,7 +14,6 @@
             <li><a href="#services">Servizi</a></li>
             <li><a href="#contact">Orari e contatti</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="">Registrazione</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

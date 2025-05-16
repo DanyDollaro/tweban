@@ -3,8 +3,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Doctors</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Dottori in servizio</h2>
+        <p>I nostri dottori più esperti</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -13,7 +13,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('img/doctors/doctors-1.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Walter White</h4>
                 <span>Chief Medical Officer</span>
@@ -30,7 +30,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('img/doctors/doctors-2.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Sarah Jhonson</h4>
                 <span>Anesthesiologist</span>
@@ -47,7 +47,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('img/doctors/doctors-3.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>William Anderson</h4>
                 <span>Cardiology</span>
@@ -64,7 +64,7 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
             <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('img/doctors/doctors-4.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Amanda Jepson</h4>
                 <span>Neurosurgeon</span>

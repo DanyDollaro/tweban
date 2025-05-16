@@ -6,6 +6,10 @@
 
     @include('home_layouts.about')
 
+    @include('home_layouts.contents.doctors')
+
+    @include('home_layouts.contents.gallery')
+    
     @include('home_layouts.services')
 
     @include('home_layouts.departments')
