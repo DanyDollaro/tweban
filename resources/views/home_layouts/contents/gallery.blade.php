@@ -4,7 +4,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Galleria</h2>
-        <p>Alcune foto del nostro ambulatorio</p>
+        <p>Alcune foto del nostro poliambulatorio</p>
       </div><!-- End Section Title -->
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -34,7 +34,6 @@
               </a>
             </div>
           </div><!-- End Gallery Item -->
-          
           
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">

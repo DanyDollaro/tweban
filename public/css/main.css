@@ -60,6 +60,10 @@
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -1243,7 +1247,8 @@ section,
 /*--------------------------------------------------------------
 # Departments Section
 --------------------------------------------------------------*/
-.departments {
+
+.departments   {
   overflow: hidden;
 }
 

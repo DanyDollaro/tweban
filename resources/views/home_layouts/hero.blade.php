@@ -14,9 +14,9 @@
         <div class="content row gy-4">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
-              <h3>Why Choose Medilab?</h3>
+              <h3>Perché sceglierci?</h3>
               <p>
-                DANIELE GAY
+                Gestiamo un poliambulatorio all'avanguardia, con gestione dei dipartimenti avanazata
               </p>
               <div class="text-center">
                 <a href="#about" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>

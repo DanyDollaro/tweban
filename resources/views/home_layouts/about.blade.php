@@ -11,9 +11,9 @@
           </div>
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <h3>About Us</h3>
+            <h3>La Nostra Storia</h3>
             <p>
-              Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
+              Siamo un gruppo di medici professionisti con diversi dipartimenti in gestione.
             </p>
             <ul>
               <li>
@@ -43,6 +43,10 @@
         </div>
 
       </div>
+
+      @include('home_layouts.contents.doctors')
+
+      @include('home_layouts.contents.gallery')
 
     </section>
 <!-- /About Section -->
