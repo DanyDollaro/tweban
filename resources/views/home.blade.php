@@ -5,8 +5,6 @@
     @include('home_layouts.hero')
 
     @include('home_layouts.about')
-
-    
     
     @include('home_layouts.departments')
 

@@ -1248,10 +1248,6 @@ section,
 # Departments Section
 --------------------------------------------------------------*/
 
-#departments{
-  scroll-margin-top: 80px;
-}
-
 .departments   {
   overflow: hidden;
 }
