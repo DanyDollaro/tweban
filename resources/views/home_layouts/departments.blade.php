@@ -3,8 +3,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Departments</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Dipartimenti e Prestazioni</h2>
+        <p>I nostri principali dipartimenti di servizio e le loro prestazioni in basso</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -13,19 +13,19 @@
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#departments-tab-1">Cardiology</a>
+                <a class="nav-link active show" data-bs-toggle="tab" href="#departments-tab-1">Cardiologia</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-2">Neurology</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-2">Dermatologia</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-3">Hepatology</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-3">Ginecologia</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-4">Pediatrics</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-4">Ortopedia</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-5">Eye Care</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-5">Fisioterapia</a>
               </li>
             </ul>
           </div>
@@ -34,7 +34,7 @@
               <div class="tab-pane active show" id="departments-tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Cardiology</h3>
+                    <h3>Cardiologia</h3>
                     <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
                     <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
                   </div>
@@ -95,7 +95,11 @@
           </div>
         </div>
 
-      </div>
+      </div>  
+
+      @include('home_layouts.services')
 
     </section>
     <!-- /Departments Section -->
+
+    

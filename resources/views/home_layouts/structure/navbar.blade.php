@@ -11,8 +11,8 @@
           <ul>
             <li><a href="#hero" class="active">Home<br></a></li>
             <li><a href="#about">Chi siamo</a></li>
-            <li><a href="#services">Servizi</a></li>
-            <li><a href="#contact">Orari e contatti</a></li>
+            <li><a href="#departments">Dipartimenti e Prestazioni</a></li>
+            <li><a href="#contact">Contatti e dove trovarci</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
