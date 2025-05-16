@@ -35,25 +35,25 @@ class DatabaseSeeder extends Seeder
         //DB::table('membro_staff')->insert([
         //]);
 
-        DB::table('dipartimento')->inserti([
-            ['specializzazione' => 'Cardiologia', 'descrizione' => '...'],
-            ['specializzazione' => 'Ortopedia', 'descrizione' => '...'],
-            ['specializzazione' => 'Dermatologia', 'descrizione' => '...'],
-            ['specializzazione' => 'Ginecologia', 'descrizione' => '...'],
-            ['specializzazione' => 'Neurologia', 'descrizione' => '...'],
-        ]);
-
-        DB::table('prestazione')->inserti([
-            ['tipologia' => 'Elettrocardiogramma', 'descrizione' => '...', 'sp_dipartimento'=>'Cardiologia', 'mail_staff' =>''],
-            ['tipologia' => 'Visita cardiologica', 'descrizione' => '...', 'sp_dipartimento'=>'Cardilogia', 'mail_staff' =>''],
-            ['tipologia' => 'Visita ortopedica', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
-            ['tipologia' => 'Radiografia articolare', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
-            ['tipologia' => 'Risonanza magnetica muscolo-scheletrica', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
-            ['tipologia' => 'Visita dermatologica', 'descrizione' => '...', 'sp_dipartimento'=>'Dermatologia', 'mail_staff' =>''],
-            ['tipologia' => 'Dermatoscopia', 'descrizione' => '...', 'sp_dipartimento'=>'Dermatologia', 'mail_staff' =>''],
-            ['tipologia' => 'Visita ginecologica', 'descrizione' => '...', 'sp_dipartimento'=>'Ginecologia', 'mail_staff' =>''],
-            ['tipologia' => 'Visita neurologica', 'descrizione' => '...', 'sp_dipartimento'=>'Neurologia', 'mail_staff' =>''],
-        ]);
+        //DB::table('dipartimento')->inserti([
+        //    ['specializzazione' => 'Cardiologia', 'descrizione' => '...'],
+        //    ['specializzazione' => 'Ortopedia', 'descrizione' => '...'],
+        //    ['specializzazione' => 'Dermatologia', 'descrizione' => '...'],
+        //    ['specializzazione' => 'Ginecologia', 'descrizione' => '...'],
+        //    ['specializzazione' => 'Neurologia', 'descrizione' => '...'],
+        //]);
+//
+        //DB::table('prestazione')->inserti([
+        //    ['tipologia' => 'Elettrocardiogramma', 'descrizione' => '...', 'sp_dipartimento'=>'Cardiologia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Visita cardiologica', 'descrizione' => '...', 'sp_dipartimento'=>'Cardilogia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Visita ortopedica', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Radiografia articolare', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Risonanza magnetica muscolo-scheletrica', 'descrizione' => '...', 'sp_dipartimento'=>'Ortopedia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Visita dermatologica', 'descrizione' => '...', 'sp_dipartimento'=>'Dermatologia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Dermatoscopia', 'descrizione' => '...', 'sp_dipartimento'=>'Dermatologia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Visita ginecologica', 'descrizione' => '...', 'sp_dipartimento'=>'Ginecologia', 'mail_staff' =>''],
+        //    ['tipologia' => 'Visita neurologica', 'descrizione' => '...', 'sp_dipartimento'=>'Neurologia', 'mail_staff' =>''],
+        //]);
 
         
     }

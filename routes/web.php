@@ -6,6 +6,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/admin-management', function () {
-    return view('admin-management');
-});
+//Route::get('/admin-management', function () {
+//    return view('admin-management');
+//});
