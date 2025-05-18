@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrestazioniSeeder::class);
         $this->call(OrarioPrestazioniSeeder::class);
         $this->call(GiornoPrestazioniSeeder::class);
-
+        $this->call(MedicoSeeder::class);
     }
 }
