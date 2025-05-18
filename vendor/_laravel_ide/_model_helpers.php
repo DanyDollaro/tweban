@@ -311,8 +311,10 @@ namespace App\Models {
      * @property string|null $mail_staff
      * @property string $sp_dipartimento
      * @property string $descrizione
+     * @property string $prescrizione
      * @property int $tipologia
      * @method static \Illuminate\Database\Eloquent\Builder<Prestazione>|Prestazione whereTipologia($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Prestazione>|Prestazione wherePrescrizione($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Prestazione>|Prestazione whereDescrizione($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Prestazione>|Prestazione whereSpDipartimento($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Prestazione>|Prestazione whereMailStaff($value)

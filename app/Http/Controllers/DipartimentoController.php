@@ -22,14 +22,64 @@ class DipartimentoController extends Controller
         ->groupBy('specializzazione');
     }
 
-    
+    //FUNZIONE CHE RESTUISCE NELLA HOME LE PRESTAZIONI PER CIASCUN DIPARTIMENTO, CON ORARI E GIORNI DISPONIBILI
+
+    public function showTimeServices(){
+        return DB::table('orario_prestazioni')
+        ->select(
+            'tipologia_prestazione',
+            DB::raw('MIN(orario) as orario_iniziale'),
+            DB::raw('MAX(orario) as orario_finale')
+        )
+        ->groupBy('tipologia_prestazione')
+        ->get()
+        ->keyBy('tipologia_prestazione');
+    }
+
+    public function showDayServices(){
+        $giorniTotali = DB::table('giorni_prestazioni')
+        ->select('tipologia_prestazione', 'giorno')
+        ->orderBy('tipologia_prestazione')
+        ->get();
+
+        $giorniRaggruppati = [];
+
+        foreach ($giorniTotali as $row) {
+            $tipo = $row->tipologia_prestazione;
+            if (!isset($giorniRaggruppati[$tipo])) {
+                $giorniRaggruppati[$tipo] = [];
+            }
+            $giorniRaggruppati[$tipo][] = $row->giorno;
+        }
+
+        // Ora estrai primo e ultimo per ciascuna prestazione
+        $giorniDisponibilita = [];
+
+        foreach ($giorniRaggruppati as $tipo => $giorni) {
+            $giorniDisponibilita[$tipo] = [
+                'inizio' => $giorni[0],
+                'fine' => $giorni[count($giorni) - 1],
+            ];
+        }
+
+        return $giorniDisponibilita;
+    }
+
+    public function showDoctors(){
+        return DB::table('medico')
+        ->select('nome','cognome','prestazione_assegnata')
+        ->get()
+        ->keyBy('prestazione_assegnata');
+    }
 
     public function showData(){
         $dipartimenti = $this->showDepartments();
         $prestazioni = $this->showServices();
-        return view('home', compact('dipartimenti','prestazioni'));
-
+        $orario_prestazioni = $this->showTimeServices();
+        $giorni_disponibili = $this->showDayServices();
+        $medici = $this->showDoctors();
+        return view('home', compact('dipartimenti','prestazioni','orario_prestazioni','medici','giorni_disponibili'));
     }
 
-    //FUNZIONE CHE RESTUISCE NELLA HOME LE PRESTAZIONI PER CIASCUN DIPARTIMENTO, CON ORARI E GIORNI DISPONIBILI
+    
 }
