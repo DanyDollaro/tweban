@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('business_mail',100)->primary();
             $table->string('nome', 30);
             $table->string('cognome',30);
+            $table->string('username', 50)->unique();
             $table->string('password',255);
         });
     }

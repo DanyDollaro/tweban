@@ -11,7 +11,6 @@ class DipartimentoController extends Controller
 {
     public function showDepartments(){
         return Dipartimento::all(); //SELECT DI TUTTI I DIPARTIMENTI
-
     }
 
     public function showServices(){
