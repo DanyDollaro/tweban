@@ -31,26 +31,26 @@
 
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
-                    <i class="bi bi-clipboard-data"></i>
-                    <h4>Corporis voluptates officia eiusmod</h4>
-                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                    <i class="bi bi-clipboard2-pulse"></i>
+                    <h4>Assistenza Multidisciplinare</h4>
+                    <p>Il poliambulatorio offre un'ampia gamma di servizi medici integrati, grazie alla collaborazione tra specialisti di diverse aree cliniche.</p>
                   </div>
                 </div>
                 <!-- End Icon Box -->
 
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="400">
-                    <i class="bi bi-gem"></i>
-                    <h4>Ullamco laboris ladore pan</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                    <i class="bi bi-hospital"></i>
+                      <h4>Servizi Ambulatoriali Avanzati</h4>
+                      <p>Visite specialistiche, controlli periodici e trattamenti mirati sono erogati in ambienti moderni, con tecnologie all'avanguardia.</p>
                   </div>
                 </div><!-- End Icon Box -->
 
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="500">
-                    <i class="bi bi-inboxes"></i>
-                    <h4>Labore consequatur incidid dolore</h4>
-                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                    <i class="bi bi-people"></i>
+                    <h4>Attenzione al Paziente</h4>
+                    <p>Un team dedicato assicura accoglienza, ascolto e un percorso di cura personalizzato per ogni paziente, dalla prenotazione alla diagnosi.</p>
                   </div>
                 </div><!-- End Icon Box -->
 
