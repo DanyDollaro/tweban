@@ -14,14 +14,14 @@ class GiornoPrestazioniSeeder extends Seeder
     public function run(): void
     {
         DB::table('giorni_prestazioni')->insert([
-            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Lunedi'],
-            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Martedi'],
-            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Mercoledi'],
-            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Giovedi'],
-            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Martedi'],
-            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Mercoledi'],
-            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Giovedi'],
-            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Venerdi']
+            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Lunedì'],
+            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Martedì'],
+            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Mercoledì'],
+            ['tipologia_prestazione' => 'Elettrocardiogramma', 'giorno' => 'Giovedì'],
+            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Martedì'],
+            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Mercoledì'],
+            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Giovedì'],
+            ['tipologia_prestazione' => 'Visita cardiologica', 'giorno' => 'Venerdì']
         ]);
     }
 }

@@ -3,7 +3,7 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Galleria</h2>
+        <h2>Struttura e attrezzatura</h2>
         <p>Alcune foto del nostro poliambulatorio</p>
       </div><!-- End Section Title -->
 

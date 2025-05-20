@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('prestazione', function(Blueprint $table){
             $table->string('tipologia', 100)->primary();
+            $table->string('prescrizione',1000);
             $table->string('descrizione',2000);
             $table->string('sp_dipartimento',100);
             $table->foreign('sp_dipartimento')->references('specializzazione')->on('dipartimento')->onDelete('cascade')->onUpdate('cascade');

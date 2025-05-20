@@ -14,11 +14,11 @@ class GiorniSeeder extends Seeder
     public function run(): void
     {
         DB::table('giorni_settimana')->insert([
-            ['valore_giorno'=>'Lunedi'],
-            ['valore_giorno'=>'Martedi'],
-            ['valore_giorno'=>'Mercoledi'],
-            ['valore_giorno'=>'Giovedi'],
-            ['valore_giorno'=>'Venerdi']
+            ['valore_giorno'=>'Lunedì'],
+            ['valore_giorno'=>'Martedì'],
+            ['valore_giorno'=>'Mercoledì'],
+            ['valore_giorno'=>'Giovedì'],
+            ['valore_giorno'=>'Venerdì']
         ]);
     }
 }
