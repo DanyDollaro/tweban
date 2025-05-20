@@ -9,6 +9,6 @@ use App\Http\Controllers\DipartimentoController;
 
 Route::get('/', [DipartimentoController::class, 'showData']);
 
-//Route::get('/admin-management', function () {
-//    return view('admin-management');
-//});
+Route::get('/admin-management', function () {
+    return view('admin_layouts/admin-management');
+});
