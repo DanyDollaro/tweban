@@ -29,7 +29,7 @@
               <div>
                 <h5>Contatti e Localizzazione</h5>
                 <p>
-                  Ci trovi in Via della Salute 12, Ancona. Per informazioni e prenotazioni puoi contattarci al numero 071 123456 o scrivere a info@poliambulatorio.it.
+                Ci trovi in Via Brecce Bianche 12, Ancona. Per informazioni e prenotazioni puoi contattarci al numero 333 1234567 o scrivere a medilab@mail.com.
                 </p>
               </div>
             </li>
@@ -38,7 +38,7 @@
               <div>
                 <h5>Accesso ai Servizi</h5>
                 <p>
-                  I servizi sono accessibili previa prenotazione online o telefonica. Il sito consente di consultare orari, disponibilità e accedere alle informazioni sui dipartimenti attivi.
+                I servizi sono accessibili previa prenotazione online. Il sito consente di consultare orari, disponibilità e accedere alle informazioni sui dipartimenti attivi.
                 </p>
               </div>
             </li>
@@ -48,6 +48,8 @@
       </div>
 
       @include('home_layouts.contents.gallery')
+
+      @include('home_layouts.contents.doctors')
 
     </section>
 <!-- /About Section -->
