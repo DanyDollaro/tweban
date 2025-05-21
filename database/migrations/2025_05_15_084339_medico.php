@@ -15,8 +15,6 @@ return new class extends Migration
             $table->string('codice_fiscale', 16)->primary();
             $table->string('nome',30);
             $table->string('cognome',30);
-            $table->string('email',100)->unique();
-            $table->string('password',255);
             $table->string('prestazione_assegnata',100)->nullable();
             $table->foreign('prestazione_assegnata')->references('tipologia')->on('prestazione')->onUpdate('set null');
         });

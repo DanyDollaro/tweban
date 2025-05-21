@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>Poliambulatorio - Home</title>
+        <title>Poliambulatorio - Dashboard</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ asset('css/stile.css') }}">
@@ -14,7 +14,7 @@
                     <h1>POLIAMBULATORIO SPECIALIZZATO</h1>
                 </div>
                 <nav>
-                    <a href="">Home</a> |
+                    <a href="">Dashboard</a> |
                     <a href="">Chi siamo</a> |
                     <a href="">Prenotazioni</a> |
                     <a href="">Orari e contatti</a> |
