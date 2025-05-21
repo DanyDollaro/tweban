@@ -12,10 +12,13 @@ use App\Http\Controllers\LoginController;*/
 
 Route::get('/', [DipartimentoController::class, 'showData']);
 
+
+/*(DANIELE)*/
 Route::get('/admin-management', function () {
     return view('admin_layouts/admin-management');
 });
 
+/*(NAOMI) */
 //Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 //Route::post('/login', [LoginController::class, 'fakeLogin']);
 
@@ -25,7 +28,7 @@ Route::get('/admin-management', function () {
     })->name('staff');
 });*/
 
-/*route per il login
+/*route per il login (CLAUDIA)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
