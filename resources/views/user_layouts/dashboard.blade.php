@@ -18,10 +18,9 @@
 
    <div class="dashboard-container">
   
-    @include('user_layouts.appuntamento')
     @include('user_layouts.profile')
     </div>
-    
+    @include('user_layouts.prenotazione') 
     
     <div id="success-toast" class="toast">
         <p>Hai effettuato l'accesso con successo.</p>
@@ -29,8 +28,7 @@
 
    
     
-    
-
+  
 
 
     <script> //fondo pagina

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DipartimentoController::class,'showData']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('user_layouts.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -25,17 +25,17 @@ Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login
 Route::post('/login', [LoginUserController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
-//route per entrare in area riservata
+/*
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PrenotazioneController::class, 'storico'])->name('dashboard');
-});
+});*/
 
-//route per appuntamento
+/*route per appuntamento
 
 use App\Http\Controllers\AppointmentController;
 
 Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
-Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');
+Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
 
 //route per modificare il profilo
 
@@ -43,3 +43,9 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::get('/profilo/modifica', [EditProfileController::class, 'edit'])->name('profilo.edit');
     Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
 });*/
+
+//prenotazione
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
+    Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
+});
