@@ -1,0 +1,162 @@
+/* Reset base */
+* {
+  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*.container {
+  background: transparent;
+} */
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  position: relative;
+  min-height: 100vh;
+}
+
+
+/*Sezione appuntamento con effetto vetro */
+.appointment.section {
+  padding: 60px 0;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 12px;
+} 
+
+/* Titolo sezione */
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #2575fc;
+  text-align: center;
+}
+
+
+
+/* Form */
+form.php-email-form {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(37, 117, 252, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+/* Colonne e layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.col-md-4 {
+  flex: 1 1 calc(33.333% - 20px);
+  min-width: 220px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+/* Input, select, textarea */
+.form-control,
+.form-select,
+textarea.form-control {
+  width: 100%;
+  padding: 16px 20px;
+  border: 1.8px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  border-color: #2575fc;
+  outline: none;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.4);
+}
+
+textarea.form-control {
+  min-height: 140px;
+  height: auto;
+}
+
+/* Pulsante */
+.btn-submit,
+form.php-email-form button[type="submit"] {
+  background-color: #2575fc;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover,
+form.php-email-form button[type="submit"]:hover {
+  background-color: #1a5bd1;
+}
+
+/* Feedback messaggi */
+.loading,
+.error-message,
+.sent-message {
+  display: none;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.loading {
+  color: #2575fc;
+}
+
+.error-message {
+  color: #d9534f;
+}
+
+.sent-message {
+  color: #28a745;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Spazi verticali */
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%;
+  }
+
+  form.php-email-form {
+    padding: 25px 20px;
+  }
+} 

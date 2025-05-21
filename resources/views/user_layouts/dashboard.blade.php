@@ -21,8 +21,6 @@
     @include('user_layouts.appuntamento')
     @include('user_layouts.profile')
     </div>
-
-   @include('user_layouts.storico')
     
     
     <div id="success-toast" class="toast">

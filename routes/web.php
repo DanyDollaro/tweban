@@ -1,41 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DipartimentoController;
-/*use App\Http\Controllers\VisiteController;
-use Illuminate\Http\Request;
-use App\Http\Controllers\LoginController;*/
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\PrenotazioneController;
+use Illuminate\Support\Facades\Route;
 
-//Route::get('/', function () {
-//    return view('home');
-//});
+Route::get('/', [DipartimentoController::class,'showData']);
 
-Route::get('/', [DipartimentoController::class, 'showData']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-/*(DANIELE)*/
-Route::get('/admin-management', function () {
-    return view('admin_layouts/admin-management');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+ 
 
-/*(NAOMI) */
-//Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-//Route::post('/login', [LoginController::class, 'fakeLogin']);
+//route per il login
 
-/*Route::middleware(['auth'])->group(function () {
-    Route::get('/staff', function () {
-        return view('staff');
-    })->name('staff');
-});*/
-
-/*route per il login (CLAUDIA)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginUserController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
 //route per entrare in area riservata
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [VisiteController::class, 'storico'])->name('dashboard');
+    Route::get('/dashboard', [PrenotazioneController::class, 'storico'])->name('dashboard');
 });
 
 //route per appuntamento
@@ -43,4 +35,11 @@ Route::middleware('auth')->group(function () {
 use App\Http\Controllers\AppointmentController;
 
 Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
-Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
+Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');
+
+//route per modificare il profilo
+
+/*Route::middleware('auth')->group(function () {
+    Route::get('/profilo/modifica', [EditProfileController::class, 'edit'])->name('profilo.edit');
+    Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
+});*/

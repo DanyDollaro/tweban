@@ -1,37 +1,44 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class LoginUserController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('user_layouts.login');
     }
 
-    public function fakeLogin(Request $request)
+    public function login(Request $request)
     {
-        // Validazione base
-        $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
+        // Validazione dati
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        // Credenziali "fisse"
-        $correctUsername = 'a';
-        $correctPassword = 'b';
+        // Prova ad autenticare
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();  // Protezione sessione
 
-        if ($request->username === $correctUsername && $request->password === $correctPassword) {
-            // Login ok: salva username in sessione
-            session(['username' => $request->username]);
-
-            return view('staff');
-        } else {
-            // Login fallito: torna indietro con errore
-            return back()->withErrors(['login' => 'Username o password non corretti'])->withInput();
+            return redirect()->intended('dashboard'); // o altra rotta dopo login
         }
+
+        // Se fallisce torna indietro con errore
+        return back()->withErrors([
+            'email' => 'Le credenziali non sono corrette.',
+        ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
-
