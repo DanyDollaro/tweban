@@ -12,27 +12,19 @@
   flex-wrap: nowrap; 
 }
 
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  
+  /* Sfondo a tutta pagina */
+  background-image: url('../img/sfondo_dash.jpg');
+  background-size: cover;       /* copre tutta la finestra */
+  background-position: center;  /* centra l’immagine */
+  background-repeat: no-repeat; /* non ripete */
+  background-attachment: fixed; /* lo sfondo resta fisso anche se scrolli */
 
-.toast {
-  position: fixed;
-  bottom: 30px; /* spostato in basso */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #28a745;
-  color: white;
-  padding: 12px 20px; /* più compatto */
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.4s ease, bottom 0.4s ease;
-  font-size: 15px;
-  text-align: center;
-  max-width: 90%;
-  width: auto;
+  color: #333; /* colore testo base, adattalo se serve */
 }
 
-/* Stato visibile */
-.toast.show {
-  opacity: 1;
-}
+    
+

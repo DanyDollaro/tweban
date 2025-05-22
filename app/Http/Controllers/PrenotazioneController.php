@@ -7,14 +7,18 @@ use App\Models\Dipartimento;
 use App\Models\Prestazione;
 use App\Models\Prenotazione;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PrenotazioneController extends Controller
-{  
+{
     public function create(Request $request)
     {
-        $searchDipartimento = $request->input('dipartimento');
-        $searchPrestazione = $request->input('prestazione');
+        // Prendo tutti per dropdown
+        $dipartimenti = Dipartimento::all();
+        $prestazioni = Prestazione::all();
+
+        // Prendo input ricerca testo o selezione
+        $searchDipartimento = $request->input('dipartimento_text') ?? $request->input('dipartimento_select');
+        $searchPrestazione = $request->input('prestazione_text') ?? $request->input('prestazione_select');
 
         $cleanWildcard = fn($term) => rtrim($term, '*');
 
@@ -26,7 +30,7 @@ class PrenotazioneController extends Controller
                 $dipartimentiQuery->where('specializzazione', $searchDipartimento);
             }
         }
-        $dipartimenti = $dipartimentiQuery->get();
+        $dipartimentiFiltered = $dipartimentiQuery->get();
 
         $prestazioniQuery = Prestazione::query();
         if ($searchPrestazione) {
@@ -36,13 +40,21 @@ class PrenotazioneController extends Controller
                 $prestazioniQuery->where('tipologia', $searchPrestazione);
             }
         }
-        if ($dipartimenti->isNotEmpty()) {
-            $dipSpecializzazioni = $dipartimenti->pluck('specializzazione')->toArray();
+        if ($dipartimentiFiltered->isNotEmpty()) {
+            $dipSpecializzazioni = $dipartimentiFiltered->pluck('specializzazione')->toArray();
             $prestazioniQuery->whereIn('sp_dipartimento', $dipSpecializzazioni);
         }
-        $prestazioni = $prestazioniQuery->get();
+        $prestazioniFiltered = $prestazioniQuery->get();
 
-        return view('user_layouts.prenotazione', compact('dipartimenti', 'prestazioni'));
+        // Flag per mostrare risultati solo se l’utente ha inviato ricerca
+        $ricercaEffettuata = $request->hasAny(['dipartimento_text', 'dipartimento_select', 'prestazione_text', 'prestazione_select']);
+
+        return view('user_layouts.prenotazione', compact(
+            'dipartimenti',
+            'prestazioni',
+            'prestazioniFiltered',
+            'ricercaEffettuata'
+        ));
     }
 
     public function store(Request $request)
@@ -50,62 +62,20 @@ class PrenotazioneController extends Controller
         $request->validate([
             'dipartimento' => 'required|string|exists:dipartimento,specializzazione',
             'prestazione' => 'required|string|exists:prestazione,tipologia',
-            'data_prenotazione' => 'required|date|after_or_equal:today',
-            'orario' => 'required|date_format:H:i:s',
+            'data_prenotazione' => 'nullable|date|after_or_equal:today',
+            'orario' => 'nullable|date_format:H:i',
         ]);
-
-        // Il giorno della prenotazione, in italiano
-        $giornoPrenotazione = strtolower($this->getGiornoItaliano($request->data_prenotazione));
-
-        if (!$giornoPrenotazione) {
-            return back()->withErrors(['data_prenotazione' => 'Il giorno selezionato non è valido per la prenotazione']);
-        }
-
-        $tipologia = $request->prestazione;
-
-        $giornoValido = DB::table('giorni_prestazioni')
-            ->where('tipologia_prestazione', $tipologia)
-            ->where('giorno', $giornoPrenotazione)
-            ->exists();
-
-        if (!$giornoValido) {
-            return back()->withErrors(['data_prenotazione' => 'La prestazione non è disponibile nel giorno selezionato']);
-        }
-
-        $orarioValido = DB::table('orario_prestazioni')
-            ->where('tipologia_prestazione', $tipologia)
-            ->where('orario', $request->orario)
-            ->exists();
-
-        if (!$orarioValido) {
-            return back()->withErrors(['orario' => 'L\'orario selezionato non è disponibile per la prestazione']);
-        }
 
         Prenotazione::create([
             'user_id' => Auth::id(),
-            'data_prenotazione' => $request->data_prenotazione,
+            'tipologia_prestazione' => $request->prestazione,
             'stato' => 'Visita prenotata',
             'giorno_escluso' => null,
             'mail_staff' => null,
-            'tipologia_prestazione' => $tipologia,
+            'data_prenotazione' => $request->data_prenotazione,
+            'orario' => $request->orario,
         ]);
 
         return redirect()->route('prenotazioni.create')->with('success', 'Prenotazione effettuata con successo!');
-    }
-
-    private function getGiornoItaliano($data)
-    {
-        $giorniSettimana = [
-            'Monday' => 'lunedi',
-            'Tuesday' => 'martedi',
-            'Wednesday' => 'mercoledi',
-            'Thursday' => 'giovedi',
-            'Friday' => 'venerdi',
-            'Saturday' => 'sabato',
-            'Sunday' => 'domenica',
-        ];
-
-        $giornoInglese = date('l', strtotime($data));
-        return $giorniSettimana[$giornoInglese] ?? null;
     }
 }

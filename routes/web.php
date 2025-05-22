@@ -4,6 +4,7 @@ use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DipartimentoController::class,'showData']);
@@ -44,8 +45,16 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
 });*/
 
-//prenotazione
+/*prenotazione
     Route::middleware(['auth'])->group(function () {
     Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
+});*/
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
+    Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
+    
 });
+   
