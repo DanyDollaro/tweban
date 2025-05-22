@@ -4,6 +4,7 @@ use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DipartimentoController::class,'showData']);
@@ -17,7 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- 
 
 //route per il login
 
@@ -43,3 +43,8 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::get('/profilo/modifica', [EditProfileController::class, 'edit'])->name('profilo.edit');
     Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
 });*/
+
+// Route per l'amministrazione
+
+Route::get('/admin/departments', [AdminController::class, 'getDepartments']);
+

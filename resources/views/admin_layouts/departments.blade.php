@@ -5,6 +5,11 @@
     <title>Gestione dipartimenti</title>
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <style>
+
+        :root {
+            --accent-color-light-test: color-mix(in srgb, var(--accent-color) 6%, white);
+        }
+
         body {
             margin: 0;
             height: 100vh;
@@ -49,9 +54,10 @@
         }
 
         .sidebar {
-            width: 16vw;
+            width: 18vw;
             overflow-y: auto;
             padding: 10px;
+            background: var(--accent-color-light-test);
         }
 
         .content {
@@ -73,7 +79,7 @@
         }
 
         .menu-item.selected {
-            background-color: var(--accent-color, #007bff);
+            background-color: var(--accent-color);
             color: white;
             font-weight: bold;
         }
@@ -95,14 +101,14 @@
 
     <!-- Main page layout -->
     <div class="main">
-        <!-- Sidebar menu -->
+        <!-- Left sidebar menu -->
         <div class="sidebar">
-            <div id="menu">
-                @for ($i = 1; $i <= 30; $i++)
-                    <div class="menu-item" onclick="selectDipartimento(this, {{ $i }})">
-                        Dipartimento {{ $i }}
+            <div id="menu-selection">
+                @foreach ($dipartimenti as $dipartimento)
+                    <div class="menu-item" onclick="selectDepartment(this, '{{ $dipartimento->specializzazione }}')">
+                        {{ $dipartimento->specializzazione }}
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 
@@ -111,11 +117,17 @@
             <h1>Contenuto principale</h1>
             <p>Seleziona un dipartimento dal menu per visualizzare i dettagli.</p>
         </div>
+
+        <div class="sidebar">
+            <div id="menu-properties">
+                Proprieta'
+            </div>
+        </div>
     </div>
 
     <!-- JS Script -->
     <script>
-        function selectDipartimento(el, id) {
+        function selectDepartment(el, specialization) {
             // Rimuove la selezione precedente
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('selected'));
 
@@ -124,10 +136,7 @@
 
             // Aggiorna il contenuto dinamico
             const content = document.getElementById('content');
-            content.innerHTML = `
-                <h1>Dipartimento ${id}</h1>
-                <p>Hai selezionato il Dipartimento ${id}. Qui puoi mostrare informazioni dinamiche specifiche.</p>
-            `;
+            content.innerHTML = specialization;
         }
     </script>
 
