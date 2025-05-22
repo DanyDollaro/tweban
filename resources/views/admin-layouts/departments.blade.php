@@ -112,13 +112,9 @@
             </div>
         </div>
 
-        <!-- Content area -->
-        <div class="content" id="content">
-            <h1>Contenuto principale</h1>
-            <p>Seleziona un dipartimento dal menu per visualizzare i dettagli.</p>
-        </div>
+        @include("admin-layouts.partials.departments-content-page")
 
-        <div class="sidebar">
+       <div class="sidebar">
             <div id="menu-properties">
                 Proprieta'
             </div>
@@ -128,13 +124,11 @@
     <!-- JS Script -->
     <script>
         function selectDepartment(el, specialization) {
-            // Rimuove la selezione precedente
+            // Deselect all the entries and set selected attributes to calling element
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('selected'));
-
-            // Aggiunge lo stile selezionato al cliccato
             el.classList.add('selected');
 
-            // Aggiorna il contenuto dinamico
+            // Update the main page
             const content = document.getElementById('content');
             content.innerHTML = specialization;
         }
