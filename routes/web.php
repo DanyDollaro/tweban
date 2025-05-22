@@ -13,12 +13,17 @@ Route::get('/dashboard', function () {
     return view('user_layouts.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//modifica del profilo
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profilo/modifica', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profilo', [ProfileController::class, 'update'])->name('profile.update');
+
+// Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show');
+   // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+   // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- 
+
+
 
 //route per il login
 
