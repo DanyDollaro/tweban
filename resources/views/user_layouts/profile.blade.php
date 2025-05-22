@@ -6,7 +6,7 @@
     <div class="profile-photo">
         <img src="{{ asset('img/omino-removebg-preview.png') }}" alt="Foto profilo" class="profile-pic"/>
     </div>
-    <div class="photo-label">Foto profilo</div>
+    <div class="photo-label"></div>
 
     <div class="info">
         <h3>{{ Auth::user()->nome }} {{ Auth::user()->cognome }}</h3>
