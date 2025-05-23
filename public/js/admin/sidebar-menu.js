@@ -17,3 +17,6 @@ function setSelection(el) {
         .text('Dipartimento ' + department.specializzazione);
 }
 
+function calendarDateClick(info) {
+    console.log('Giorno cliccato:', info.dateStr);
+}
