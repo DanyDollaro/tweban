@@ -3,101 +3,45 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest; // Breeze usa un Form Request per la validazione
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Importa la facade Auth
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use App\Models\User; // Importa il modello User
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Mostra il form di login.
-     * Reindirizza gli utenti già autenticati in base al loro ruolo.
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Display the login view.
      */
-    public function create(): View|RedirectResponse
+    public function create(): View
     {
-        // Logica per reindirizzare se l'utente è già autenticato
-        if (Auth::check()) {
-            $user = Auth::user();
-            return $this->redirectToRoleDashboard($user); // Usa una funzione helper per la logica di reindirizzamento
-        }
-
-        // Se l'utente NON è autenticato, mostra la view del form di login
-        return view('auth.login'); // Mantieni la vista di Breeze che stiamo personalizzando
+        return view('auth.login');
     }
 
     /**
-     * Gestisce la richiesta di login.
-     * Autentica l'utente e lo reindirizza in base al ruolo.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Se l'utente è già autenticato, reindirizzalo per prevenire re-login
-        if (Auth::check()) {
-            $user = Auth::user();
-            return $this->redirectToRoleDashboard($user);
-        }
+        $request->authenticate();
 
-        // Il LoginRequest di Breeze gestisce già la validazione e Auth::attempt()
-        try {
-            $request->authenticate(); // Questo metodo lancia un'eccezione se l'autenticazione fallisce
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Se l'autenticazione fallisce (ad esempio, credenziali non valide),
-            // la validazione del Form Request gestirà già il ritorno indietro con gli errori.
-            throw $e;
-        }
+        $request->session()->regenerate();
 
-        $request->session()->regenerate(); // Rigenera l'ID della sessione per prevenire attacchi di session fixation
-
-        $user = Auth::user(); // Ottiene l'oggetto utente appena autenticato
-
-        // Logica di reindirizzamento basata sul ruolo dell'utente
-        return $this->redirectToRoleDashboard($user); // Usa la funzione helper
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
-     * Gestisce il logout dell'utente.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout(); // Breeze usa guard 'web'
+        Auth::guard('web')->logout();
 
-        $request->session()->invalidate(); // Invalida la sessione corrente
+        $request->session()->invalidate();
 
-        $request->session()->regenerateToken(); // Rigenera il token CSRF per protezione
+        $request->session()->regenerateToken();
 
-        return redirect('/'); // Reindirizza l'utente alla homepage dopo il logout
-    }
-
-    /**
-     * Funzione helper per reindirizzare in base al ruolo dell'utente.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function redirectToRoleDashboard($user): RedirectResponse
-    {
-        switch ($user->role) {
-            case 'amministratore':
-                return redirect()->intended('/amministratore/dashboard');
-            case 'staff':
-                return redirect()->intended('/staff/dashboard');
-            case 'paziente':
-                return redirect()->intended('/paziente/dashboard');
-            default:
-                // Se il ruolo non è riconosciuto, scollega l'utente e reindirizza al login con errore
-                Auth::logout();
-                return redirect('/login')->withErrors(['login' => 'Ruolo utente non valido.']);
-        }
+        return redirect('/');
     }
 }

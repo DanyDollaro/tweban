@@ -34,7 +34,17 @@ class UserSeeder extends Seeder
             'email' => 'staffstaff@example.com',
             'indirizzo' => 'via geppetto',
             'password' => Hash::make('xThSxThS'),
-            'ruolo' => 'staff']
+            'ruolo' => 'staff'],
+            ['username' => 'adminadmin',
+            'nome' => 'admin',
+            'cognome' => 'admin',
+            'codice_fiscale' => 'ddddmmmm',
+            'data_nascita' => '01/01/0001',
+            'telefono'=> '123456781',
+            'email' => 'admin@example.com',
+            'indirizzo' => 'via geppetto',
+            'password' => Hash::make('xThSxThS'),
+            'ruolo' => 'admin']
         ]);
     }
 }
