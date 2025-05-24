@@ -12,7 +12,7 @@ class PrenotazioneController extends Controller
 {
     public function create(Request $request)
     {
-        // Prendo tutti per dropdown
+        // Prendo tutti 
         $dipartimenti = Dipartimento::all();
         $prestazioni = Prestazione::all();
 
@@ -66,6 +66,7 @@ class PrenotazioneController extends Controller
             'orario' => 'nullable|date_format:H:i',
         ]);
 
+        //salva prenotazione 
         Prenotazione::create([
             'user_id' => Auth::id(),
             'tipologia_prestazione' => $request->prestazione,

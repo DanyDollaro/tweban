@@ -7,11 +7,15 @@ use App\Http\Controllers\PrenotazioneController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [DipartimentoController::class,'showData']);
 
 Route::get('/dashboard', function () {
-    return view('user_layouts.dashboard');
+    return view('breezedashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show'); });
 
 //modifica del profilo
 Route::middleware('auth')->group(function () {
@@ -24,12 +28,20 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
 //route per il login
 
 Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginUserController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
+
+//route prenotazioni
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
+    Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
+    
+});
+
 
 /*
 Route::middleware('auth')->group(function () {
@@ -56,10 +68,5 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
 });*/
 
-Route::middleware(['auth'])->group(function () {
-    
-    Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
-    Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-    
-});
+
    
