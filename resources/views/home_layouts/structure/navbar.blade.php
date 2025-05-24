@@ -18,7 +18,7 @@
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a class="cta-btn d-none d-sm-block" href="#appointment">Login</a>
+        <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a> 
 
     </div>
 

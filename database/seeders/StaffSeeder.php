@@ -14,7 +14,7 @@ class StaffSeeder extends Seeder
     public function run(): void
     {
         DB::table('membro_staff')->insert([
-            ['business_mail'=>'mail@business.com','nome'=>'Mario','cognome'=>'Rossi','password'=>'...']
+            ['business_mail'=>'mail@business.com','nome'=>'Mario','cognome'=>'Rossi','username' => 'staffstaff','password'=>'hXsThXsT']
         ]);
     }
 }

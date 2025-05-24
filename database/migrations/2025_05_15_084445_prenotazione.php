@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->date('data_prenotazione');
             $table->enum('giorno_escluso', ['lunedi', 'martedi', 'mercoledi', 'giovedi', 'venerdi']);
-            $table->string('cf_cliente',16);
-            $table->foreign('cf_cliente')->references('codice_fiscale')->on('cliente')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('mail_staff',100)->nullable();
-            $table->foreign('mail_staff')->references('business_mail')->on('membro_staff')->onUpdate('cascade')->onDelete('set null');
+             // Cliente
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // Staff
+            $table->unsignedBigInteger('staff_id')->nullable();
+            $table->foreign('staff_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             $table->string('tipologia_prestazione',100);
             $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

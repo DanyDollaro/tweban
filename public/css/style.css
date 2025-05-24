@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: url("../img/hero-bg.jpg") no-repeat center center fixed;  /*da capire come mettere sfondo*/ 
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Sovrapposizione sfumata per leggibilità */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 0;
+}
+
+.form-container {
+  background-color: #ffffffee;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.6s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #2575fc;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: hwb(210 60% 10%); 
+  border: none;
+  border-radius: 8px;
+  color: black;
+  font-weight: normal;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background:  hwb(210 60% 10%);
+}
+
+.footer-text {
+  margin-top: 16px;
+  font-size: 13px;
+  text-align: center;
+  color: #555;
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 30px 20px;
+  }
+}

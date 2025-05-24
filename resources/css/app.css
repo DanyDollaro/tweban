@@ -1,12 +1,137 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
+/* ---------------------------------------------------- */
+/* I TUOI STILI PERSONALIZZATI PER IL LOGIN */
+/* ---------------------------------------------------- */
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+body {
+    /* Assicurati che l'immagine sia in public/img/staff/staff.jpg */
+    background: url('/img/staff/staff.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif; /* Sovrascrive il font predefinito di Breeze (Figtree) */
+
+    /* Queste proprietà sono essenziali per il centraggio verticale e orizzontale del form */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Garantisce che il body occupi l'intera altezza della viewport */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding e border nella larghezza/altezza totale */
+}
+
+/* Rimuoviamo .login-container-breeze perché useremo le classi Tailwind di guest.blade.php */
+/* Se vuoi un bordo più arrotondato e un'ombra più marcata come nell'immagine, useremo Tailwind */
+/* Puoi usare questo se vuoi aggiungere stili extra al riquadro bianco di Breeze */
+.custom-breeze-card {
+    /* Esempio: aggiungi stili che non sono facilmente gestibili con Tailwind */
+    /* background: rgba(255, 255, 255, 0.95); */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); */
+    /* Se vuoi una larghezza fissa che ignora max-w-md, definiscila qui */
+    /* width: 350px; */
+}
+
+
+.custom-login-form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 28px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Stili per i Campi Input (email e password) - QUESTA È LA CHIAVE */
+.custom-input {
+    /* Vogliamo che siano più piccoli e non 100% come prima */
+    width: 250px; /* Larghezza fissa come nell'immagine "ok.png" */
+    max-width: 100%; /* Si adatta su schermi piccoli */
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Stili per il Pulsante di Submit ("Accedi") */
+.submit-btn-custom {
+    /* Adatta la larghezza del bottone se vuoi che sia uguale agli input */
+    width: 250px; /* Rendi uguale alla larghezza degli input */
+    max-width: 100%; /* Si adatta su schermi piccoli */
+    margin-top: 25px;
+    padding: 12px;
+    background-color: #C6E9F9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-sizing: border-box;
+}
+
+.submit-btn-custom:hover {
+    background-color: #ADD8E6;
+    transform: translateY(-2px);
+}
+
+.submit-btn-custom:active {
+    background-color: #9ac2d9;
+    transform: translateY(0);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+    text-align: left;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Media Queries per schermi più piccoli (responsive design) */
+@media (max-width: 600px) {
+    /* Le classi Tailwind nel guest.blade.php gestiranno la responsività del contenitore principale */
+    .custom-input,
+    .submit-btn-custom {
+        width: 100%; /* Su schermi più piccoli, rendi input e bottone pieni */
+        padding: 10px;
+    }
+    .custom-login-form-wrapper h2 {
+        font-size: 24px;
+    }
 }

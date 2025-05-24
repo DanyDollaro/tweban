@@ -1,0 +1,101 @@
+/* Reset base */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Contenuto pagina */
+.page-content {
+  padding: 2rem;
+}
+
+/* Titolo principale */
+.page-content h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  text-align: center;
+} 
+
+/* Contenitore profilo */
+.profile-container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  margin: 2rem 0 0 2rem; 
+  position: relative;
+  margin-top: auto;
+} 
+
+/* Sottotitolo */
+
+.container h2 {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+/* Card profilo */
+.profile-card {
+  text-align: center;
+}
+
+/* Foto profilo e riquadro */
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  border: 4px solid #2c3e50;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  margin: 0 auto 0.7rem auto;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Scritta sotto foto profilo */
+.photo-label {
+  text-align: center;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+} 
+
+/* Informazioni utente */
+.info p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+/* Pulsanti */
+.buttons {
+  margin-top: 1rem;
+  text-align: center;
+  margin-left: 0.3rem;
+}
+
+.buttons button {
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.buttons button:hover {
+  background-color: #1a252f;
+}
