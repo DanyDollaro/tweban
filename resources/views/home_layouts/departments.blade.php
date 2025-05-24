@@ -1,5 +1,5 @@
 <!-- Departments Section -->
-   {{-- <section id="departments" class="departments section">
+<section id="departments" class="departments section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -69,6 +69,6 @@
       </div>  
 
     </section>
-<!-- /Departments Section -->--}}
+<!-- /Departments Section -->
 
     

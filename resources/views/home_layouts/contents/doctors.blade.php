@@ -1,5 +1,5 @@
 <!-- Doctors Section -->
-   {{--   <section id="doctors" class="doctors section">
+<section id="doctors" class="doctors section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -9,7 +9,7 @@
 
       <div class="container">
         <div class="row gy-4">
-          @foreach($medico as $medico)
+          @foreach($medici as $medico)
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member d-flex align-items-start">
               <div class="pic"><img src="{{ asset('img/doctors/doctors-'. ($loop->index + 1) .'.jpg') }}" class="img-fluid" alt=""></div>
@@ -31,4 +31,4 @@
 
       </div>
 
-    </section><!-- /Doctors Section -->--}}
+    </section><!-- /Doctors Section -->
