@@ -1,61 +1,60 @@
-<!DOCTYPE html>
+{{--<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Area Riservata</title>
-    <link rel="stylesheet" href="{{ asset('css/login_staff1.css') }}">
+    <title>Login Staff</title>
+    <link rel="stylesheet" href="{{ asset('css/login_staff1.css') }}"> {{-- Puoi usare un CSS diverso 
 </head>
 <body>
+
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Accedi Staff</h2>
 
-        {{-- Errore di autenticazione (es: credenziali errate) --}}
-        @if(session('error'))
-            <div class="invalid-feedback" role="alert" style="text-align:center; margin-bottom:10px;">
-                <strong>{{ session('error') }}</strong>
-            </div>
-        @endif
-
-       <form method="POST" action="{{ route('login') }}" autocomplete="off">
+        <form action="{{ route('login.post') }}" method="POST">
             @csrf
 
-            {{-- Username o Email --}}
-            <label for="username">Email o Nome utente</label>
-            <input 
-                type="text" 
-                id="username" 
-                name="username" 
-                value="{{ old('username') }}" 
-                required 
-                autofocus
-                aria-describedby="username-error"
-            >
-            @error('username')
-                <span id="username-error" class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <div class="form-group">
+                <label for="username">Nome Utente</label> {{-- Qui potresti usare un username invece di email 
+                <input
+                    type="text"
+                    id="username"
+                    name="username" {{-- Notare 'name="username"' invece di 'email' 
+                    value="{{ old('username') }}"
+                    required
+                    autofocus
+                    autocomplete="username"
+                />
+                @error('username')
+                    <span class="error-message" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-            {{-- Password --}}
-            <label for="password">Password</label>
-            <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                required
-                aria-describedby="password-error"
-            >
-            @error('password')
-                <span id="password-error" class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                />
+                @error('password')
+                    <span class="error-message" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-            {{-- Pulsante invio --}}
-            <button type="submit" class="testo-pulsante">Accedi</button>
-            
+            <button type="submit" class="submit-btn">Accedi</button>
+
+            <div class="alternative-login-link" style="margin-top: 15px; text-align: center;">
+                <p><a href="{{ route('login') }}">Torna al login utente</a></p>
+            </div>
         </form>
     </div>
+
 </body>
-</html>
+</html>--}}

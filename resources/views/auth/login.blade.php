@@ -1,47 +1,74 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    {{-- Aggiungi qui la gestione dei messaggi di stato della sessione (es. "Siamo stati disconnessi") --}}
+    {{-- Ho modificato la classe in "alert alert-danger" per usare gli stili che hai definito nel CSS --}}
+    <x-auth-session-status class="alert alert-danger" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    {{-- Contenitore interno del form di login personalizzato --}}
+    <div class="custom-login-form-wrapper">
+        {{-- Il titolo del form: "Accedi Staff" come nell'immagine --}}
+        <h2>Accedi</h2>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <div class="form-group">
+                {{-- Etichetta "Username" --}}
+                <label for="username">Username</label>
+                <input
+                    type="text" {{-- Meglio usare "text" per username, anche se email funziona --}}
+                    id="username"
+                    name="username"
+                    value="{{ old('username') }}"
+                    required
+                    autofocus
+                    autocomplete="username"
+                    class="custom-input" {{-- Questa classe è fondamentale per la grandezza --}}
+                />
+                @error('username')
+                    <span class="error-message" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    class="custom-input" {{-- Questa classe è fondamentale per la grandezza --}}
+                />
+                @error('password')
+                    <span class="error-message" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            {{-- Questo div gestisce il "Ricordami" e il "Password Dimenticata"
+                 Le classi Tailwind qui sono per il layout interno di questi elementi.
+                 Se vuoi rimuoverli completamente, devi eliminare questo blocco. --}}
+            <div class="block mt-4" style="text-align: left;"> {{-- Ho aggiunto text-align: left per coerenza --}}
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Ricordami') }}</span>
+                </label>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 float-right" href="{{ route('password.request') }}"> {{-- Ho aggiunto float-right per allinearlo a destra --}}
+                        {{ __('Password dimenticata?') }}
+                    </a>
+                @endif
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+            {{-- Il bottone di submit "Accedi", centrato e senza margini laterali di Tailwind --}}
+            {{-- Ho rimosso il flex justify-center, il tuo submit-btn-custom ha già width: 100% --}}
+            <div class="mt-4"> {{-- Ho messo solo un margine superiore --}}
+                <button type="submit" class="submit-btn-custom">Accedi</button>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>
