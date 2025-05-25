@@ -1,0 +1,108 @@
+/* Sfondo sfocato */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-blur {
+    background: url("../img/sfondomodprofilo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+/* Contenuto principale sopra sfondo */
+.main-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Titolo */
+h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+/* Tabella form */
+
+table {
+    width: 100%;
+    border-spacing: 10px;
+    table-layout: fixed; /* importante per non far allargare le colonne */
+}
+
+td {
+    vertical-align: top;
+    width: 50%; /* due colonne uguali */
+    padding: 8px;
+    box-sizing: border-box; /* includi padding nella larghezza */
+    word-wrap: break-word; /* evita overflow testi lunghi */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Pulsanti */
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-save,
+.btn-cancel {
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+}

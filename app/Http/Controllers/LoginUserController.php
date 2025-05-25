@@ -27,10 +27,10 @@ class LoginUserController extends Controller
         }
 
         // Se fallisce torna indietro con errore
-        return back()->withErrors([
-            'email' => 'Le credenziali non sono corrette.',
-        ])->onlyInput('email');
-    }
+        //return back()->withErrors([
+            //'email' => 'Le credenziali non sono corrette.',
+        //])->onlyInput('email');
+   }
 
     public function logout(Request $request)
     {
