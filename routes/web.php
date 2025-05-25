@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
 });
 
+Route::get('/admin/departments', [AdminController::class,'getDepartments']);
 
 /*
 Route::middleware('auth')->group(function () {
