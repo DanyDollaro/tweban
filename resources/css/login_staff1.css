@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,18 +23,27 @@ body {
     box-sizing: border-box; /* Include padding e border nella larghezza/altezza totale */
 }
 
-/* Rimuoviamo .login-container-breeze perché useremo le classi Tailwind di guest.blade.php */
-/* Se vuoi un bordo più arrotondato e un'ombra più marcata come nell'immagine, useremo Tailwind */
-/* Puoi usare questo se vuoi aggiungere stili extra al riquadro bianco di Breeze */
-.custom-breeze-card {
-    /* Esempio: aggiungi stili che non sono facilmente gestibili con Tailwind */
-    /* background: rgba(255, 255, 255, 0.95); */
-    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); */
-    /* Se vuoi una larghezza fissa che ignora max-w-md, definiscila qui */
-    /* width: 350px; */
+/* Stile per il Contenitore del Login (il riquadro bianco) */
+/* Questa classe (.login-container-breeze) DEVE essere aggiunta al div contenitore
+   nel tuo file Blade: `resources/views/layouts/guest.blade.php`. */
+.login-container-breeze {
+    background: rgba(255, 255, 255, 0.95); /* Sfondo bianco semi-trasparente */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra pronunciata */
+    width: 100%;
+    max-width: 400px; /* Larghezza massima del form */
+    box-sizing: border-box;
+    text-align: center;
 }
 
+/* Stile per il Contenitore interno del form (per il titolo e il form) */
+/* Questa classe (.custom-login-form-wrapper) è usata nel file `auth/login.blade.php` */
+.custom-login-form-wrapper {
+    /* Puoi aggiungere stili specifici per questo wrapper se il tuo design lo richiede */
+}
 
+/* Stile per il Titolo del Login ("Accedi Staff") */
 .custom-login-form-wrapper h2 {
     text-align: center;
     margin-bottom: 25px;
@@ -41,11 +51,13 @@ body {
     font-size: 28px;
 }
 
+/* Stili per i Gruppi di Form (etichetta + input) */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
+/* Stili per le Etichette dei Campi */
 .form-group label {
     display: block;
     margin-bottom: 8px;
@@ -53,11 +65,9 @@ body {
     color: #555;
 }
 
-/* Stili per i Campi Input (email e password) - QUESTA È LA CHIAVE */
+/* Stili per i Campi Input (email e password) */
 .custom-input {
-    /* Vogliamo che siano più piccoli e non 100% come prima */
-    width: 250px; /* Larghezza fissa come nell'immagine "ok.png" */
-    max-width: 100%; /* Si adatta su schermi piccoli */
+    width: 100%;
     padding: 12px;
     margin-top: 5px;
     border: 1px solid #ccc;
@@ -67,20 +77,19 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Stili al focus sui campi input */
 .custom-input:focus {
-    border-color: #007bff;
+    border-color: #007bff; /* Colore blu al focus */
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Ombra blu leggera al focus */
 }
 
 /* Stili per il Pulsante di Submit ("Accedi") */
 .submit-btn-custom {
-    /* Adatta la larghezza del bottone se vuoi che sia uguale agli input */
-    width: 250px; /* Rendi uguale alla larghezza degli input */
-    max-width: 100%; /* Si adatta su schermi piccoli */
-    margin-top: 25px;
-    padding: 12px;
-    background-color: #C6E9F9;
+    width: 100%;
+    margin-top: 25px; /* Spazio sopra il pulsante */
+    padding: 12px; /* Padding interno per un pulsante più grande */
+    background-color: #C6E9F9; /* Il tuo colore azzurro chiaro */
     color: black;
     border: none;
     border-radius: 5px;
@@ -92,23 +101,25 @@ body {
 }
 
 .submit-btn-custom:hover {
-    background-color: #ADD8E6;
-    transform: translateY(-2px);
+    background-color: #ADD8E6; /* Azzurro leggermente più scuro al hover */
+    transform: translateY(-2px); /* Piccolo effetto di sollevamento */
 }
 
 .submit-btn-custom:active {
-    background-color: #9ac2d9;
+    background-color: #9ac2d9; /* Ancora più scuro al click */
     transform: translateY(0);
 }
 
+/* Stili per i Messaggi di Errore sotto i campi (generati da @error) */
 .error-message {
-    color: #dc3545;
+    color: #dc3545; /* Rosso per gli errori */
     font-size: 14px;
     margin-top: 5px;
     display: block;
     text-align: left;
 }
 
+/* Stili per eventuali messaggi di errore flash (es. "Ruolo non valido") */
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -125,13 +136,18 @@ body {
 
 /* Media Queries per schermi più piccoli (responsive design) */
 @media (max-width: 600px) {
-    /* Le classi Tailwind nel guest.blade.php gestiranno la responsività del contenitore principale */
-    .custom-input,
-    .submit-btn-custom {
-        width: 100%; /* Su schermi più piccoli, rendi input e bottone pieni */
-        padding: 10px;
+    .login-container-breeze {
+        padding: 20px;
+        margin: 15px;
     }
     .custom-login-form-wrapper h2 {
         font-size: 24px;
+    }
+    .custom-input {
+        padding: 10px;
+    }
+    .submit-btn-custom {
+        padding: 10px;
+        font-size: 16px;
     }
 }

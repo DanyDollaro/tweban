@@ -5,11 +5,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', [DipartimentoController::class,'showData']);
-
 Route::get('/dashboard', function () {
     return view('breezedashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,7 +26,6 @@ Route::middleware('auth')->group(function () {
    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 //route per il login
 
 Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
@@ -36,10 +34,8 @@ Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
 //route prenotazioni
 Route::middleware(['auth'])->group(function () {
-    
     Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-    
 });
 
 
@@ -68,5 +64,4 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
 });*/
 
-
-   
+require __DIR__.'/auth.php';
