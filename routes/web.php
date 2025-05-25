@@ -8,7 +8,6 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DipartimentoController::class,'showData']);
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -44,7 +43,4 @@ Route::post('/appointment', [AppointmentController::class, 'submit'])->name('app
     Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
 });*/
 
-// Route per l'amministrazione
-
-Route::get('/admin/departments', [AdminController::class, 'getDepartments']);
-
+require __DIR__.'/auth.php';

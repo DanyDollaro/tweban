@@ -1,5 +1,5 @@
 <!-- Doctors Section -->
-    <section id="doctors" class="doctors section">
+<section id="doctors" class="doctors section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
