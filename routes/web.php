@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- 
+
 
 //route per il login
 
@@ -37,9 +37,4 @@ use App\Http\Controllers\AppointmentController;
 Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
 Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');
 
-//route per modificare il profilo
-
-/*Route::middleware('auth')->group(function () {
-    Route::get('/profilo/modifica', [EditProfileController::class, 'edit'])->name('profilo.edit');
-    Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
-});*/
+require __DIR__.'/auth.php';
