@@ -17,7 +17,7 @@
                 <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                   <i class="bi bi-geo-alt flex-shrink-0"></i>
                   <div>
-                    <h3>Luogo</h3>
+                    <h3>Luogo 1</h3>
                     <p>Via Brecce Bianche 12, 60131 Ancona AN</p>
                   </div>
                 </div>
