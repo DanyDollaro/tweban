@@ -25,11 +25,6 @@ Route::middleware('auth')->group(function () {
    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-<<<<<<< HEAD
-
-=======
->>>>>>> c275b4c117fc33c6c7a1f4097cbba9a62cbe064e
-
 //route per il login
 
 Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
@@ -55,20 +50,4 @@ use App\Http\Controllers\AppointmentController;
 Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
 Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
 
-<<<<<<< HEAD
-=======
-//route per modificare il profilo
-
-/*Route::middleware('auth')->group(function () {
-    Route::get('/profilo/modifica', [EditProfileController::class, 'edit'])->name('profilo.edit');
-    Route::post('/profilo/modifica', [EditProfileController::class, 'update'])->name('profilo.update');
-});*/
-
-/*prenotazione
-    Route::middleware(['auth'])->group(function () {
-    Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
-    Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-});*/
-
->>>>>>> c275b4c117fc33c6c7a1f4097cbba9a62cbe064e
 require __DIR__.'/auth.php';
