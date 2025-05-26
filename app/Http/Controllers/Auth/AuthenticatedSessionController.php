@@ -85,7 +85,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectToRoleDashboard($user): RedirectResponse
+    public function redirectToRoleDashboard($user): RedirectResponse
     {
         switch ($user->role) {
             case 'amministratore':

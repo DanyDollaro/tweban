@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+//namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller; // Assicurati di importare la classe Controller base!
 
@@ -13,7 +13,7 @@ class LoginController extends Controller
      * Mostra il form di login.
      * Reindirizza gli utenti già autenticati in base al loro ruolo.
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
+     
     public function showLoginForm()
     {
         // Logica per reindirizzare se l'utente è già autenticato
@@ -34,7 +34,7 @@ class LoginController extends Controller
             }
         }
         // Se l'utente NON è autenticato, mostra la view del form di login
-        return view('login'); // Restituisce la view 'login.blade.php' 
+        return view('auth.login'); // Restituisce la view 'login.blade.php' 
     }
 
     /**
@@ -42,7 +42,7 @@ class LoginController extends Controller
      * Autentica l'utente e lo reindirizza in base al ruolo.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
-     */
+     
     public function autentich(Request $request) // Il metodo che processa i dati del form di login
     {
         // Se l'utente è già autenticato, reindirizzalo per prevenire re-login
@@ -100,7 +100,7 @@ class LoginController extends Controller
      * Gestisce il logout dell'utente.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
-     */
+     
     public function logout(Request $request)
     {
         Auth::logout(); // Effettua il logout dell'utente
@@ -111,4 +111,4 @@ class LoginController extends Controller
 
         return redirect('/'); // Reindirizza l'utente alla homepage dopo il logout
     }
-}
+}*/
