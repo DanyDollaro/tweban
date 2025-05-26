@@ -2,20 +2,21 @@
 
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DipartimentoController::class,'showData']);
-Route::get('/dashboard', function () {
-    return view('breezedashboard');
+
+Route::get('/', [DipartimentoController::class,'showData'])->name('home');;
+
+Route::get('/dashboard_paziente', function () {
+    return view('user_layouts/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show'); });
+    Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show'); 
+});
 
 //modifica del profilo
 Route::middleware('auth')->group(function () {
@@ -31,11 +32,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 
-//route per il login
-
-Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginUserController::class, 'login'])->name('login.post');
-Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
 
 //route prenotazioni
 Route::middleware(['auth'])->group(function () {

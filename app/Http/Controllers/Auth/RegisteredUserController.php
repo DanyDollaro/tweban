@@ -30,21 +30,33 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:50', 'unique:users,username'],
+            'nome' => ['required', 'string', 'max:255'],
+            'cognome' => ['required', 'string', 'max:255'],
+            'codice_fiscale' => ['required', 'string', 'size:16', 'unique:users,codice_fiscale'],
+            'data_nascita' => ['required', 'date', 'before:today'],
+            'telefono' => ['required', 'string', 'regex:/^[0-9]{10,15}$/'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'indirizzo' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'username' => $request->username,
+            'nome' => $request->nome,
+            'cognome' => $request->cognome,
+            'codice_fiscale' => $request->codice_fiscale,
+            'data_nascita' => $request->data_nascita,
+            'telefono' => $request->telefono,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'indirizzo' => $request->indirizzo,
+            'password' => Hash::make($request->password)
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
-
+        session()->flash('success', 'Registrazione completata con successo!');
         return redirect(route('dashboard', absolute: false));
     }
 }

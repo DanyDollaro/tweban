@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cognome',30);
             $table->string('prestazione_assegnata',100)->nullable();
             $table->foreign('prestazione_assegnata')->references('tipologia')->on('prestazione')->onUpdate('set null');
+            $table->string('immagine_profilo',100);
         });
     }
 

@@ -137,7 +137,7 @@ class DipartimentoController extends Controller
     //RESTITUZIONE DI MEDICI ASSEGNATI PER PRESTAZIONE (QUERY-BUILDER) {NO ELOQUENT DATA LA SOLA ESTRAZIONE DI SEMPLICI DATI IN QUESTO CONTESTO}
     public function showDoctors(){
         return DB::table('medico')
-        ->select('nome','cognome','prestazione_assegnata')
+        ->select('nome','cognome','prestazione_assegnata','immagine_profilo')
         ->get()
         ->keyBy('prestazione_assegnata');
     }
