@@ -48,4 +48,35 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
             'password' => 'hashed',
         ];
     }
+     /**
+     * Verifica se l'utente ha il ruolo di 'amministratore'.
+     *
+     * @return bool
+     */
+    public function isPaziente():bool{
+        return $this->role === 'paziente';
+    }
+    public function isStaff():bool{
+        return $this->role === 'staff';
+    }
+    public function isAmministratore():bool{
+        return $this->role === 'amministratore';
+    }
+    /**
+     * Verifica se l'utente appartiene a uno dei ruoli specificati.
+     * Utile per controllare ruoli multipli.
+     *
+     * @param  array|string  $roles
+     * @return bool
+     */
+    public function hasRole(array|string $roles): bool
+    {
+        // Se $roles è una stringa, la convertiamo in un array per uniformità
+        if (is_string($roles)) {
+            $roles = [$roles];
+        }
+
+        return in_array($this->role, $roles);
+    }
 }
+

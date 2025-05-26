@@ -3,9 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------------------------------------------- */
-/* I TUOI STILI PERSONALIZZATI PER IL LOGIN */
-/* ---------------------------------------------------- */
 
 body {
     /* Assicurati che l'immagine sia in public/img/staff/staff.jpg */

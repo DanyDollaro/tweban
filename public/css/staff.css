@@ -11,6 +11,31 @@ body {
     flex-direction: column; /* */
     justify-content: flex-start; /* */
     align-items: stretch; /* Stretch items to container width */
+    position: relative; /* Indispensabile per posizionare il pseudo-elemento */
+    z-index: 1; /* Assicura che il body sia "sopra" il suo pseudo-elemento */
+}
+
+/* Questo è il codice che schiarisce l'immagine */
+body::before {
+    content: ""; /* Obbligatorio per i pseudo-elementi */
+    position: absolute; /* Permette di posizionarlo liberamente */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Questo è il trucco: un colore bianco semi-trasparente */
+     background-color: rgba(255, 255, 255, 0.7);; /* Regola il valore 0.4 per l'intensità */
+    z-index: -1; /* Mette la "copertura" trasparente DIETRO il contenuto del body */
+}
+
+.agenda-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30vh;
+    background-color: #ffffff;
+    background-size: cover;
+    padding: 20px;
 }
 
 header {
