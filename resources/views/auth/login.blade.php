@@ -6,7 +6,7 @@
     {{-- Contenitore interno del form di login personalizzato --}}
     <div class="custom-login-form-wrapper">
         {{-- Il titolo del form: "Accedi Staff" come nell'immagine --}}
-        <h2>Accedi</h2>
+        <h2>Accedi o <a href="{{ route('register') }}"> Registati</a></h2>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

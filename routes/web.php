@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DipartimentoController::class,'showData']);
@@ -25,6 +26,11 @@ Route::middleware('auth')->group(function () {
    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//route per la registrazione
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+
+
 //route per il login
 
 Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
