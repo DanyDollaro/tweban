@@ -29,26 +29,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
     <script>
+        // Make department globally available
+        window.departments = @json($dipartimenti);
 
         document.addEventListener('DOMContentLoaded', function () {
-            const calendarEl = document.getElementById('calendar');
-            if (!calendarEl) {
-                console.error("#calendar NOT found!");
-                return;
-            }
-
-            const calendar = new FullCalendar.Calendar(calendarEl, {
+            const calendar = new FullCalendar.Calendar($('#calendar')[0], {
                 initialView: 'dayGridMonth',
                 dateClick: calendarDateClick
             });
-
             calendar.render();
         });
 
-        // Make department globally available
-        window.departments = @json($dipartimenti);
-        // Set the first entry of the menu as selected
-        setSelection($('.menu-item')[0]);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set the first entry of the menu as selected
+            setSelection($('.menu-item')[0]);
+        });
     </script>
 </body>
 </html>

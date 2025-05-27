@@ -43,11 +43,29 @@
         </div>
     </header>
     <main>
-             <section class="agenda-controls">
-                <label for="date-selector">Appuntamenti del giorno <span id="selected-date-display"></label>
-            </section>
+        <section class="agenda-controls">
+            <div class="agenda-header">
+                <label for="date-selector">Appuntamenti del giorno <span id="selected-date-display"></span></label>
+            </div>
             <section class="agenda-display">
-    </main>
+                <div class="control-group">
+                    <label for="service-filter">Filtra per Prestazione:</label>
+                    <select id="service-filter">
+                        @foreach ($prestazioni_per_select as $prestazione)
+                        <option value="{{ $prestazione->id }}">
+                            {{ $prestazione->nome }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+            </section>
+            <div id="appointments-results">
+                <p class="loading-message" style="display: none;">Caricamento appuntamenti...</p>
+                <p class="no-appointments-message" style="display: none;">Nessun appuntamento trovato per la data e/o prestazione selezionata.</p>
+                <div class="appointments-list"></div>
+            </div>
+        </section>
+</main>
     <script>
         //funzione per ottenere la data corrente e formattarla 
         function getCurrentDateFormatted(){
@@ -69,8 +87,19 @@
             // Seleziona gli elementi HTML necessari
             //Trova il campo input della data
             const dateInput = document.getElementById('date-selector'); 
+            //Nuovo elemento per il filtro
+            const serviceFilter = document.getElementById('service-filter'); 
             //Trova lo span dove mostrare la data
             const selectedDateDisplay = document.getElementById('selected-date-display');
+             const appointmentsList = document.querySelector('.appointments-list');
+             const noAppointmentsMessage = document.querySelector('.no-appointments-message');
+
+            //Gestione degli appuntamenti
+            const appointmentsResults = document.getElementById('appointments-results');
+            const loadingMessage = appointmentsResults.querySelector('.loading-message');
+            const noAppointmentsMessage = appointmentsResults.querySelector('.no-appointments-message');
+            const appointmentsList = appointmentsResults.querySelector('.appointments-list');
+
             //Imposta la data del giorno
             const todayFormatted = getCurrentDateFormatted();
             //Se l'input della data esiste, imposta il suo valore
