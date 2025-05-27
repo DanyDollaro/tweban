@@ -85,20 +85,16 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectToRoleDashboard($user): RedirectResponse
+    public function redirectToRoleDashboard($user): RedirectResponse
     {
         
         switch ($user->ruolo) {
             case 'amministratore':
-                return redirect()->intended('/admin/departments');
+                return redirect()->intended('/dashboard_amministratore');
             
-            //*******DA RISCRIVERE L'INDIRIZZAMENTO PER LO STAFF********
-            /*
             case 'staff':
-                return redirect()->intended('/staff/dashboard');
-            */
-            /* ****************************************************** */ 
-
+                return redirect()->intended('/dashboard_staff');
+            
             case 'paziente':
                 return redirect()->intended('/dashboard_paziente');
             default:
