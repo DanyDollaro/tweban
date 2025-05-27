@@ -18,5 +18,5 @@ function setSelection(el) {
 }
 
 function calendarDateClick(info) {
-    info.dayEl.style.backgroundColor = '#00cc00';
+    info.dayEl.style.backgroundColor = '#ffcc00';
 }

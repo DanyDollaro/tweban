@@ -7,10 +7,7 @@
 
     <!-- Styles definition -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/departments-page.css') }}" rel="stylesheet">
-
-    <!-- Include fullcalendar -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+    <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -20,9 +17,9 @@
 
     <!-- Main page layout -->
     <div class="main">
-        @include("admin-layouts.partials.sidebar-menu")
-        @include("admin-layouts.partials.departments-content-page")
-        @include("admin-layouts.partials.sidebar-properties")
+        @include("admin-layouts.partials.departments.sidebar-menu")
+        @include("admin-layouts.partials.departments.content-page")
+        @include("admin-layouts.partials.departments.sidebar-properties")
     </div>
 
     <!-- JS Scripts -->
@@ -32,13 +29,6 @@
         // Make department globally available
         window.departments = @json($departments);
         window.reservations = @json($reservations);
-        console.log(window.departments);
-        console.log(window.reservations);
-
-        document.addEventListener('DOMContentLoaded', function () {
-            calendar = new FullCalendar.Calendar($('#calendar')[0], { dateClick: calendarDateClick });
-            calendar.render();
-        });
 
         document.addEventListener('DOMContentLoaded', function () {
             // Set the first entry of the menu as selected
