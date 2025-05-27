@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dipartimento;
+use App\Models\Prenotazione;
+use App\Models\GiornoPrestazione;
 
 class AdminController extends Controller
 {
-    public function getDepartments()
+    public function getDepartmentsData()
     {
-        $dipartimenti = Dipartimento::all(); // Recupera tutti i dipartimenti
-        return view('admin-layouts.departments', compact('dipartimenti'));
+        $departments = Dipartimento::all();
+        $reservations = GiornoPrestazione::all();
+
+        return view('admin-layouts.departments', compact('departments', 'reservations'));
+    }
+
+    public function getStaffData()
+    {
+        return view('admin-layouts.staff');
+    }
+
+    public function getPerformancesData()
+    {
+        return view('admin-layouts.performances');
     }
 }
 

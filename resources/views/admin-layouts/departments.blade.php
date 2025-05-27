@@ -23,20 +23,20 @@
         @include("admin-layouts.partials.sidebar-menu")
         @include("admin-layouts.partials.departments-content-page")
         @include("admin-layouts.partials.sidebar-properties")
-   </div>
+    </div>
 
     <!-- JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
     <script>
         // Make department globally available
-        window.departments = @json($dipartimenti);
+        window.departments = @json($departments);
+        window.reservations = @json($reservations);
+        console.log(window.departments);
+        console.log(window.reservations);
 
         document.addEventListener('DOMContentLoaded', function () {
-            const calendar = new FullCalendar.Calendar($('#calendar')[0], {
-                initialView: 'dayGridMonth',
-                dateClick: calendarDateClick
-            });
+            calendar = new FullCalendar.Calendar($('#calendar')[0], { dateClick: calendarDateClick });
             calendar.render();
         });
 

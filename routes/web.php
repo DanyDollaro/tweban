@@ -37,7 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
 });
 
-Route::get('/admin/departments', [AdminController::class,'getDepartments']);
+Route::get('/admin/dipartimenti', [AdminController::class,'getDepartmentsData']);
+Route::get('/admin/personale', [AdminController::class,'getStaffData']);
+Route::get('/admin/prestazioni', [AdminController::class,'getPerformancesData']);
 
 /*
 Route::middleware('auth')->group(function () {

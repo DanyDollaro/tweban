@@ -1,8 +1,8 @@
 <div class="sidebar-menu">
     <div id="menu-selection">
-        @foreach ($dipartimenti as $dipartimento)
-            <div class="menu-item" data-specialization="{{ $dipartimento->specializzazione }}" onclick="setSelection(this)">
-                {{ $dipartimento->specializzazione }}
+        @foreach ($departments as $d)
+            <div class="menu-item" data-specialization="{{ $d->specializzazione }}" onclick="setSelection(this)">
+                {{ $d->specializzazione }}
             </div>
         @endforeach
     </div>
