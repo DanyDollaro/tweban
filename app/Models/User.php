@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-// Se NON VUOI la verifica email, rimuovi l'importazione di MustVerifyEmail
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'implements MustVerifyEmail'
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 

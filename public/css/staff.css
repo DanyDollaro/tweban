@@ -28,14 +28,18 @@ body::before {
     z-index: -1; /* Mette la "copertura" trasparente DIETRO il contenuto del body */
 }
 
-.agenda-display{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 30vh;
-    background-color: #ffffff;
-    background-size: cover;
-    padding: 20px;
+.agenda-controls{
+    margin-top: 90px;
+    width: 90%; /* Rimpicciolisce la larghezza al 90% del suo contenitore */
+    max-width: 960px; /* Mantieni la larghezza massima */
+    margin-left: auto; /* Centra il riquadro orizzontalmente */
+    margin-right: auto; /* Centra il riquadro orizzontalmente */
+    padding: 40px; /* Aggiunge un po' di spazio interno per il contenuto */
+    padding-top: 30px;    /* Aumenta lo spazio interno in alto */
+    padding-bottom: 60px; /* Aumenta lo spazio interno in basso */
+    background-color: #E0F2F7; /* Un leggero colore di sfondo per renderlo visibile */
+    border: 2px solid #99CCEE; /* Un bordo per definirne i contorni */
+    border-radius: 12px; /*angoli arrotondati*/
 }
 
 header {
@@ -43,8 +47,8 @@ header {
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative; /* Needed for absolute positioning of elements inside */
-    z-index: 10; /* Ensure header is above other elements */
+    position: relative; /* Necessario per il posizionamento assoluto degli elementi al suo interno */
+    z-index: 10; /* Assicurati che l'intestazione sia sopra gli altri elementi */
 }
 
 header .top-bar {
