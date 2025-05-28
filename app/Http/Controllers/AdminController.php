@@ -12,9 +12,9 @@ class AdminController extends Controller
     public function getDepartmentsData()
     {
         $departments = Dipartimento::all();
-        $reservations = GiornoPrestazione::all();
+        $performance_availability = GiornoPrestazione::all();
 
-        return view('admin-layouts.departments', compact('departments', 'reservations'));
+        return view('admin-layouts.departments', compact('departments', 'performance_availability'));
     }
 
     public function getStaffData()
