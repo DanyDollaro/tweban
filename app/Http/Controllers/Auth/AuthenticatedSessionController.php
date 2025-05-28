@@ -85,7 +85,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirectToRoleDashboard($user): RedirectResponse
+    protected function redirectToRoleDashboard($user): RedirectResponse
     {
         switch ($user->ruolo) {
              case 'amministratore':
@@ -96,6 +96,7 @@ class AuthenticatedSessionController extends Controller
 
             case 'paziente':
                 return redirect()->route('paziente.dashboard');
+
             default:
                 // Se il ruolo non è riconosciuto, scollega l'utente e reindirizza al login con errore
                 Auth::logout();

@@ -3,8 +3,8 @@
        Gestione Dipartimenti
     </div>
     <nav class="navbar">
-        <a href="#" class="nav-link">Dipartimenti</a>
-        <a href="#" class="nav-link">Personale</a>
-        <a href="#" class="nav-link">Agenda</a>
+        <a href="/admin/dipartimenti" class="nav-link">Dipartimenti</a>
+        <a href="/admin/personale" class="nav-link">Personale</a>
+        <a href="/admin/prestazioni" class="nav-link">Prestazioni</a>
     </nav>
 </div>
