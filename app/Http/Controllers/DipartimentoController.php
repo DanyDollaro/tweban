@@ -39,16 +39,6 @@ class DipartimentoController extends Controller
         return $group_services;
     }
 
-    //RESTITUZIONE DI PRESTAZIONI PER DIPARTIMENTO ASSOCIATO (QUERY-BUILDER)
-
-    /*public function showServices(){
-        return DB::table('prestazione as p')
-        ->join('dipartimento as d', 'p.sp_dipartimento', '=', 'd.specializzazione')
-        ->select('p.*', 'd.specializzazione')
-        ->get()
-        ->groupBy('specializzazione');
-    }*/
-
 
     //RESTITUZIONE DI ORARI DELLE PRESTAZIONI PER TIPOLOGIA DI PRESTAZIONE [ELOQUENT]
     public function showTimeServices(){
@@ -61,21 +51,6 @@ class DipartimentoController extends Controller
             ->get()
             ->keyBy('tipologia_prestazione');;
     }
-
-
-    //RESTITUZIONE DI ORARI DELLE PRESTAZIONI PER TIPOLOGIA DI PRESTAZIONE (QUERY-BUILDER)
-
-    /*public function showTimeServices(){
-        return DB::table('orario_prestazioni')
-        ->select(
-            'tipologia_prestazione',
-            DB::raw('MIN(orario) as orario_iniziale'),
-            DB::raw('MAX(orario) as orario_finale')
-        )
-        ->groupBy('tipologia_prestazione')
-        ->get()
-        ->keyBy('tipologia_prestazione');
-    }*/
 
     //RESTITUZIONE GIORNO FINALE E INIZIALE DI SERVIZIO DELLE PRESTAZIONI PER TIPOLOGIA DI PRESTAZIONE (ELOQUENT)
     public function showFirstLastDayServices(){
@@ -105,39 +80,10 @@ class DipartimentoController extends Controller
 
     }
 
-    //RESTITUZIONE GIORNO FINALE E INIZIALE DI SERVIZIO DELLE PRESTAZIONI PER TIPOLOGIA DI PRESTAZIONE (QUERY-BUILDER)
-    /*public function showFirstLastDayServices(){
-        $giorniTotali = DB::table('giorni_prestazioni')
-        ->select('tipologia_prestazione', 'giorno')
-        ->orderBy('tipologia_prestazione')
-        ->get();
-
-        $giorniRaggruppati = [];
-
-        foreach ($giorniTotali as $row) {
-            $tipo = $row->tipologia_prestazione;
-            if (!isset($giorniRaggruppati[$tipo])) {
-                $giorniRaggruppati[$tipo] = [];
-            }
-            $giorniRaggruppati[$tipo][] = $row->giorno;
-        }
-
-        // Ora estrai primo e ultimo per ciascuna prestazione
-        $giorniDisponibilita = [];
-
-        foreach ($giorniRaggruppati as $tipo => $giorni) {
-            $giorniDisponibilita[$tipo] = [
-                'inizio' => $giorni[0],
-                'fine' => $giorni[count($giorni) - 1],
-            ];
-        }
-        return $giorniDisponibilita;
-    }*/
-
     //RESTITUZIONE DI MEDICI ASSEGNATI PER PRESTAZIONE (QUERY-BUILDER) {NO ELOQUENT DATA LA SOLA ESTRAZIONE DI SEMPLICI DATI IN QUESTO CONTESTO}
     public function showDoctors(){
         return DB::table('medico')
-        ->select('nome','cognome','prestazione_assegnata')
+        ->select('nome','cognome','prestazione_assegnata','immagine_profilo')
         ->get()
         ->keyBy('prestazione_assegnata');
     }

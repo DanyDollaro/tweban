@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('descrizione',2000);
             $table->string('sp_dipartimento',100);
             $table->foreign('sp_dipartimento')->references('specializzazione')->on('dipartimento')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('mail_staff')->nullable();
-            $table->foreign('mail_staff')->references('email')->on('users');
+            $table->unsignedBigInteger('staff_id')->nullable();
+            $table->foreign('staff_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
         });
     }
 
