@@ -25,7 +25,7 @@
             <nav>
                 <ul>
                     {{-- Il link per l'Agenda Prestazioni, potresti volerlo più specifico, non 'login' --}}
-                    <li><a href="{{ route('staff.dashboard') }}">Agenda Prestazioni</a></li> {{-- Modificato da 'login' --}}
+                    <li><a href="#">Prenotazioni</a></li> {{-- Modificato da 'login' --}}
                     <li><a href="#">Visualizzazione Referti</a></li>
                     <li><a href="#">Comunicazioni Interne</a></li>
 
@@ -46,6 +46,7 @@
         <section class="agenda-controls">
             <div class="agenda-header">
                 <label for="date-selector">Appuntamenti del giorno <span id="selected-date-display"></span></label>
+                <input type="date" id="date-selector" style="display: none;">
             </div>
             <section class="agenda-display">
                 <div class="control-group">
@@ -91,8 +92,6 @@
             const serviceFilter = document.getElementById('service-filter'); 
             //Trova lo span dove mostrare la data
             const selectedDateDisplay = document.getElementById('selected-date-display');
-             const appointmentsList = document.querySelector('.appointments-list');
-             const noAppointmentsMessage = document.querySelector('.no-appointments-message');
 
             //Gestione degli appuntamenti
             const appointmentsResults = document.getElementById('appointments-results');

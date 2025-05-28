@@ -42,18 +42,6 @@ body::before {
     border-radius: 12px; /*angoli arrotondati*/
 }
 
-/* Stile generale del contenitore della scatola (simile a prima, ma puoi adattarlo) 
-.agenda-controls {
-    background-color: #f8fcfd; /* Un bianco/azzurro molto chiaro per lo sfondo generale 
-    border: 1px solid #cceeff; /* Bordo sottile e chiaro per il contenitore esterno 
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ombra un po' più definita 
-    padding: 0;
-    width: fit-content;
-    margin: 30px auto;
-    overflow: hidden; /* Assicura che i bordi arrotondati si applichino bene anche internamente 
-
-/* Stile per l'intestazione degli appuntamenti giornalieri */
 .agenda-header {
     background-color: #e0f2f7; /* Sfondo leggermente più scuro per l'intestazione */
     padding: 18px 25px; /* Più padding per dare spazio */
@@ -70,6 +58,13 @@ body::before {
 .agenda-display {
     padding: 20px 25px; /* Padding generoso per il contenuto sotto la linea */
     background-color: #ffffff; /* Sfondo bianco per staccare dal blu dell'intestazione */
+}
+
+.date-display {
+    display: inline !important; /* Forza la visualizzazione come elemento in linea */
+    color: #333 !important;    /* Assicurati che il colore del testo non sia trasparente o uguale allo sfondo */
+    /* Potresti voler specificare anche font-size se è zero */
+    font-size: 1em !important; /* O la dimensione che desideri */
 }
 
 /* Stile per l'etichetta del filtro */

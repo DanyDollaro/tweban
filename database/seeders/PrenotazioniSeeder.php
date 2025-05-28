@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Prestazione; 
-use App\Models\Paziente; 
-use App\Models\Prenotazione; 
+use App\Models\Prestazione;
+use App\Models\User;
+use App\Models\Prenotazione;
+use Carbon\Carbon; // Import the Carbon facade
 
 class PrenotazioniSeeder extends Seeder
 {
@@ -15,50 +16,44 @@ class PrenotazioniSeeder extends Seeder
      */
     public function run(): void
     {
-        // Esempio: recupera un paziente esistente
-        $paziente1 = Paziente::first(); // Prende il primo paziente disponibile
-        // O recupera un paziente specifico:
-        // $paziente1 = Paziente::where('email', 'mario.rossi@example.com')->first();
+        // Recupera un paziente esistente
+        $paziente1 = User::where('ruolo', 'paziente')->first();
+        $paziente2 = User::where('ruolo', 'paziente')->skip(1)->first();
 
-        // Esempio: recupera un'altra paziente
-        $paziente2 = Paziente::skip(1)->first(); // Prende il secondo paziente disponibile
-        // O recupera un paziente specifico:
-        // $paziente2 = Paziente::where('email', 'laura.bianchi@example.com')->first();
-
-        // Esempio: recupera una prestazione esistente
+        // Recupera le prestazioni esistenti
         $prestazioneCardiologica = Prestazione::where('tipologia', 'cardiologica')->first();
-        // O recupera un'altra prestazione:
         $prestazioneDermatologica = Prestazione::where('tipologia', 'dermatologica')->first();
 
-
-        // Data per le prenotazioni (puoi usare Carbon::now() per la data odierna)
+        // Data per le prenotazioni
         $today = Carbon::now()->format('Y-m-d');
-        // Oppure una data fissa per i test:
-        // $testDate = '2025-05-28'; // Esempio: domani
 
         // Inserimento delle due prenotazioni (Appuntamenti)
         if ($paziente1 && $prestazioneCardiologica) {
             Prenotazione::create([
-                'data' => $today, // Data di oggi (o $testDate)
-                'ora' => '09:30:00', // Ora dell'appuntamento
-                'id_prestazione' => $prestazioneCardiologica->tipologia, // Chiave esterna per la prestazione
-                'paziente_id' => $paziente1->id, // Chiave esterna per il paziente
+                'data_prenotazione' => $today, // Modificato da 'data'
+                'ora' => '09:30:00',
+                // IMPORTANTE: Se 'tipologia_prestazione' nella tua tabella `prenotazione` è un ID numerico
+                // (chiave esterna a `prestazioni.id`), allora qui dovresti usare `$prestazioneCardiologica->id`.
+                // Se invece deve contenere la stringa "cardiologica", allora `$prestazioneCardiologica->tipologia` è corretto.
+                // Basandoci sul nome della colonna che hai mostrato, assumiamo che voglia la stringa "cardiologica".
+                'tipologia_prestazione' => $prestazioneCardiologica->tipologia, // Modificato da 'id_prestazione'
+                'client_id' => $paziente1->id, // Modificato da 'paziente_id'
                 'note' => 'Controllo annuale preventivo.',
-                // Aggiungi qui altri campi se la tua tabella Appuntamento li richiede
+                // 'giorno_escluso' e 'staff_id' non sono inclusi qui.
+                // Se non sono nullable nella tua tabella, dovrai aggiungerli con un valore.
             ]);
         } else {
             $this->command->info('Skipping appointment 1: Paziente 1 or Cardiologica Prestazione not found.');
         }
 
-
         if ($paziente2 && $prestazioneDermatologica) {
             Prenotazione::create([
-                'data' => $today, // Data di oggi (o $testDate)
-                'ora' => '14:00:00', // Ora dell'appuntamento
-                'id_prestazione' => $prestazioneDermatologica->tipologia,
-                'paziente_id' => $paziente2->id,
+                'data_prenotazione' => $today, // Modificato da 'data'
+                'ora' => '14:00:00',
+                // Vedi la nota sopra per 'tipologia_prestazione'.
+                'tipologia_prestazione' => $prestazioneDermatologica->tipologia, // Modificato da 'id_prestazione'
+                'client_id' => $paziente2->id, // Modificato da 'paziente_id'
                 'note' => 'Visita per controllo nei.',
-                // Aggiungi qui altri campi se la tua tabella Appuntamento li richiede
             ]);
         } else {
             $this->command->info('Skipping appointment 2: Paziente 2 or Dermatologica Prestazione not found.');

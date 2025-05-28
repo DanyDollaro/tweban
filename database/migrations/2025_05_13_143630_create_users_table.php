@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('indirizzo');
             $table->string('password');
-            $table->enum('ruolo',['cliente','staff','admin'])->default('cliente'); // 👈 Campo ruolo con valore predefinito
+            $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente'); // 👈 Campo ruolo con valore predefinito
             $table->rememberToken();
             $table->timestamps();
         });
