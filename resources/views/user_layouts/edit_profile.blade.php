@@ -61,7 +61,7 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn-save">Salva Modifiche</button>
-                <a href="{{ route('dashboard') }}" class="btn-cancel">Annulla</a>
+                <a href="{{ route('paziente.dashboard') }}" class="btn-cancel">Annulla</a>
             </div>
         </form>
     </div>

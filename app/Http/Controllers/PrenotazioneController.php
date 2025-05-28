@@ -78,7 +78,7 @@ class PrenotazioneController extends Controller
             
         ]);
 
-        $tipologia_prestazione = Prestazione::where('tipologia', $request->tipologia_prestazione);
+        $tipologia_prestazione = Prestazione::where('tipologia', $request->tipologia_prestazione)->first();
 
         //salva prenotazione 
         Prenotazione::create([

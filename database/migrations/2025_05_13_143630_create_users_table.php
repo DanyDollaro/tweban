@@ -25,7 +25,6 @@ return new class extends Migration
             $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente');
             $table->string('indirizzo');
             $table->string('password');
-            $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente'); // 👈 Campo ruolo con valore predefinito
             $table->rememberToken();
             $table->timestamps();
         });
