@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('prenotazione', function(Blueprint $table){
             $table->id();
             $table->date('data_prenotazione');
+            $table->time('orario_prenotazione');
             $table->enum('giorno_escluso', ['lunedi', 'martedi', 'mercoledi', 'giovedi', 'venerdi']);
              // Cliente
             $table->unsignedBigInteger('cliente_id');
