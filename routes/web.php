@@ -2,12 +2,10 @@
 
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\PrenotazioneController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaffDashboardController; 
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
 
 // Importa il controller di sessione autenticata di Breeze
@@ -18,14 +16,23 @@ use App\Http\Controllers\PazienteDashboardController;
 Route::get('/', [DipartimentoController::class, 'showData'])->name('home');
 
 
-Route::get('/', [DipartimentoController::class,'showData']);
+// --- Rotta Generica /dashboard di Breeze ---
+// Questa rotta serve come punto di smistamento dopo il login.
+// Reindirizza l'utente alla sua dashboard specifica in base al ruolo.
 Route::get('/dashboard', function () {
-    return view('breezedashboard');
+    if (Auth::check()) {
+        $user = Auth::user();
+        // Chiama il metodo helper dal controller di Breeze per reindirizzare al ruolo corretto
+        return (new AuthenticatedSessionController())->redirectToRoleDashboard($user);
+    }
+    // Se un utente non autenticato prova ad accedere a /dashboard, lo reindirizziamo al login
+    return redirect()->route('login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show'); });
 
+// --- Gruppo di Rotte Protette da Autenticazione ---
+// TUTTE le rotte all'interno di questo gruppo richiedono che l'utente sia loggato.
+Route::middleware('auth')->group(function () {
 
     // --- Rotte per la Gestione del Profilo Utente ---
     // Rotte standard di Breeze per la modifica del profilo
@@ -34,22 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/profilo', [ProfileController::class, 'update'])->name('profile.update');
 
 
+    // La tua rotta personalizzata per la visualizzazione del profilo
+    Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show');
 
-// Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show');
-   // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-   // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-//route per il login
 
-Route::get('/login', [LoginUserController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginUserController::class, 'login'])->name('login.post');
-Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
-
-//route prenotazioni
-Route::middleware(['auth'])->group(function () {
+    // --- Rotte per le Prenotazioni ---
+    // Accessibili a qualsiasi utente autenticato.
     Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-
 
 
     // --- Rotte per le Dashboard Specifiche per Ruolo ---
@@ -80,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
 }); // Fine del gruppo Route::middleware('auth')
 
 
-Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
-Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
-
+// --- Include le rotte di autenticazione predefinite di Breeze ---
+// Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
+// Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
 require __DIR__.'/auth.php';
