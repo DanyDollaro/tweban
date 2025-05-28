@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * @return void
      */
     public function up(): void
@@ -22,9 +22,10 @@ return new class extends Migration
             $table->date('data_nascita');
             $table->string('telefono')->unique();
             $table->string('email')->unique();
+            $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente');
             $table->string('indirizzo');
             $table->string('password');
-            $table->enum('ruolo',['cliente','staff','admin'])->default('cliente'); // 👈 Campo ruolo con valore predefinito
+            $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente'); // 👈 Campo ruolo con valore predefinito
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,7 +33,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     * 
+     *
      * @return void
      */
     public function down(): void

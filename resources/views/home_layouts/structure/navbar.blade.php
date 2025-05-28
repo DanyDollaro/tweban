@@ -18,7 +18,13 @@
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a> <!-- DA MODIFICARE IL LINK PER ACCEDERE ALLA PAGINA COME UTENTE-->
+        @auth
+            @if (Auth::user()->ruolo === 'paziente')
+                <a class="cta-btn d-none d-sm-block" href="{{ url('/dashboard_paziente') }}">Area Utente</a>
+            @endif
+        @else
+            <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
+        @endauth
 
     </div>
 

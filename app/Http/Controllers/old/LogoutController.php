@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+/*namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,4 +17,4 @@ class LogoutController extends Controller
 
         return redirect('/'); // Reindirizza l'utente alla homepage o alla pagina di login
     }
-}
+}*/

@@ -12,7 +12,7 @@
           @foreach($medici as $medico)
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member d-flex align-items-start">
-              <div class="pic"><img src="{{ asset('img/doctors/doctors-'. ($loop->index + 1) .'.jpg') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('img/doctors/'.$medico->immagine_profilo  ) }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>{{ $medico->nome .' '.$medico->cognome }}</h4>
                 <span><b>Prestazione associata: </b>{{ $medico->prestazione_assegnata }} </span>

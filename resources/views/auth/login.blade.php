@@ -64,11 +64,16 @@
                 @endif
             </div>
 
+            <div>
+                <p>Non hai un account? <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}"><i>Registrati</i></a></p>
+            </div>
+
             {{-- Il bottone di submit "Accedi", centrato e senza margini laterali di Tailwind --}}
             {{-- Ho rimosso il flex justify-center, il tuo submit-btn-custom ha già width: 100% --}}
             <div class="mt-4"> {{-- Ho messo solo un margine superiore --}}
                 <button type="submit" class="submit-btn-custom">Accedi</button>
             </div>
+            
         </form>
     </div>
 </x-guest-layout>
