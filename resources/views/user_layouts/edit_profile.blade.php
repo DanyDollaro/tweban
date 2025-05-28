@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Modifica Profilo</title>
     <link rel="stylesheet" href="{{ asset('css/editprofile.css') }}">
+  
 </head>
+
 <body>
+   
+    
     <div class="background-blur"></div>
 
     <div class="main-content">
@@ -13,6 +17,7 @@
 
         <form method="POST" action="{{ route('profile.update') }}">
         @csrf
+        @method('PUT') 
 
 
             <table>
@@ -56,7 +61,7 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn-save">Salva Modifiche</button>
-                <a href="{{ route('dashboard') }}" class="btn-cancel">Annulla</a>
+                <a href="{{ route('paziente.dashboard') }}" class="btn-cancel">Annulla</a>
             </div>
         </form>
     </div>

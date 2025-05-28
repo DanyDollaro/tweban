@@ -7,6 +7,7 @@ use App\Models\Dipartimento;
 use App\Models\Prestazione;
 use App\Models\Prenotazione;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PrenotazioneController extends Controller
 {
@@ -46,6 +47,17 @@ class PrenotazioneController extends Controller
         }
         $prestazioniFiltered = $prestazioniQuery->get();
 
+        // Recupera tutti i medici e i giorni in cui la prestazione è disponibile
+        $medici = DB::table('medico')->get()->keyBy('prestazione_assegnata');
+        $giorni_operativi = DB::table('giorni_prestazioni')->get()->groupBy('tipologia_prestazione');
+          
+        
+        $prestazioniFiltered->transform(function ($prestazione) use ($medici, $giorni_operativi) {
+        $prestazione->medico = $medici[$prestazione->tipologia] ?? null;
+        $prestazione->giorni_operativi = $giorni_operativi[$prestazione->tipologia] ?? collect();
+        return $prestazione;
+        });
+
         // Flag per mostrare risultati solo se l’utente ha inviato ricerca
         $ricercaEffettuata = $request->hasAny(['dipartimento_text', 'dipartimento_select', 'prestazione_text', 'prestazione_select']);
 
@@ -55,26 +67,25 @@ class PrenotazioneController extends Controller
             'prestazioniFiltered',
             'ricercaEffettuata'
         ));
+
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'dipartimento' => 'required|string|exists:dipartimento,specializzazione',
-            'prestazione' => 'required|string|exists:prestazione,tipologia',
-            'data_prenotazione' => 'nullable|date|after_or_equal:today',
-            'orario' => 'nullable|date_format:H:i',
+           
+            'tipologia_prestazione' => 'required|string|exists:prestazione,tipologia',
+            
         ]);
+
+        $tipologia_prestazione = Prestazione::where('tipologia', $request->tipologia_prestazione)->first();
 
         //salva prenotazione 
         Prenotazione::create([
-            'user_id' => Auth::id(),
-            'tipologia_prestazione' => $request->prestazione,
-            'stato' => 'Visita prenotata',
+            'cliente_id' => Auth::id(),
+            'tipologia_prestazione' => $request->tipologia_prestazione,
             'giorno_escluso' => null,
-            'mail_staff' => null,
-            'data_prenotazione' => $request->data_prenotazione,
-            'orario' => $request->orario,
+            'staff_id' =>$tipologia_prestazione->staff_id,
         ]);
 
         return redirect()->route('prenotazioni.create')->with('success', 'Prenotazione effettuata con successo!');

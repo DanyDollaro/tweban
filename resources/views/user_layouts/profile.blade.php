@@ -19,7 +19,7 @@
 
     <div class="buttons">
         <a href="{{ route('profile.edit') }}">
-            <button>Modifica Profilo</button>
+            <button>Modifica Profilo ✏️</button>
         </a>
     </div>
 </div>

@@ -51,7 +51,8 @@ class ProfileController extends Controller
 
         $user->fill($validated);
         $user->save();
-
-        return redirect()->route('dashboard');
+   
+        return redirect()->route('paziente.dashboard')->with('profile_updated', true);
+        
     }
 }

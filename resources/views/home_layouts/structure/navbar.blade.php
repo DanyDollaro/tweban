@@ -20,7 +20,7 @@
 
         @auth
             @if (Auth::user()->ruolo === 'paziente')
-                <a class="cta-btn d-none d-sm-block" href="{{ url('/dashboard_paziente') }}">Area Utente</a>
+                <a class="cta-btn d-none d-sm-block" href="{{ url('/dashboard') }}">Area Utente</a>
             @endif
         @else
             <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
