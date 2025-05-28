@@ -28,7 +28,7 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
         'email',
         'indirizzo',
         'password',
-        'ruolo', // Aggiungi 'role' qui per consentirne l'assegnazione di massa
+        'ruolo', // Aggiungi 'ruolo' qui per consentirne l'assegnazione di massa
     ];
 
     /**
