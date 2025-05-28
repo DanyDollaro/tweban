@@ -10,7 +10,14 @@
       <li><a href="#">Visualizza Referti</a></li>
       <li><a href="#">Comunicazioni Medico-Paziente</a></li>
       
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
 
+        <li><a href="route('logout')"
+              onclick="event.preventDefault();
+              this.closest('form').submit();">
+        {{ __('Logout') }} </a></li>
+  </form>
     </ul>
   </nav>
    

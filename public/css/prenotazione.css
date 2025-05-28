@@ -80,8 +80,6 @@ label {
 }
 
 input[type="text"],
-input[type="date"],
-input[type="time"],
 select {
     padding: 10px;
     border: 1px solid var(--border);
@@ -101,6 +99,7 @@ button {
     transition: background 0.2s ease;
     margin-top: 16px;
     align-self: flex-start;
+    padding: 6px 12px
 }
 
 button:hover {
@@ -128,15 +127,22 @@ button:hover {
     margin-bottom: 16px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .container {
-        padding: 16px;
-    }
 
-    .form-grid {
-        flex-direction: column;
-    }
+.info-blocchi {
+    font-size: 16px;
+    margin: -10px ; 
+    padding: 4px 8px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #2196F3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
 }
 
+.info-blocchi .icon {
+    color: #555;
+    margin-right: 6px;
+}
 

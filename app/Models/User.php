@@ -20,9 +20,14 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
      */
     protected $fillable = [
         'name',
+        'cognome',
         'email',
         'password',
         'role', // Aggiungi 'role' qui per consentirne l'assegnazione di massa
+        'telefono',
+        'data_nascita',
+        'codice_fiscale',
+        'indirizzo',
     ];
 
     /**

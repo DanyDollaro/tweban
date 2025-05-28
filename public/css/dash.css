@@ -1,16 +1,10 @@
 .welcome {
   margin-top: 80px; /* aumenta se serve */
-  text-align: center;
+  
+  margin-left:1rem;
 }
 
-.dashboard-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 30px;
-  padding: 2rem;
-  flex-wrap: nowrap; 
-}
+
 
 body {
   margin: 0;
@@ -26,5 +20,9 @@ body {
   color: #333; /* colore testo base, adattalo se serve */
 }
 
-    
+   .logo a {
+    text-decoration: none;
+    color: white;
+}   
+ 
 

@@ -9,8 +9,9 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DipartimentoController::class,'showData']);
-Route::get('/dashboard', function () {
-    return view('breezedashboard');
+
+Route::get('/paziente/dashboard', function () {
+    return view('user_layouts.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profilo/modifica', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profilo', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profilo', [ProfileController::class, 'update'])->name('profile.update');
+
 
 // Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show');
    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -37,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
 });
 
+
+
 Route::get('/admin/departments', [AdminController::class,'getDepartments']);
 
 /*
@@ -46,9 +51,7 @@ Route::middleware('auth')->group(function () {
 
 /*route per appuntamento
 
-use App\Http\Controllers\AppointmentController;
 
-Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
 Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
 
 require __DIR__.'/auth.php';
