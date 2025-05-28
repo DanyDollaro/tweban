@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+/*namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -33,5 +33,5 @@ class LoginStaffController extends Controller
             return back()->withErrors(['login' => 'Username o password non corretti'])->withInput();
         }
     }
-}
+}*/
 
