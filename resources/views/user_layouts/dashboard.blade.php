@@ -5,10 +5,22 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/dash.css') }}">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+     @if (session('profile_updated'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Modifica avvenuta con successo',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+@endif
 
 @include('user_layouts.structure.navbar')
+
 
 <div class="welcome">
     <h1>Benvenuto in Area Riservata!</h1>
@@ -20,4 +32,4 @@
 
 
 </body>
-</html>
+</html> 

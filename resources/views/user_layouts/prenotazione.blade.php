@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Prenotazione Prestazioni</title>
     <link rel="stylesheet" href="{{ asset('css/prenotazione.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
     <div class="container">
@@ -64,27 +66,42 @@
                 <p>Nessuna prestazione trovata. Prova con altri criteri.</p>
             @else
                 <h3>Risultati della ricerca:</h3>
-                @foreach ($prestazioniFiltered as $prestazione)
-                    <div class="result-item">
-                        <strong>{{ $prestazione->tipologia }}</strong> (Dipartimento: {{ $prestazione->sp_dipartimento }})
+               @foreach ($prestazioniFiltered as $prestazione)
+    <div class="result-item">
+        <strong>{{ $prestazione->tipologia }}</strong> (Dipartimento: {{ $prestazione->sp_dipartimento }})
 
-                        <form method="POST" action="{{ route('prenotazioni.store') }}">
-                            @csrf
-                            <input type="hidden" name="dipartimento" value="{{ $prestazione->sp_dipartimento }}">
-                            <input type="hidden" name="prestazione" value="{{ $prestazione->tipologia }}">
+        <form method="POST" action="{{ route('prenotazioni.store') }}">
+            @csrf
+            <input type="hidden" name="tipologia_prestazione" value="{{ $prestazione->tipologia }}">
 
-                            <label for="data_{{ $loop->index }}">Data (opzionale):</label>
-                            <input type="date" id="data_{{ $loop->index }}" name="data_prenotazione">
 
-                            <label for="orario_{{ $loop->index }}">Orario (opzionale):</label>
-                            <input type="time" id="orario_{{ $loop->index }}" name="orario">
+            @if($prestazione->medico)
+                <p class="info-blocchi">
+                    <i class="fas fa-user-md icon"></i>
+                    <strong>Medico:</strong> {{ $prestazione->medico->nome ?? 'Non assegnato' }} {{ $prestazione->medico->cognome ?? '' }}
+                </p>
+            @endif
 
-                            <button type="submit">Prenota</button>
-                        </form>
-                    </div>
-                @endforeach
+            <p class="info-blocchi">
+                <i class="fas fa-calendar-alt icon"></i>
+                <strong>Giorni Operativi:</strong>
+                @if($prestazione->giorni_operativi->isNotEmpty())
+                    {{ $prestazione->giorni_operativi->pluck('giorno')->join(', ') }}
+                @else
+                    Nessun giorno disponibile
+                @endif
+            </p>
+
+             <button type="submit">Prenota</button>
+         </form>
+      </div>
+    @endforeach
+
             @endif
         @endif
+  
+
+
 
         @if(session('success'))
             <div class="alert-success">

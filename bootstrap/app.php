@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\PazienteMiddleware;
 use App\Http\Middleware\StaffMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Registra qui i tuoi middleware di rotta (aliases)
         $middleware->alias([
             'staff_only' => StaffMiddleware::class, // <-- Aggiungi questa riga
+            'paziente_only'=> PazienteMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

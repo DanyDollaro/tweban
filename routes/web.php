@@ -8,6 +8,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
+
+// Importa il controller di sessione autenticata di Breeze
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\PazienteDashboardController;
+
+// Rotta per la homepage principale del sito
+Route::get('/', [DipartimentoController::class, 'showData'])->name('home');
+
+
 Route::get('/', [DipartimentoController::class,'showData']);
 Route::get('/dashboard', function () {
     return view('breezedashboard');
@@ -16,10 +26,14 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show'); });
 
-//modifica del profilo
-Route::middleware('auth')->group(function () {
+
+    // --- Rotte per la Gestione del Profilo Utente ---
+    // Rotte standard di Breeze per la modifica del profilo
     Route::get('/profilo/modifica', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profilo', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profilo', [ProfileController::class, 'update'])->name('profile.update');
+
+
 
 // Route::get('/profilo', [ProfileController::class, 'show'])->name('profile.show');
    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -35,20 +49,36 @@ Route::post('/logout', [LoginUserController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-});
 
-Route::get('/admin/dipartimenti', [AdminController::class,'getDepartmentsData']);
-Route::get('/admin/personale', [AdminController::class,'getStaffData']);
-Route::get('/admin/prestazioni', [AdminController::class,'getPerformancesData']);
 
-/*
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [PrenotazioneController::class, 'storico'])->name('dashboard');
-});*/
 
-/*route per appuntamento
+    // --- Rotte per le Dashboard Specifiche per Ruolo ---
+    // Ogni gruppo è protetto dal middleware 'ruolo' (che deve essere stato creato e registrato).
+    // Queste rotte sono NELL'ULTIMO 'auth' middleware group.
 
-use App\Http\Controllers\AppointmentController;
+    // Rotte per gli Amministratori
+    Route::middleware('ruolo:amministratore')->prefix('amministratore')->name('amministratore.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin-layouts.departments'); // Assicurati che esista in resources/views/amministratore
+        })->name('dashboard');
+        // Aggiungi qui altre rotte specifiche per l'amministratore
+    });
+
+    // Rotte per lo Staff
+    Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
+        Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+        // Reindirizza la rotta base /staff alla dashboard specifica
+        Route::get('/', function() {
+            return redirect()->route('staff_layouts.staff');
+        });
+    });
+
+    // Rotte per i Pazienti
+    Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
+        Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
+    });
+}); // Fine del gruppo Route::middleware('auth')
+
 
 Route::get('/appointment', [AppointmentController::class, 'showForm'])->name('appointment.form');
 Route::post('/appointment', [AppointmentController::class, 'submit'])->name('appointment.submit');*/
