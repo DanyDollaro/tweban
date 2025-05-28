@@ -87,14 +87,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function redirectToRoleDashboard($user): RedirectResponse
     {
-        
         switch ($user->ruolo) {
             case 'amministratore':
                 return redirect()->intended('/dashboard_amministratore');
-            
+
             case 'staff':
                 return redirect()->intended('/dashboard_staff');
-            
+
             case 'paziente':
                 return redirect()->intended('/dashboard_paziente');
             default:

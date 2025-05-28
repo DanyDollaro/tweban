@@ -48,8 +48,8 @@ Route::middleware('auth')->group(function () {
     // Accessibili a qualsiasi utente autenticato.
     Route::get('/prenotazioni', [PrenotazioneController::class, 'create'])->name('prenotazioni.create');
     Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])->name('prenotazioni.store');
-
-Route::get('/admin/departments', [AdminController::class,'getDepartments']);
+    
+    //Route::get('/admin/departments', [AdminController::class,'getDepartments']);
 
     // --- Rotte per le Dashboard Specifiche per Ruolo ---
     // Ogni gruppo è protetto dal middleware 'role' (che deve essere stato creato e registrato).

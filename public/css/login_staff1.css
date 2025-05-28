@@ -1,5 +1,9 @@
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities*/
+
 body {
-  background: url('../img/staff/staff.jpg') no-repeat center center fixed;
+  background: url('/img/staff/staff.jpg') no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
   display: flex;

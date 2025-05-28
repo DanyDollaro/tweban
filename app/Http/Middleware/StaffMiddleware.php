@@ -24,7 +24,7 @@ class StaffMiddleware
         $user = Auth::user();
 
         // 2. Controlla che l'utente esista e che il suo ruolo sia esattamente 'staff'.
-        if (is_null($user) || !isset($user->role) || $user->role !== 'staff') {
+        if (is_null($user) || !isset($user->ruolo) || $user->ruolo !== 'staff') {
             Auth::logout(); // Disconnetti l'utente non autorizzato.
             return redirect('/login')->withErrors(['unauthorized' => 'Accesso negato: Solo lo staff può accedere a questa risorsa.']);
         }

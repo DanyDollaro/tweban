@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-// Se NON VUOI la verifica email, rimuovi l'importazione di MustVerifyEmail
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'implements MustVerifyEmail'
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -28,7 +26,7 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
         'email',
         'indirizzo',
         'password',
-        'ruolo', // Aggiungi 'ruolo' qui per consentirne l'assegnazione di massa
+        'ruolo', // Aggiungi 'role' qui per consentirne l'assegnazione di massa
     ];
 
     /**
@@ -60,13 +58,13 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
      * @return bool
      */
     public function isPaziente():bool{
-        return $this->role === 'paziente';
+        return $this->ruolo === 'paziente';
     }
     public function isStaff():bool{
-        return $this->role === 'staff';
+        return $this->ruolo === 'staff';
     }
     public function isAmministratore():bool{
-        return $this->role === 'amministratore';
+        return $this->ruolo === 'amministratore';
     }
     /**
      * Verifica se l'utente appartiene a uno dei ruoli specificati.
@@ -82,7 +80,7 @@ class User extends Authenticatable // Se NON VUOI la verifica email, rimuovi 'im
             $roles = [$roles];
         }
 
-        return in_array($this->role, $roles);
+        return in_array($this->ruolo, $roles);
     }
 }
 

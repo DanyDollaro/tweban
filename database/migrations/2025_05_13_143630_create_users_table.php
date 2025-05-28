@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * @return void
      */
     public function up(): void
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente');
             $table->string('indirizzo');
             $table->string('password');
+            $table->enum('ruolo',['paziente','staff','amministratore'])->default('paziente'); // 👈 Campo ruolo con valore predefinito
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,7 +33,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     * 
+     *
      * @return void
      */
     public function down(): void
