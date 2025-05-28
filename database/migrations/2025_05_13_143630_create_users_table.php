@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('data_nascita');
             $table->string('telefono')->unique();
             $table->string('email')->unique();
-            $table->enum('ruolo',['user','staff','amministratore'])->default('paziente');
+            $table->enum('ruolo',['user','staff','amministratore'])->default('user');
             $table->string('indirizzo');
             $table->string('password');
             $table->rememberToken();

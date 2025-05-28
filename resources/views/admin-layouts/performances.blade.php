@@ -12,16 +12,22 @@
     <!-- Include the navbar -->
     @include("admin-layouts.partials.navbar")
 
-    <!-- Setup the calendar div -->
-    <div id="calendar"></div>
+    <div class="main">
+        @include("admin-layouts.partials.departments.sidebar-menu")
+        <!-- Create the calendar holder -->
+        <div id="calendar"></div>
+        @include("admin-layouts.partials.departments.sidebar-properties")
+    </div>
 
     <!-- JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-                calendar = new FullCalendar.Calendar($('#calendar')[0], { dateClick: calendarDateClick });
-                calendar.render();
+            calendar = new FullCalendar.Calendar($('#calendar')[0], {
+                dateClick: calendarDateClick
+            });
+            calendar.render();
         });
     </script>
 </body>
