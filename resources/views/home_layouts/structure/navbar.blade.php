@@ -19,12 +19,22 @@
         </nav>
 
         @auth
-            @if (Auth::user()->ruolo === 'paziente')
-                <a class="cta-btn d-none d-sm-block" href="{{ url('/dashboard') }}">Area Utente</a>
-            @endif
-        @else
-            <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
+          @switch(Auth::user()->ruolo)
+              @case('paziente')
+                  <a class="cta-btn d-none d-sm-block" href="{{ url('/paziente/dashboard') }}">Area Utente</a>
+                  @break
+              @case('staff')
+                  <a class="cta-btn d-none d-sm-block" href="{{ url('/staff/dashboard') }}">Area Staff</a>
+                  @break
+              @case('amministratore')
+                  <a class="cta-btn d-none d-sm-block" href="{{ url('/amministratore/dashboard') }}">Area Admin</a>
+                  @break
+          @endswitch
         @endauth
+
+        @guest
+            <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
+        @endguest
 
     </div>
 
