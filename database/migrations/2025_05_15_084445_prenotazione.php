@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('staff_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             $table->string('tipologia_prestazione',100);
             $table->foreign('tipologia_prestazione')->references('tipologia')->on('prestazione')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('stato', ['in_attesa', 'accettata', 'rifiutata'])->default('in_attesa');
             $table->timestamps();
         });
     }
