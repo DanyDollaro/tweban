@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgendaPrenotazioniStaffController;
+use App\Http\Controllers\AgendaStaffController;
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrenotazioneController;
@@ -74,7 +76,9 @@ Route::middleware('auth')->group(function () {
     });
 }); // Fine del gruppo Route::middleware('auth')
 
-
+/*Route::get('/agenda-prestazioni', function () {
+    return view('staff_layouts.agendaPrenotazioni');
+})->name('agenda.prestazioni'); */
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
