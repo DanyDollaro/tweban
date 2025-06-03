@@ -28,43 +28,67 @@ body::before {
     z-index: -1; /* Mette la "copertura" trasparente DIETRO il contenuto del body */
 }
 
-.agenda-controls{
-    margin-top: 90px;
-    width: 90%; /* Rimpicciolisce la larghezza al 90% del suo contenitore */
-    max-width: 960px; /* Mantieni la larghezza massima */
-    margin-left: auto; /* Centra il riquadro orizzontalmente */
-    margin-right: auto; /* Centra il riquadro orizzontalmente */
-    padding: 40px; /* Aggiunge un po' di spazio interno per il contenuto */
-    padding-top: 30px;    /* Aumenta lo spazio interno in alto */
-    padding-bottom: 60px; /* Aumenta lo spazio interno in basso */
-    background-color: #E0F2F7; /* Un leggero colore di sfondo per renderlo visibile */
-    border: 2px solid #99CCEE; /* Un bordo per definirne i contorni */
-    border-radius: 12px; /*angoli arrotondati*/
+/* Stili per la tabella degli appuntamenti */
+#appointments-table {
+    width: 100%; /* La tabella occupa tutta la larghezza disponibile */
+    border-collapse: collapse; /* Rimuove lo spazio tra i bordi delle celle */
+    margin-top: 20px; /* Spazio sopra la tabella */
+    background-color: #ffffff; /* Sfondo bianco per la tabella */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Leggera ombra per un effetto di elevazione */
+    border-radius: 8px; /* Angoli leggermente arrotondati per la tabella */
+    overflow: hidden; /* Importante per far sì che il border-radius funzioni con i bordi interni */
 }
 
-.agenda-header {
-    background-color: #e0f2f7; /* Sfondo leggermente più scuro per l'intestazione */
-    padding: 18px 25px; /* Più padding per dare spazio */
-    font-size: 1.2em; /* Testo più grande */
-    font-weight: 600; /* Leggermente più spesso del bold standard */
-    color: #0d47a1; /* Blu scuro per il testo */
-    /* QUESTA È LA MODIFICA CHIAVE PER UNA DIVISIONE NETTA */
-    border-bottom: 3px solid #64b5f6; /* Bordo più spesso e colore blu più intenso */
-    /* O anche: border-bottom: 1px solid #cccccc; (se preferisci un grigio) */
-    margin-bottom: 0; /* Rimuovi il margin-bottom qui, lo gestiamo con il padding della sezione sotto */
+/* Stile per il titolo della tabella */
+#appointments-table h1 {
+    text-align: center; /* Centra il testo del titolo */
+    padding: 20px; /* Spazio interno attorno al titolo */
+    color: #333333; /* Colore scuro per il testo del titolo */
+    background-color: #f8f8f8; /* Sfondo leggermente grigio per il titolo */
+    border-bottom: 1px solid #eeeeee; /* Bordo inferiore sottile per separare il titolo */
+    margin: 0; /* Rimuove i margini predefiniti dell'h1 */
 }
 
-/* Stile per la sezione del filtro */
-.agenda-display {
-    padding: 20px 25px; /* Padding generoso per il contenuto sotto la linea */
-    background-color: #ffffff; /* Sfondo bianco per staccare dal blu dell'intestazione */
+/* Stili per l'intestazione della tabella (thead) */
+#appointments-table thead th {
+    background-color: #e9ecef; /* Sfondo grigio chiaro per le intestazioni delle colonne */
+    color: #495057; /* Colore scuro per il testo delle intestazioni */
+    padding: 12px 15px; /* Spazio interno */
+    text-align: left; /* Allinea il testo a sinistra */
+    border-bottom: 1px solid #dee2e6; /* Bordo inferiore per separare le intestazioni dai dati */
+    font-weight: bold; /* Testo in grassetto */
+    font-size: 15px; /* Dimensione del font */
 }
 
-.date-display {
-    display: inline !important; /* Forza la visualizzazione come elemento in linea */
-    color: #333 !important;    /* Assicurati che il colore del testo non sia trasparente o uguale allo sfondo */
-    /* Potresti voler specificare anche font-size se è zero */
-    font-size: 1em !important; /* O la dimensione che desideri */
+/* Stili per il corpo della tabella (tbody) */
+#appointments-table tbody td {
+    padding: 10px 15px; /* Spazio interno */
+    border-bottom: 1px solid #dee2e6; /* Bordo inferiore per separare le righe */
+    color: #343a40; /* Colore scuro per il testo dei dati */
+}
+
+/* Stile zebrato per le righe (righe pari con sfondo leggermente diverso) */
+#appointments-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Sfondo leggermente grigio per le righe pari */
+}
+
+/* Effetto al passaggio del mouse sulle righe */
+#appointments-table tbody tr:hover {
+    background-color: #e9f5f9; /* Sfondo azzurro chiaro al passaggio del mouse */
+}
+
+/* Stile per il messaggio di caricamento/errore */
+#appointments-table tbody td[colspan="7"] { /* Assicurati che il colspan sia 7 */
+    text-align: center; /* Centra il testo */
+    padding: 20px; /* Spazio interno */
+    font-style: italic; /* Testo in corsivo */
+    color: #6c757d; /* Colore grigio per il messaggio */
+}
+
+/* Stile specifico per il messaggio di errore rosso, se presente */
+#appointments-table tbody td[colspan="7"][style="color: red;"] {
+    color: red !important; /* Forza il colore rosso */
+    font-weight: bold; /* Testo in grassetto */
 }
 
 /* Stile per l'etichetta del filtro */
@@ -73,28 +97,6 @@ body::before {
     color: #424242; /* Grigio scuro per la leggibilità */
     margin-right: 15px; /* Più spazio tra etichetta e select */
     font-weight: 500;
-}
-
-/* Stile personalizzato per il menu a discesa select (simile a prima ma con piccoli tweaks) */
-#service-filter {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    padding: 12px 35px 12px 18px; /* Più padding, extra spazio per la freccia */
-    border: 1px solid #bbdefb; /* Bordo leggero */
-    border-radius: 6px; /* Angoli leggermente più pronunciati */
-    background-color: #ffffff;
-    color: #424242;
-    font-size: 1em;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease-in-out;
-
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23616161%22%20d%3D%22M287%2095.1L159.2%20222.9c-7.9%207.9-20.6%207.9-28.5%200L5.4%2095.1c-7.9-7.9-7.9-20.6%200-28.5%207.9-7.9%2020.6-7.9%2028.5%200l110.3%20110.3%20110.3-110.3c7.9-7.9%2020.6-7.9%2028.5%200C294.9%2074.5%20294.9%2087.2%20287%2095.1z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 15px center; /* Freccia leggermente più centrata */
-    background-size: 14px auto; /* Freccia leggermente più grande */
 }
 
 #service-filter:hover {
@@ -171,6 +173,69 @@ header .main-header nav ul li a {
 
 header .main-header nav ul li a:hover {
     color: #007bff;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Stili per la tabella, filtri, bottoni, ecc. */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.btn-accept {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-reject {
+    background-color: #f44336;
+    color: white;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label, .filters input, .filters select {
+    margin-right: 10px;
 }
 
 .hero-section {
