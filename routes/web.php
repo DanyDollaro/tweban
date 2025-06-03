@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgendaPrenotazioniStaffController;
+use App\Http\Controllers\AgendaStaffController;
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrenotazioneController;
@@ -66,10 +68,10 @@ Route::middleware('auth')->group(function () {
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-        // Reindirizza la rotta base /staff alla dashboard specifica
-        Route::get('/', function() {
-            return redirect()->route('staff_layouts.staff');
-        });
+
+        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+        Route::patch('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'accetta'])->name('agenda.accetta');
+        Route::patch('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'rifiuta'])->name('agenda.rifiuta');
     });
 
     // Rotte per i Pazienti
@@ -78,7 +80,9 @@ Route::middleware('auth')->group(function () {
     });
 }); // Fine del gruppo Route::middleware('auth')
 
-
+/*Route::get('/agenda-prestazioni', function () {
+    return view('staff_layouts.agendaPrenotazioni');
+})->name('agenda.prestazioni'); */
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
