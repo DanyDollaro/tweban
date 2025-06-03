@@ -66,10 +66,6 @@ Route::middleware('auth')->group(function () {
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-        // Reindirizza la rotta base /staff alla dashboard specifica
-        Route::get('/', function() {
-            return redirect()->route('staff_layouts.staff');
-        });
     });
 
     // Rotte per i Pazienti
