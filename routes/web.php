@@ -68,10 +68,6 @@ Route::middleware('auth')->group(function () {
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-
-        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
-        Route::patch('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'accetta'])->name('agenda.accetta');
-        Route::patch('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'rifiuta'])->name('agenda.rifiuta');
     });
 
     // Rotte per i Pazienti

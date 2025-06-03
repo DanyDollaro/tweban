@@ -32,4 +32,8 @@
 
 
 </body>
+
+ <footer>
+        <p>© {{ date('Y') }} Medilab. Tutti i diritti riservati.</p>
+    </footer>
 </html> 
