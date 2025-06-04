@@ -68,6 +68,14 @@ Route::middleware('auth')->group(function () {
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+        // Accetta una prenotazione (POST)
+        Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
+        // Aggiorna data e orario di una prenotazione (POST)
+        Route::post('/prenotazioni/{id}/aggiorna', [AgendaPrenotazioniStaffController::class, 'updateReservationDateTime'])->name('prenotazioni.aggiorna');
+        //Modifica lo stato di una prenotazione (POST)
+        Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
     });
 
     // Rotte per i Pazienti

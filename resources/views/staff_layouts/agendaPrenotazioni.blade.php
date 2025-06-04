@@ -35,7 +35,7 @@
             </nav>
         </div>
     </header>
-</select>
+
     <main>
     <table id="appointments-table">
         <thead>
@@ -48,27 +48,28 @@
                 <th>Stato</th>
             </tr>
         </thead>
-        
-
         <tbody>
-
             @foreach ($prenotazioni as $p)
-            <tr>
-                <td>{{ $p->data_prenotazione }}</td>
-                <td>{{ $p->orario_prenotazione }}</td>
-                <td>{{ $p->cliente_id }}</td>
-                <td>{{ $p->staff_id }}</td>
-                <td>{{ $p->tipologia_prestazione }}</td>
-                <td>{{ $p->stato }}</td>
-                <td>
-                    <button class="btn btn-accept" onclick="showAcceptModal({{ $p->id }})">Accetta</button>
-                </td>
-            </tr>
+            <tr data-id="{{ $p->id }}">
+                    <td>{{ $p->data_prenotazione }}</td>
+                    <td>{{ $p->orario_prenotazione }}</td>
+                    <td>{{ $p->cliente->name ?? $p->cliente_id }}</td>
+                    <td>{{ $p->staff->name ?? ($p->staff_id ?? '-') }}</td>
+                    <td>{{ $p->tipologia_prestazione }}</td>
+                    <td class="stato">{{ ucfirst($p->stato) }}</td>
+                    <td>
+                    @if ($p->stato == 'in_attesa')
+                    <button type="button" class="btn btn-accept" onclick="showAcceptModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Accetta</button>                        
+                    @elseif ($p->stato == 'accettata')
+                    <button type="button" class="btn btn-update" onclick="showModifyModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Modifica</button>
+                    @endif
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
-
-    {{-- Modale per l'accettazione della prenotazione (unica versione) --}}
+   
+    {{-- Modale per l'accettazione della prenotazione --}}
     <div id="accept-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-button" onclick="$('#accept-modal').hide()">&times;</span>
@@ -78,7 +79,21 @@
             <input type="date" id="accept-giorno" required>
             <label for="accept-orario">Ora Appuntamento:</label>
             <input type="time" id="accept-orario" required>
-            <button id="confirm-accept">Conferma Accettazione</button>
+            <button id="confirm-accept">Conferma</button> 
+        </div>
+    </div>
+
+    {{-- Modale per la modifica della prenotazione --}}
+    <div id="modify-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="$('#modify-modal').hide()">&times;</span>
+            <h2>Modifica Appuntamento</h2>
+            <input type="hidden" id="modify-id">
+            <label for="modify-giorno">Nuovo Giorno Appuntamento:</label>
+            <input type="date" id="modify-giorno" required>
+            <label for="modify-orario">Nuovo Orario Appuntamento:</label>
+            <input type="time" id="modify-orario" required>
+            <button id="confirm-modify">Conferma</button> 
         </div>
     </div>
 
