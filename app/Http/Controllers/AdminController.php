@@ -11,10 +11,20 @@ class AdminController extends Controller
 {
     public function getDepartmentsData()
     {
-        $departments = Dipartimento::all();
-        $performance_availability = GiornoPrestazione::all();
+        $departments = Dipartimento::with(['prestazioni.giorni'])->get();
 
-        return view('admin-layouts.departments', compact('departments', 'performance_availability'));
+        $data = $departments->mapWithKeys(function ($dip) {
+            return [
+                $dip->specializzazione => $dip->prestazioni->map(function ($prestazione) {
+                    return [
+                        'tipologia' => $prestazione->tipologia,
+                        'giorni' => $prestazione->giorni->pluck('giorno')->all()
+                    ];
+                })->all()
+            ];
+        });
+
+        return view('admin-layouts.departments', compact('data'));
     }
 
     public function getStaffData()

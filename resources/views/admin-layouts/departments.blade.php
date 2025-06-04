@@ -19,7 +19,6 @@
     <div class="main">
         @include("admin-layouts.partials.departments.sidebar-menu")
         @include("admin-layouts.partials.departments.content-page")
-        @include("admin-layouts.partials.departments.sidebar-properties")
     </div>
 
     <!-- JS Scripts -->
@@ -27,8 +26,8 @@
     <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
     <script>
         // Make department globally available
-        window.departments = @json($departments);
-        window.reservations = @json($reservations);
+        window.data = @json($data);
+        console.log(window.data);
 
         document.addEventListener('DOMContentLoaded', function () {
             // Set the first entry of the menu as selected

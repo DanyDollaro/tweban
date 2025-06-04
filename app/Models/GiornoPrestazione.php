@@ -14,4 +14,10 @@ class GiornoPrestazione extends Model
         'tipologia_prestazione',
         'giorno',
     ];
+
+    public function prestazione()
+    {
+        return $this->belongsTo(Prestazione::class, 'tipologia_prestazione', 'tipologia');
+    }
+
 }
