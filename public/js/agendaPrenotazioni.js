@@ -45,10 +45,10 @@ function confirmAcceptReservation() {
         url: `/staff/prenotazioni/${id}/accetta`,  // endpoint con id e azione specifica
         method: 'POST',
         data: {
-        _token: $('meta[name="csrf-token"]').attr('content'),
-        data_prenotazione: giorno,      // CORRETTO
-        orario_prenotazione: orario     // CORRETTO
-    },
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            data_prenotazione: giorno,      // CORRETTO
+            orario_prenotazione: orario     // CORRETTO
+        },
         success: function (response) {
             alert(response.message || 'Richiesta accettata con successo!');
             $('#accept-modal').hide();            
@@ -57,8 +57,8 @@ function confirmAcceptReservation() {
             row.find('td:nth-child(1)').text(giorno); // aggiorna data
             row.find('td:nth-child(2)').text(orario); // aggiorna orario
 
-            // CREA UN NUOVO BOTTONE "Modifica" con classe corretta
-            const newBtn = $(`<button type="button" class="btn btn-update">Modifica</button>`);
+            // CREA UN NUOVO BOTTONE "Modifica" con classe corretta per il colore rosa
+            const newBtn = $(`<button type="button" class="btn btn-update bottone-modifica">Modifica</button>`);
             newBtn.on('click', function () {
                 showModifyModal(id);
             });
@@ -69,6 +69,7 @@ function confirmAcceptReservation() {
 
     });
 }
+
 function confirmModifyReservation() {
     const id = $('#modify-id').val();
     const giorno = $('#modify-giorno').val();
@@ -103,12 +104,40 @@ function confirmModifyReservation() {
     });
 }
 
+function deleteReservation(id) {
+    if (confirm('Sei sicuro di voler eliminare questa prenotazione?')) {
+        $.ajax({
+            url: `/staff/prenotazioni/${id}/elimina`,
+            method: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert(response.message || 'Prenotazione eliminata con successo!');
+                // Rimuovi la riga della tabella corrispondente
+                $(`tr[data-id="${id}"]`).remove();
+                $('#modify-modal').hide();
+            },
+            error: function(xhr) {
+                alert('Errore durante l\'eliminazione della prenotazione.');
+            }
+  
+        });
+    }
+}
+
 $('#confirm-accept').on('click', function() {
-        console.log('Conferma cliccata');
-        confirmAcceptReservation();
-    });
+    console.log('Conferma cliccata');
+    confirmAcceptReservation();
+});
 
 $('#confirm-modify').on('click', function() {
-        console.log('Conferma modifica cliccata');
-        confirmModifyReservation();
-    });
+    console.log('Conferma modifica cliccata');
+    confirmModifyReservation();
+});
+
+$('#confirm-elimination').on('click', function() {
+    console.log('Conferma eliminazione cliccata');
+    const id = $('#modify-id').val();
+    deleteReservation(id);
+});

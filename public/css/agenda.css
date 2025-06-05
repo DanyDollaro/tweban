@@ -85,6 +85,37 @@ body::before {
     color: #6c757d; /* Colore grigio per il messaggio */
 }
 
+.bottone-conferma{
+    background-color: #32CD32; /* Rosso per il bottone di eliminazione */
+    color: white; /* Testo bianco */
+    border: none; /* Rimuove il bordo predefinito */
+    padding: 10px 15px; /* Spazio interno */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+}
+.bottone-elimina{
+    background-color: #f44336; /* Rosso per il bottone di eliminazione */
+    color: white; /* Testo bianco */
+    border: none; /* Rimuove il bordo predefinito */
+    padding: 10px 15px; /* Spazio interno */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+}
+
+.bottone-modifica{
+    background-color: #FFB6C1; /* Blu per il bottone di modifica */
+    color: white; /* Testo bianco */
+    border: none; /* Rimuove il bordo predefinito */
+    padding: 10px 15px; /* Spazio interno */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.bottone-modifica:hover {
+    background-color: #FFB6C1; /* rosa scuro al passaggio del mouse */
+}
 /* Stile specifico per il messaggio di errore rosso, se presente */
 #appointments-table tbody td[colspan="7"][style="color: red;"] {
     color: red !important; /* Forza il colore rosso */
@@ -368,4 +399,5 @@ footer {
     .why-choose-section .reasons-grid {
         grid-template-columns: 1fr;
     }
+    
 }

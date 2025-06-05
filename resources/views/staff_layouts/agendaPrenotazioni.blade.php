@@ -14,7 +14,7 @@
     <header>
         <div class="top-bar">
             {{-- Modificato: link "Torna alla home" --}}
-            <a href="{{ url('/') }}">Torna alla home</a>
+            <a href="{{route('staff.dashboard') }}">Torna alla Dashboard</a>
         </div>
         <div class="main-header">
             {{-- Modificato: il logo "Gestione Prenotazioni" ora è un link alla dashboard (Agenda) --}}
@@ -48,27 +48,6 @@
                 <th>Stato</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($prenotazioni as $p)
-            <tr data-id="{{ $p->id }}">
-                    <td>{{ $p->data_prenotazione }}</td>
-                    <td>{{ $p->orario_prenotazione }}</td>
-                    <td>{{ $p->cliente->name ?? $p->cliente_id }}</td>
-                    <td>{{ $p->staff->name ?? ($p->staff_id ?? '-') }}</td>
-                    <td>{{ $p->tipologia_prestazione }}</td>
-                    <td class="stato">{{ ucfirst($p->stato) }}</td>
-                    <td>
-                    @if ($p->stato == 'in_attesa')
-                    <button type="button" class="btn btn-accept" onclick="showAcceptModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Accetta</button>                        
-                    @elseif ($p->stato == 'accettata')
-                    <button type="button" class="btn btn-update" onclick="showModifyModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Modifica</button>
-                    @endif
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-   
     {{-- Modale per l'accettazione della prenotazione --}}
     <div id="accept-modal" class="modal" style="display: none;">
         <div class="modal-content">
@@ -79,7 +58,7 @@
             <input type="date" id="accept-giorno" required>
             <label for="accept-orario">Ora Appuntamento:</label>
             <input type="time" id="accept-orario" required>
-            <button id="confirm-accept">Conferma</button> 
+            <button id="confirm-accept" class="bottone-conferma" style="background-color: green;">Conferma</button>
         </div>
     </div>
 
@@ -93,7 +72,8 @@
             <input type="date" id="modify-giorno" required>
             <label for="modify-orario">Nuovo Orario Appuntamento:</label>
             <input type="time" id="modify-orario" required>
-            <button id="confirm-modify">Conferma</button> 
+            <button id="confirm-modify" class="bottone-conferma" style="background-color: green;">Conferma</button> 
+            <button id="confirm-elimination" class="bottone-elimina" style="background-color: red;">Elimina Appuntamento</button> 
         </div>
     </div>
 
@@ -113,6 +93,27 @@
         </div>
     </div>
 
+        <tbody>
+            @foreach ($prenotazioni as $p)
+            <tr data-id="{{ $p->id }}">
+                    <td>{{ $p->data_prenotazione }}</td>
+                    <td>{{ $p->orario_prenotazione }}</td>
+                    <td>{{ $p->cliente->id ?? $p->cliente_id }}</td>
+                    <td>{{ $p->staff->id ?? ($p->staff_id ?? '-') }}</td>
+                    <td>{{ $p->tipologia_prestazione }}</td>
+                    <td class="stato">{{ ucfirst($p->stato) }}</td>
+                    <td>
+                    @if ($p->stato == 'in_attesa')
+                    <button type="button" class="btn btn-accept" onclick="showAcceptModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Accetta</button>                        
+                    @elseif ($p->stato == 'accettata')
+                    <button type="button" class="btn btn-update bottone-modifica" onclick="showModifyModal({{ $p->id }}, '{{ $p->data_prenotazione }}', '{{ $p->orario_prenotazione }}')">Modifica</button>
+                    @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+   
 </main>
     <footer>
         <p>© {{ date('Y') }} Medilab. Tutti i diritti riservati.</p>

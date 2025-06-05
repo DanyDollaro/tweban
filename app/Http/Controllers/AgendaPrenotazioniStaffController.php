@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AgendaPrenotazioni; // Modello per l'agenda (se usato per appuntamenti confermati)
 use App\Models\Prenotazione;       // Modello per le richieste di prenotazione in attesa
-use App\Models\Prestazione;         // Modello per i tipi di prestazione
-use App\Models\GiornoPrestazione;   // Modello per giorni_prestazioni
-use App\Models\OrarioPrestazione;   // Modello per orario_prestazioni
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class AgendaPrenotazioniStaffController extends Controller
 {
@@ -71,23 +67,7 @@ class AgendaPrenotazioniStaffController extends Controller
 }
 
 
-    public function updateReservationDateTime(Request $request, $id)
-    {
-        $request->validate([
-            'data_prenotazione' => 'required|date_format:Y-m-d',
-            'orario_prenotazione' => 'required|date_format:H:i',
-        ]);
-
-        $prenotazione = Prenotazione::findOrFail($id);
-
-        $prenotazione->data_prenotazione = $request->input('data_prenotazione');
-        $prenotazione->orario_prenotazione = $request->input('orario_prenotazione');
-        $prenotazione->save();
-
-        return response()->json(['message' => 'Data e ora aggiornate.', 'prenotazione' => $prenotazione]);
-    }
-
-    public function modifyReservationStatus(Request $request, $id)
+public function modifyReservationStatus(Request $request, $id)
     {
     $prenotazione = Prenotazione::findOrFail($id);
 
@@ -107,9 +87,8 @@ class AgendaPrenotazioniStaffController extends Controller
     ]);
 }
 
-public function fetchPrenotazioni(Request $request)
-    {
-        $query = Prenotazione::with('cliente')->where('stato', 'in_attesa');
+public function fetchPrenotazioni(Request $request){
+        $query = AgendaPrenotazioni::with('cliente')->where('stato', 'in_attesa');
 
         if ($request->filled('date')) {
             $query->whereDate('created_at', $request->input('date'));
@@ -132,5 +111,12 @@ public function fetchPrenotazioni(Request $request)
                 'stato' => $p->stato,
             ];
         }));
+    }
+    public function deleteReservation($id)
+    {
+        $prenotazione = Prenotazione::findOrFail($id);
+        $prenotazione->delete();
+
+        return response()->json(['success' => true, 'message' => 'Prenotazione eliminata con successo!']);
     }
 }

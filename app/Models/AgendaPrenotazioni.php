@@ -10,6 +10,7 @@ class AgendaPrenotazioni extends Model
 {
     use HasFactory;
 
+    protected $table = 'prenotazione';
     protected $fillable = [
         'cliente_id',
         'staff_id',
@@ -22,9 +23,10 @@ class AgendaPrenotazioni extends Model
 
     protected $casts = [
         'data_prenotazione' => 'date',
-        'orario_prenotazione' => 'datetime:H:i:s',
+        'orario_prenotazione' => 'datetime',
     ];
 
+    // RELAZIONI
     public function cliente()
     {
         return $this->belongsTo(User::class, 'cliente_id');
@@ -40,10 +42,35 @@ class AgendaPrenotazioni extends Model
         return $this->belongsTo(Prestazione::class, 'tipologia_prestazione', 'tipologia');
     }
 
-    public function getFullDateTimeAttribute(){
+    // ACCESSOR: orario formattato
+    public function getOrarioPrenotazioneFormattedAttribute()
+    {
+        return $this->orario_prenotazione ? $this->orario_prenotazione->format('H:i') : null;
+    }
+
+    // ACCESSOR: data + orario uniti in un unico oggetto Carbon
+    public function getFullDateTimeAttribute()
+    {
         if ($this->data_prenotazione && $this->orario_prenotazione) {
-        return Carbon::parse($this->data_prenotazione->format('Y-m-d') . ' ' . $this->orario_prenotazione->format('H:i'));
-       }
-       return null;
+            return Carbon::create(
+                $this->data_prenotazione->year,
+                $this->data_prenotazione->month,
+                $this->data_prenotazione->day,
+                $this->orario_prenotazione->hour,
+                $this->orario_prenotazione->minute,
+                $this->orario_prenotazione->second
+            );
+        }
+        return null;
+    }
+
+    // (OPZIONALE) ACCESSOR per visualizzare lo stato in formato leggibile
+    public function getStatoLabelAttribute()
+    {
+        return match($this->stato) {
+            'in_attesa' => 'In Attesa',
+            'accettata' => 'Accettata',
+            default => ucfirst($this->stato),
+        };
     }
 }

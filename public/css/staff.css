@@ -97,6 +97,81 @@ body::before {
     background-size: 14px auto; /* Freccia leggermente più grande */
 }
 
+/* Contenitore della tabella */
+.container {
+    /* Questo padding serve per dare un po' di spazio alla tabella rispetto ai bordi del riquadro .agenda-controls */
+    margin-top: 25px; /* Questo stacca la tabella dal filtro */
+}
+
+/* Stili per la tabella in generale */
+.table {
+    width: 100%; /* La tabella occupa tutta la larghezza disponibile */
+    border-collapse: separate; /* Permette di usare border-radius */
+    border-spacing: 0; /* Rimuove lo spazio tra le celle */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Una leggera ombra per dare profondità */
+    background-color: #0000; /* Sfondo bianco per le celle */
+}
+
+/* Stili per l'intestazione della tabella (thead) */
+.table thead {
+    background-color: #A5D9FD; /* Sfondo blu per l'intestazione */
+    color: #fff; /* Testo bianco */
+}
+
+/* Stili per le celle dell'intestazione (th) */
+.table th {
+    padding: 12px 15px; /* Spazio interno per il testo */
+    text-align: left; /* Allinea il testo a sinistra */
+    font-weight: bold; /* Testo in grassetto */
+    white-space: nowrap; /* Evita che il testo dell'intestazione vada a capo */
+}
+
+/* Stili per le righe del corpo della tabella (tbody tr) */
+.table tbody tr {
+    background-color: #fff; /* Sfondo bianco di default per le righe */
+}
+
+/* Stili per le righe pari (per un effetto a strisce) */
+.table tbody tr:nth-child(even) {
+    background-color: #f8f8f8; /* Sfondo leggermente grigio per le righe pari */
+}
+
+/* Stili per le righe al passaggio del mouse (hover) */
+.table tbody tr:hover {
+    background-color: #eef; /* Sfondo azzurro chiaro al passaggio del mouse */
+}
+
+/* Stili per le celle del corpo della tabella (td) */
+.table td {
+    padding: 10px 15px; /* Spazio interno per il testo */
+    border-bottom: 1px solid #eee; /* Bordo inferiore sottile per separare le righe */
+    color: #444; /* Colore del testo grigio scuro */
+}
+
+/* Rimuovi il bordo inferiore dall'ultima riga della tabella per un aspetto più pulito */
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Media Queries per la responsività della tabella su schermi piccoli */
+@media (max-width: 768px) {
+    .container {
+        /* Permette alla tabella di essere scrollata orizzontalmente se è troppo larga */
+        overflow-x: auto;
+        padding: 0 20px 20px 20px; /* Padding adeguato su mobile */
+    }
+
+    .table {
+        /* Larghezza minima per la tabella per evitare che i contenuti si schiaccino troppo */
+        min-width: 550px;
+    }
+
+    .table th, .table td {
+        padding: 8px 10px; /* Ridotto padding per schermi più piccoli */
+        font-size: 0.85em; /* Dimensione del font leggermente ridotta */
+    }
+}
+
 #service-filter:hover {
     border-color: #90caf9;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
