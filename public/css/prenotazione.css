@@ -48,11 +48,30 @@ body::before {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     padding: 24px;
     width: 100%;
+    font-family: Arial, sans-serif;
 }
 
 h2, h3 {
     margin-bottom: 1rem;
     color: var(--primary);
+    
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c7be5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* spazio tra emoji e testo */
+}
+
+h2::after {
+  content: "🔍"; /* emoji lente d'ingrandimento */
+  font-size: 1.6rem;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 form {

@@ -225,6 +225,11 @@ th {
     color: white;
 }
 
+.btn-update {
+    background-color: #4CAF50;
+    color: white;
+}
+
 .btn-reject {
     background-color: #f44336;
     color: white;

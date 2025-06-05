@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
 <div class="profile-container">
-    <h2>Profilo Personale</h2><br>
+    <h2>Profilo Personale</h2>
     <div class="profile-photo">
         <img src="{{ asset('img/omino-removebg-preview.png') }}" alt="Foto profilo" class="profile-pic"/>
     </div>

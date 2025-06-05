@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /da
 // Importa il controller di sessione autenticata di Breeze
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\PazienteDashboardController;
+use App\Http\Controllers\StampaPrenotazioniController;
 
 // Rotta per la homepage principale del sito
 Route::get('/', [DipartimentoController::class, 'showData'])->name('home');
@@ -68,11 +69,19 @@ Route::middleware('auth')->group(function () {
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+        // Accetta una prenotazione (POST)
+        Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('staff.prenotazioni.accetta');
+        //Modifica lo stato di una prenotazione (POST)
+        Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
     });
 
     // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
+        Route::delete('/prenotazioni/{id}', [PazienteDashboardController::class, 'destroy'])->name('prenotazioni.destroy');
+        Route::get('/storico', [PazienteDashboardController::class, 'storico'])->name('prenotazioni.passate');
     });
 }); // Fine del gruppo Route::middleware('auth')
 
@@ -82,4 +91,19 @@ Route::middleware('auth')->group(function () {
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 require __DIR__.'/auth.php';

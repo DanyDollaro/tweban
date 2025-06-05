@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class AgendaPrenotazioni extends Model
 {
     use HasFactory;
+    protected $table = 'prenotazione';
 
     protected $fillable = [
         'cliente_id',
@@ -23,6 +24,7 @@ class AgendaPrenotazioni extends Model
     protected $casts = [
         'data_prenotazione' => 'date',
         'orario_prenotazione' => 'datetime:H:i:s',
+
     ];
 
     public function cliente()
