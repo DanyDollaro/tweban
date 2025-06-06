@@ -15,5 +15,4 @@ class Dipartimento extends Model
     {
         return $this->hasMany(Prestazione::class, 'sp_dipartimento', 'specializzazione');
     }
-
 }

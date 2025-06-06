@@ -5,8 +5,8 @@ use App\Http\Controllers\AgendaStaffController;
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrenotazioneController;
-use App\Http\Controllers\StaffDashboardController; 
-
+use App\Http\Controllers\StaffDashboardController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
 
@@ -87,9 +87,10 @@ Route::middleware('auth')->group(function () {
     });
 }); // Fine del gruppo Route::middleware('auth')
 
-/*Route::get('/agenda-prestazioni', function () {
-    return view('staff_layouts.agendaPrenotazioni');
-})->name('agenda.prestazioni'); */
+Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData']);
+Route::get('/admin/prestazioni', [AdminController::class, 'getPerformancesData']);
+Route::get('/admin/personale', [AdminController::class, 'getStaffData']);
+
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
