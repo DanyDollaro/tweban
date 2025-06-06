@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {  
+    {
         $this->call(UserSeeder::class);
         $this->call(DipartimentiSeeder::class);
         $this->call(GiorniSeeder::class);
@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrarioPrestazioniSeeder::class);
         $this->call(GiornoPrestazioniSeeder::class);
         $this->call(MedicoSeeder::class);
+        $this->call(PrenotazioniSeeder::class);
     }
 }

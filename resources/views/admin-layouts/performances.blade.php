@@ -17,7 +17,7 @@
 
     <!-- Create the calendar holder -->
     <div class="main">
-        <div class="sidebar-menu">
+        <div class="sidebar-menu" style="flex: 0 0 18%;">
             @include("admin-layouts.partials.performances.sidebar-menu")
         </div>
         <div id="calendar" style="flex: 1; padding: 35px;"></div>
