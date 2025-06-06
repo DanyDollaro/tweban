@@ -31,8 +31,8 @@ class AdminController extends Controller
 
     public function getPerformancesData()
     {
-        $performances = Prestazione::all();
-        return view('admin-layouts.performances', compact('performances'));
+        $data = Prestazione::with('prenotazioni')->get();
+        return view('admin-layouts.performances', compact('data'));
     }
 
     public function getStaffData()
