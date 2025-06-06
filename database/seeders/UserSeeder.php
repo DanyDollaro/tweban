@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'telefono'=> '123456789',
             'email' => 'pazipazi@example.com',
             'indirizzo' => 'via geppetto',
-            'password' => Hash::make('xThSxThS'),
+            'password' => Hash::make('hXsThXsT'),
             'ruolo' => 'paziente'],
             ['username' => 'staffstaff',
             'nome' => 'staff',
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'telefono'=> '123456780',
             'email' => 'staffstaff@example.com',
             'indirizzo' => 'via geppetto',
-            'password' => Hash::make('xThSxThS'),
+            'password' => Hash::make('hXsThXsT'),
             'ruolo' => 'staff'],
             ['username' => 'adminadmin',
             'nome' => 'admin',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'telefono'=> '123456781',
             'email' => 'admin@example.com',
             'indirizzo' => 'via geppetto',
-            'password' => Hash::make('xThSxThS'),
+            'password' => Hash::make('hXsThXsT'),
             'ruolo' => 'amministratore']
         ]);
     }
