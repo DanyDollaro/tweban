@@ -18,7 +18,22 @@
 
         <!-- Orario -->
         <label class="label-text">Orario</label><br>
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;">
+            @for ($i = 0; $i < 24; $i++)
+                <label>
+                    <input type="checkbox" name="hours[]" value="{{ $i }}">
+                    {{ sprintf('%02d:00', $i) }}
+                </label>
+            @endfor
+        </div><br>
 
-        <button type="submit">Invia</button>
+        <button type="submit">Modifica</button>
     </form>
+
+    <!-- JS scripts -->
+    <script>
+        $(document).ready(function () {
+            $('#content-performances').on('change', performanceSelectOnChange);
+        });
+    </script>
 </div>

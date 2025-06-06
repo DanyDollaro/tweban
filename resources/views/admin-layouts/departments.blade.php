@@ -9,11 +9,13 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
 
+    <!-- JS modules -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
     <!-- Include the navbar -->
-    @include("admin-layouts.partials.navbar")
+    @include("admin-layouts.partials.navbar", ['title' => "Gestione dipartimenti"])
 
     <!-- Main page layout -->
     <div class="main">
@@ -22,14 +24,13 @@
     </div>
 
     <!-- JS Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
+    <script src="{{ asset('js/admin/departments.js') }}"></script>
     <script>
         // Make department globally available
         window.data = @json($data);
         console.log(window.data);
 
-        document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function() {
             // Set the first entry of the menu as selected
             setSelection($('.menu-item')[0]);
         });
