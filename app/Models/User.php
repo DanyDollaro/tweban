@@ -83,5 +83,9 @@ class User extends Authenticatable
 
         return in_array($this->ruolo, $roles);
     }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
 

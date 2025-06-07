@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgendaPrenotazioni; // Modello per l'agenda (se usato per appuntamenti confermati)
+use App\Models\Notification;
 use App\Models\Prenotazione;       // Modello per le richieste di prenotazione in attesa
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -114,6 +115,14 @@ public function accettaPrenotazione(Request $request, $id)
     $prenotazione->stato = 'accettata';
     $prenotazione->staff_id = Auth::id();
     $prenotazione->save();
+
+    // Creazione notifica per l'utente cliente
+    Notification::create([
+        'user_id' => $prenotazione->cliente_id,
+        'prenotazione_id' => $prenotazione->id,
+        'type' => 'prenotazione_accettata',
+        'message' => 'La tua prenotazione per ' . $prenotazione->tipologia_prestazione . ' è stata accettata.',
+    ]);
 
     return response()->json(['success' => true, 'message' => 'Prenotazione accettata con successo!']);
 }

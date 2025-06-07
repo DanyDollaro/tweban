@@ -14,9 +14,8 @@ class PazienteDashboardController extends Controller
         // come recuperare dati dal database.
         $user = Auth::user(); // Ottiene l'utente autenticato
         // Recupera le prestazioni dal database
-        
-        
 
-        return view('user_layouts.dashboard', compact('user')); 
+
+        return view('user_layouts.dashboard', compact('user'));
     }
 }

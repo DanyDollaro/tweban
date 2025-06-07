@@ -21,7 +21,6 @@
 
 @include('user_layouts.structure.navbar')
 
-
 <div class="welcome">
     <h1>Benvenuto in Area Riservata!</h1>
 </div>
@@ -29,7 +28,6 @@
 <div class="dashboard-container">
     @include('user_layouts.profile')
 </div>
-
 
 </body>
 

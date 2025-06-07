@@ -9,6 +9,7 @@ use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
+use App\Http\Controllers\NotificationController; // Importa il controller delle notifiche
 
 // Importa il controller di sessione autenticata di Breeze
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -87,6 +88,7 @@ Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->grou
     // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/notifiche', [NotificationController::class, 'mostraNotifiche'])->name('notifiche.utente');
     });
 }); // Fine del gruppo Route::middleware('auth')
 
