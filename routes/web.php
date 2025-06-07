@@ -66,20 +66,23 @@ Route::middleware('auth')->group(function () {
     });
 
     // Rotte per lo Staff
-    Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
-        Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-        // Stampa prestazione
-        Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
-        Route::get('/prenotazioni-oggi/{tipologia}', [StaffDashboardController::class, 'getAppointmentsByTipologia'])->name('prenotazioni.oggi');
+Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
+    Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+    // Stampa prestazione
+    Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
+    // Prenotazioni di oggi per tipologia
+    Route::get('/prenotazioni-oggi/{tipologia}', [StaffDashboardController::class, 'getAppointmentsByTipologia'])->name('prenotazioni.oggi');
+    Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+    // Accetta una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
+    // Modifica lo stato di una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
+    // Route per il bottone elimina
+    Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
+    // Route per ottenere giorni e orari disponibili per una prestazione
+    Route::get('/prenotazioni/{id}/disponibilita', [AgendaPrenotazioniStaffController::class, 'getDisponibilita'])->name('prenotazioni.disponibilita');
+});
 
-        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
-        // Accetta una prenotazione (POST)
-        Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
-        //Modifica lo stato di una prenotazione (POST)
-        Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
-        //Route per il bottone elimina
-        Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
-    });
 
     // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {

@@ -65,9 +65,12 @@ function confirmAcceptReservation() {
 
             // SOSTITUISCE l'ultima cella (quella col bottone) con il nuovo bottone
             row.find('td:last-child').html(newBtn);
-        }
-
+        },
+        error: function(xhr) {
+                alert('Giorno o orario non validi.');
+            }
     });
+    
 }
 
 function confirmModifyReservation() {
@@ -79,7 +82,7 @@ function confirmModifyReservation() {
         alert('Per favore, inserisci almeno il giorno o l\'ora dell\'appuntamento.');
         return;
     }
-
+    
     const dataDaInviare = {};
     if (giorno) dataDaInviare.data_prenotazione = giorno;
     if (orario) dataDaInviare.orario_prenotazione = orario;
@@ -101,6 +104,9 @@ function confirmModifyReservation() {
 
             row.find('.stato').text('Accettata');
         },
+        error: function(xhr) {
+                alert('Giorno o orario non validi.');
+            }
     });
 }
 

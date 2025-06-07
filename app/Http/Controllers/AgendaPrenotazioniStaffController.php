@@ -6,6 +6,7 @@ use App\Models\AgendaPrenotazioni; // Modello per l'agenda (se usato per appunta
 use App\Models\Prenotazione;       // Modello per le richieste di prenotazione in attesa
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaPrenotazioniStaffController extends Controller
 {
@@ -47,8 +48,8 @@ class AgendaPrenotazioniStaffController extends Controller
         }));
     }
 
-    public function accettaPrenotazione(Request $request, $id)
-    {
+public function accettaPrenotazione(Request $request, $id)
+{
     $request->validate([
         'data_prenotazione' => 'required|date_format:Y-m-d',
         'orario_prenotazione' => 'required|date_format:H:i',
@@ -56,34 +57,150 @@ class AgendaPrenotazioniStaffController extends Controller
 
     $prenotazione = Prenotazione::findOrFail($id);
 
-    $prenotazione->data_prenotazione = $request->input('data_prenotazione');
-    $prenotazione->orario_prenotazione = $request->input('orario_prenotazione');
+    $tipologia = $prenotazione->tipologia_prestazione;
+    $data = $request->input('data_prenotazione');
+    $orario = $request->input('orario_prenotazione');
+
+    // Traduci il giorno in italiano per il controllo (lunedi, martedi, ecc.)
+    $giornoItaliano = [
+        'Monday' => 'Lunedi',
+        'Tuesday' => 'Martedi',
+        'Wednesday' => 'Mercoledi',
+        'Thursday' => 'Giovedi',
+        'Friday' => 'Venerdi',
+        'Saturday' => 'Sabato',
+        'Sunday' => 'Domenica'
+    ][date('l', strtotime($data))] ?? null;
+
+    if (!$giornoItaliano) {
+        return response()->json(['error' => 'Data non valida.'], 422);
+    }
+
+    // 1) Controlla che il giorno sia abilitato per la prestazione
+    $giornoValido = DB::table('giorni_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->where('giorno', $giornoItaliano)
+        ->exists();
+
+    if (!$giornoValido) {
+        return response()->json(['error' => 'Il giorno selezionato non è disponibile per questa prestazione.'], 422);
+    }
+
+    // 2) Controlla che l'orario sia abilitato per la prestazione
+    $orarioValido = DB::table('orario_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->where('orario', $orario)
+        ->exists();
+
+    if (!$orarioValido) {
+        return response()->json(['error' => 'L\'orario selezionato non è disponibile per questa prestazione.'], 422);
+    }
+
+    // 3) Controlla che non ci sia già una prenotazione nello stesso giorno, orario, prestazione e stato accettato/confermato
+    $prenotazioneEsistente = Prenotazione::where('tipologia_prestazione', $tipologia)
+        ->where('data_prenotazione', $data)
+        ->where('orario_prenotazione', $orario)
+        ->whereIn('stato', ['accettata', 'confermata'])
+        ->where('id', '!=', $prenotazione->id)
+        ->exists();
+
+    if ($prenotazioneEsistente) {
+        return response()->json(['error' => 'Esiste già una prenotazione per questa prestazione, giorno e orario.'], 422);
+    }
+
+    // Aggiorna e salva
+    $prenotazione->data_prenotazione = $data;
+    $prenotazione->orario_prenotazione = $orario;
     $prenotazione->stato = 'accettata';
     $prenotazione->staff_id = Auth::id();
     $prenotazione->save();
 
     return response()->json(['success' => true, 'message' => 'Prenotazione accettata con successo!']);
-    
 }
 
 
-public function modifyReservationStatus(Request $request, $id)
-    {
+public function modifyReservationStatus(Request $request, $id){
+
     $prenotazione = Prenotazione::findOrFail($id);
 
-    if ($request->has('data_prenotazione')) {
-        $prenotazione->data_prenotazione = $request->input('data_prenotazione');
+    $tipologia = $prenotazione->tipologia_prestazione;
+    $data = $request->input('data_prenotazione') ?? $prenotazione->data_prenotazione;
+    $orario = $request->input('orario_prenotazione') ?? $prenotazione->orario_prenotazione;
+
+    // Giorno della settimana in italiano
+    $giornoItaliano = [
+        'Monday' => 'Lunedi',
+        'Tuesday' => 'Martedi',
+        'Wednesday' => 'Mercoledi',
+        'Thursday' => 'Giovedi',
+        'Friday' => 'Venerdi',
+        'Saturday' => 'Sabato',
+        'Sunday' => 'Domenica'
+    ][date('l', strtotime($data))] ?? null;
+
+    if (!$giornoItaliano) {
+        return response()->json(['error' => 'Data non valida.'], 422);
     }
 
-    if ($request->has('orario_prenotazione')) {
-        $prenotazione->orario_prenotazione = $request->input('orario_prenotazione');
+    //verifivica che il giorno sia abilitato per la prestazione
+    $giornoValido = DB::table('giorni_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->where('giorno', $giornoItaliano)
+        ->exists();
+
+    if (!$giornoValido) {
+        return response()->json(['error' => 'Il giorno selezionato non è disponibile per questa prestazione.'], 422);
+    }
+    //verifica che l'orario sia abilitato per la prestazione
+    $orarioValido = DB::table('orario_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->where('orario', $orario)
+        ->exists();
+        
+    if (!$orarioValido) {
+        return response()->json(['error' => 'L\'orario selezionato non è disponibile per questa prestazione.'], 422);
+    }
+    //verifica che non ci sia già una prenotazione nello stesso giorno, orario, prestazione e stato accettato/confermato
+    $prenotazioneEsistente = Prenotazione::where('tipologia_prestazione', $tipologia)
+        ->where('data_prenotazione', $data)
+        ->where('orario_prenotazione', $orario)
+        ->whereIn('stato', ['accettata', 'confermata'])
+        ->where('id', '!=', $prenotazione->id)
+        ->exists();
+    if ($prenotazioneEsistente) {
+        return response()->json(['error' => 'Esiste già una prenotazione per questa prestazione, giorno e orario.'], 422);
     }
 
+    // Applica le modifiche
+    $prenotazione->data_prenotazione = $data;
+    $prenotazione->orario_prenotazione = $orario;
+    $prenotazione->staff_id = Auth::id(); // opzionale: aggiorna lo staff
     $prenotazione->save();
 
     return response()->json([
         'success' => true,
         'message' => 'Prenotazione modificata con successo.'
+    ]);
+}
+
+public function disponibilita($id)
+{
+    $prenotazione = Prenotazione::findOrFail($id);
+    $tipologia = $prenotazione->tipologia_prestazione;
+
+    // Giorni disponibili
+    $giorni = DB::table('giorni_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->pluck('giorno');
+
+    // Orari disponibili
+    $orari = DB::table('orario_prestazioni')
+        ->where('tipologia_prestazione', $tipologia)
+        ->pluck('orario');
+
+    return response()->json([
+        'giorni' => $giorni,
+        'orari' => $orari,
     ]);
 }
 
