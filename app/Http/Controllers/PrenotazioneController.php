@@ -76,7 +76,7 @@ class PrenotazioneController extends Controller
         }
     }
 
-    $prestazioniQuery = Prestazione::query();
+    $prestazioniQuery = Prestazione::query(); 
 
     if ($searchPrestazione !== null) {
         $isWildcard = str_ends_with($searchPrestazione, '*');
