@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Rotte per lo Staff
-Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
+    Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
     Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
     // Stampa prestazione
     Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
@@ -82,14 +82,20 @@ Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->grou
     Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
     // Route per ottenere giorni e orari disponibili per una prestazione
     Route::get('/prenotazioni/{id}/disponibilita', [AgendaPrenotazioniStaffController::class, 'getDisponibilita'])->name('prenotazioni.disponibilita');
+    //route per le notifiche
 });
 
-
-    // Rotte per i Pazienti
+ // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/notifiche', [NotificationController::class, 'mostraNotifiche'])->name('notifiche.utente');
+        Route::delete('/prenotazioni/{id}', [PazienteDashboardController::class, 'destroy'])->name('prenotazioni.destroy');
+        Route::get('/storico', [PazienteDashboardController::class, 'storico'])->name('prenotazioni.passate');
+        
+        Route::get('/comunicazioni', function() {
+            return view('user_layouts.notifiche'); // Assicurati che esista in resources/views/paziente
+        })->name('messaggi');
     });
+
 }); // Fine del gruppo Route::middleware('auth')
 
 Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData']);

@@ -186,6 +186,14 @@ public function modifyReservationStatus(Request $request, $id){
     $prenotazione->staff_id = Auth::id(); // opzionale: aggiorna lo staff
     $prenotazione->save();
 
+    // Creazione notifica per l'utente cliente
+    Notification::create([
+        'user_id' => $prenotazione->cliente_id,
+        'prenotazione_id' => $prenotazione->id,
+        'type' => 'prenotazione_modificata',
+        'message' => 'La tua prenotazione per ' . $prenotazione->tipologia_prestazione . ' è stata modificata.',
+    ]);
+
     return response()->json([
         'success' => true,
         'message' => 'Prenotazione modificata con successo.'
@@ -238,11 +246,19 @@ public function fetchPrenotazioni(Request $request){
             ];
         }));
     }
-    public function deleteReservation($id)
+public function deleteReservation($id)
     {
         $prenotazione = Prenotazione::findOrFail($id);
-        $prenotazione->delete();
 
+        // Creazione notifica per l'utente cliente
+        Notification::create([
+            'user_id' => $prenotazione->cliente_id,
+            'prenotazione_id' => $prenotazione->id,
+            'type' => 'prenotazione_eliminata',
+            'message' => 'La tua prenotazione per ' . $prenotazione->tipologia_prestazione . ' è stata eliminata.',
+        ]);
+
+        $prenotazione->delete();
         return response()->json(['success' => true, 'message' => 'Prenotazione eliminata con successo!']);
     }
 }

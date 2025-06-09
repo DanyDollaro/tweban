@@ -19,7 +19,7 @@ public function up()
         $table->foreign('prenotazione_id')
                 ->references('id')
                 ->on('prenotazione') // <- usa il nome corretto
-                ->onDelete('cascade');
+                ->onDelete('set null'); // se la prenotazione viene cancellata, la notifica non viene eliminata ma il campo prenotazione_id diventa null
         $table->string('type'); // tipo notifica, es: "prenotazione_modificata"
         $table->text('message'); // testo notifica
         $table->timestamps();

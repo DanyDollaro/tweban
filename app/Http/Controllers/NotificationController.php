@@ -20,7 +20,7 @@ class NotificationController extends Controller
         // Recupera le notifiche non lette dell'utente, ordinate per data (opzionale)
         $notifications = $user->notifications()->get();
 
-        return view('user_layouts.dashboard', compact('notifications'));
+        return view('staff_layouts.notificheStaff', compact('notifications'));
     }
 
 }
