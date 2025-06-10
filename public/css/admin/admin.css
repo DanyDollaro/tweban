@@ -45,12 +45,38 @@ body {
     min-height: 0;
 }
 
+.analytics-content {
+    min-height: 0;
+}
+
 .sidebar-menu {
     flex: 0 0 18%;
     height: 100%;
     overflow-y: auto;
     padding: 10px;
     background: var(--accent-color-light-test);
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-buttons button {
+    flex: 1;
+    padding: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: var(--accent-color-light);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.filter-buttons button:hover {
+    background-color: var(--accent-color);
+    color: white;
 }
 
 .content-container {

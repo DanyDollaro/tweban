@@ -50,10 +50,16 @@ function calendarDateClick(info)
         i.prenotazioni.forEach(function(j, jj) {
             if ((j.data_prenotazione === date) && (j.tipologia_prestazione === $('#hidden-performance-type').val())) {
                 $('<option>', {
+                    // Store the index from window.data and the appointments array
                     value: `${ii}-${jj}`,
                     text: date.toString()
                 }).appendTo('#appointments-select');
             }
         });
     });
+}
+
+function appointmentSelectOnChange()
+{
+    console.log($(this).val());
 }

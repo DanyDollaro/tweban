@@ -20,7 +20,6 @@
     <!-- Include the navbar -->
     @include("admin-layouts.partials.navbar", ['title' => "Gestione prestazioni"])
 
-    <!-- Create the calendar holder -->
     <div class="main">
         <div class="sidebar-menu" style="flex: 0 0 18%;">
             @include("admin-layouts.partials.performances.sidebar-menu")
