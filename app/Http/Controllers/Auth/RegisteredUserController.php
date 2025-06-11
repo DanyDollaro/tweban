@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'nome' => ['required', 'string', 'max:255'],
             'cognome' => ['required', 'string', 'max:255'],
             'codice_fiscale' => ['required', 'string', 'size:16', 'unique:users,codice_fiscale'],
-            'data_nascita' => ['required', 'date', 'before:today'],
+            'data_nascita' => ['required', 'date', 'before:today','after_or_equal:1900-01-01'],
             'telefono' => ['required', 'string', 'regex:/^[0-9]{10,15}$/'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'indirizzo' => ['required', 'string', 'max:255'],
