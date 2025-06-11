@@ -18,7 +18,8 @@
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        @auth
+
+       @auth
           @switch(Auth::user()->ruolo)
               @case('paziente')
                   <a class="cta-btn d-none d-sm-block" href="{{ url('/paziente/dashboard') }}">Area Utente</a>

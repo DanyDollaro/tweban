@@ -21,7 +21,6 @@
 
 @include('user_layouts.structure.navbar')
 
-
 <div class="welcome">
     <h1>Benvenuto in Area Riservata!</h1>
 </div>
@@ -30,6 +29,9 @@
     @include('user_layouts.profile')
 </div>
 
-
 </body>
+
+ <footer>
+        <p>© {{ date('Y') }} Medilab. Tutti i diritti riservati.</p>
+    </footer>
 </html> 

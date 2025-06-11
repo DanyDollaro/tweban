@@ -7,23 +7,28 @@
     <!-- Styles definition -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
+
+    <!-- JS modules -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- Include the navbar -->
-    @include("admin-layouts.partials.navbar")
+    @include("admin-layouts.partials.navbar", ['title' => "Gestione prestazioni"])
 
+    <!-- Create the calendar holder -->
     <div class="main">
-        @include("admin-layouts.partials.departments.sidebar-menu")
-        <!-- Create the calendar holder -->
-        <div id="calendar"></div>
-        @include("admin-layouts.partials.departments.sidebar-properties")
+        <div class="sidebar-menu">
+            @include("admin-layouts.partials.performances.sidebar-menu")
+        </div>
+        <div id="calendar" style="flex: 1; padding: 35px;"></div>
     </div>
 
     <!-- JS Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/admin/sidebar-menu.js') }}"></script>
+    <script src="{{ asset('js/admin/performances.js') }}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        window.performances = @json($performances);
+
+        $(document).ready(function() {
             calendar = new FullCalendar.Calendar($('#calendar')[0], {
                 dateClick: calendarDateClick
             });

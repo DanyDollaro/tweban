@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\AgendaPrenotazioniStaffController;
+use App\Http\Controllers\AgendaStaffController;
 use App\Http\Controllers\DipartimentoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrenotazioneController;
-use App\Http\Controllers\StaffDashboardController; 
-
+use App\Http\Controllers\StaffDashboardController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
+use App\Http\Controllers\NotificationController; // Importa il controller delle notifiche
 
 // Importa il controller di sessione autenticata di Breeze
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -64,20 +67,34 @@ Route::middleware('auth')->group(function () {
     });
 
     // Rotte per lo Staff
-    Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
-        Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-        // Reindirizza la rotta base /staff alla dashboard specifica
-        Route::get('/', function() {
-            return redirect()->route('staff_layouts.staff');
-        });
-    });
+Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
+    Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+    // Stampa prestazione
+    Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
+    // Prenotazioni di oggi per tipologia
+    Route::get('/prenotazioni-oggi/{tipologia}', [StaffDashboardController::class, 'getAppointmentsByTipologia'])->name('prenotazioni.oggi');
+    Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+    // Accetta una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
+    // Modifica lo stato di una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
+    // Route per il bottone elimina
+    Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
+    // Route per ottenere giorni e orari disponibili per una prestazione
+    Route::get('/prenotazioni/{id}/disponibilita', [AgendaPrenotazioniStaffController::class, 'getDisponibilita'])->name('prenotazioni.disponibilita');
+});
+
 
     // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/notifiche', [NotificationController::class, 'mostraNotifiche'])->name('notifiche.utente');
     });
 }); // Fine del gruppo Route::middleware('auth')
 
+Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData']);
+Route::get('/admin/prestazioni', [AdminController::class, 'getPerformancesData']);
+Route::get('/admin/personale', [AdminController::class, 'getStaffData']);
 
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.

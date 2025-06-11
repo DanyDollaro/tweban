@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use App\Models\Prestazione;
+use App\Models\AgendaPrenotazioni;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Importa la facade Auth
-use Illuminate\View\View; // Importa la classe View
-use App\Models\Prestazione; 
+use Illuminate\Http\JsonResponse;
 
 class StaffDashboardController extends Controller
 {
@@ -16,23 +19,71 @@ class StaffDashboardController extends Controller
      */
     public function index(): View
     {
-        // Puoi aggiungere qui qualsiasi logica specifica per la dashboard dello staff,
-        // come recuperare dati dal database.
-        $user = Auth::user(); // Ottiene l'utente autenticato
-        // Recupera le prestazioni dal database
-        $rawPrestazioni = Prestazione::all();
-        // Prepara la collezione per la select, aggiungendo l'opzione "Tutte le Prestazioni"
-         $prestazioni_per_select = collect([
-            (object)['id' => 'all', 'nome' => 'Tutte le Prestazioni']
-        ])->merge($rawPrestazioni->map(function($item) {
-            // Qui è FONDAMENTALE usare 'tipologia' per il value (id) e 'nome' per il testo
-            // Assumendo che tu abbia una colonna 'nome' o 'descrizione' per il testo leggibile
-            return (object)['id' => $item->tipologia, 'nome' => $item->nome_prestazione_leggibile ?? $item->tipologia];
-            // Sostituisci 'nome_prestazione_leggibile' con il nome effettivo della colonna nel tuo DB
-            // che contiene la descrizione leggibile della prestazione (es. "Visita Cardiologica")
-            // Se non hai una colonna specifica per il nome leggibile, userà 'tipologia' come fallback
-        }));
+        $user = Auth::user();
 
-        return view('staff_layouts.staff', compact('user', 'prestazioni_per_select')); // Restituisce la vista staff.blade.php
+        $rawPrestazioni = Prestazione::all();
+
+        $prestazioni_per_select = collect([
+            (object)['id' => 'all', 'nome' => 'Tutte le Prestazioni']
+        ])->merge(
+            $rawPrestazioni->map(function ($item) {
+                return (object)[
+                    'id' => $item->tipologia,
+                    'nome' => $item->nome_prestazione_leggibile ?? $item->tipologia
+                ];
+            })
+        );
+
+        $today = Carbon::today()->toDateString();
+
+        $prenotazioni = AgendaPrenotazioni::where('data_prenotazione', $today)
+            ->where('stato', '!=', 'svolta')
+            ->with(['cliente', 'staff', 'prestazione'])
+            ->get();
+
+        return view('staff_layouts.staff', compact('user', 'prestazioni_per_select', 'prenotazioni'));
     }
+
+    /**
+     * Recupera le prenotazioni di oggi filtrate per tipologia via AJAX.
+     *
+     * @param Request $request
+     * @param string $tipologia
+     * @return JsonResponse
+     */
+    public function getAppointmentsByTipologia(Request $request, string $tipologia): JsonResponse
+    {
+        $today = Carbon::today()->toDateString();
+
+        $query = AgendaPrenotazioni::where('data_prenotazione', $today)
+            ->where('stato', '!=', 'svolta')
+            ->with(['cliente', 'staff', 'prestazione']);
+
+        if ($tipologia !== 'all') {
+            $query->where('tipologia_prestazione', $tipologia);
+        }
+
+        $prenotazioni = $query->get();
+
+        // Restituisci i dati in formato JSON
+        return response()->json($prenotazioni);
+    }
+    /**
+     * Mostra le prenotazioni di oggi (dashboard agenda).
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showToday(): View
+    {
+        $today = Carbon::today()->toDateString();
+
+        $prenotazioni = AgendaPrenotazioni::where('data_prenotazione', $today)
+            ->where('stato', '!=', 'accettata')
+            ->with(['cliente', 'staff', 'prestazione'])
+            ->get();
+            
+
+        return view('staff_layouts.agendaPrenotazioni', compact('prenotazioni'));
+    }
+    
 }

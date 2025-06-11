@@ -11,7 +11,7 @@
 </head>
 <body>
         <!-- Include the navbar -->
-        @include("admin-layouts.partials.navbar")
+        @include("admin-layouts.partials.navbar", ['title' => "Gestione staff"])
 
         <div>
             <!-- Setup the calendar div -->

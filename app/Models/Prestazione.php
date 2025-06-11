@@ -15,4 +15,16 @@ class Prestazione extends Model
     {
         return $this->belongsTo(Dipartimento::class, 'sp_dipartimento', 'specializzazione');
     }
+
+    public function giorni()
+    {
+        return $this->hasMany(GiornoPrestazione::class, 'tipologia_prestazione', 'tipologia');
+    }
+
+    // app/Models/Prestazione.php
+    public function orari()
+    {
+        return $this->hasMany(OrarioPrestazione::class, 'tipologia_prestazione', 'tipologia');
+    }
+
 }
