@@ -91,9 +91,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/prenotazioni/{id}', [PazienteDashboardController::class, 'destroy'])->name('prenotazioni.destroy');
         Route::get('/storico', [PazienteDashboardController::class, 'storico'])->name('prenotazioni.passate');
         
-        Route::get('/comunicazioni', function() {
-            return view('user_layouts.notifiche'); // Assicurati che esista in resources/views/paziente
-        })->name('messaggi');
+    
+        Route::get('/notifiche', [PazienteDashboardController::class, 'notifications'])->name('messaggi');
+        Route::get('/notifiche/count', [PazienteDashboardController::class, 'getUnreadNotificationsCount']);
+
+        
     });
 
 }); // Fine del gruppo Route::middleware('auth')

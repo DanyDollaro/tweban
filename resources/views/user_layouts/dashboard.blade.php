@@ -10,6 +10,7 @@
     window.Laravel = { csrfToken: '{{ csrf_token() }}' };
     </script>
      <script src="{{ asset('js/eliminaPrenotazione.js') }}"></script>
+      <script src="{{ asset('js/notifiche.js') }}"></script>
 
 </head>
 <body>
@@ -80,12 +81,29 @@
                 @endif
             </div>
         </div>
+
+
+        <div class="card">
+    <div class="card-body">
+        <h5>Notifiche</h5>
+        @if($unreadCount > 0)
+            <p>Hai {{ $unreadCount }} nuove notifiche.</p>
+        @else
+            <p>Nessuna nuova notifica.</p>
+        @endif
+    </div>
+</div>
+
     </main>
 
     {{-- Footer --}}
     <footer class="dashboard-footer">
         <p>© {{ date('Y') }} Medilab. Tutti i diritti riservati.</p>
     </footer>
+
+
+
+
 
 </body>
 </html>

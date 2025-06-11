@@ -22,6 +22,7 @@ public function up()
                 ->onDelete('set null'); // se la prenotazione viene cancellata, la notifica non viene eliminata ma il campo prenotazione_id diventa null
         $table->string('type'); // tipo notifica, es: "prenotazione_modificata"
         $table->text('message'); // testo notifica
+        $table->boolean('is_read')->default(false); // flag per lettura (default: non letta)
         $table->timestamps();
     });
 }

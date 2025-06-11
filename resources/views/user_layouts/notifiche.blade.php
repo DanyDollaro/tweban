@@ -11,7 +11,7 @@
 
     <!-- Bottone per tornare alla Dashboard -->
     <div class="top-buttons">
-        <form action="{{ route('dashboard') }}" method="GET">
+        <form action="{{ route('paziente.dashboard') }}" method="GET">
             <button type="submit">← Torna alla Dashboard</button>
         </form>
     </div>
@@ -20,27 +20,27 @@
         <h1>Notifiche</h1>
     </header>
 
-    @forelse(auth()->user()->notifications->sortByDesc('created_at') as $notifica)
-    <div class="notification {{ $notifica->type }}">
-        <p class="notification-type">
-            {{ ucfirst(str_replace('_', ' ', $notifica->type)) }}
-        </p>
-        <p class="notification-message">
-            {{ $notifica->message }}
-        </p>
-
-        @if($notifica->prenotazione)
-            <p class="notification-date">
-                Data prenotazione: {{ \Carbon\Carbon::parse($notifica->prenotazione->data_prenotazione)->format('d/m/Y') }}
-                ore {{ \Carbon\Carbon::parse($notifica->prenotazione->orario_prenotazione)->format('H:i') }}
+    @forelse($notifications as $notifica)
+        <div class="notification {{ $notifica->type }}">
+            <p class="notification-type">
+                {{ ucfirst(str_replace('_', ' ', $notifica->type)) }}
             </p>
-        @else
-            <p class="notification-date">Nessuna data disponibile.</p>
-        @endif
-    </div>
-@empty
-    <p class="no-notifications">Nessuna notifica disponibile.</p>
-@endforelse
+            <p class="notification-message">
+                {{ $notifica->message }}
+            </p>
 
+            @if($notifica->prenotazione)
+                <p class="notification-date">
+                    Data prenotazione: {{ \Carbon\Carbon::parse($notifica->prenotazione->data_prenotazione)->format('d/m/Y') }}
+                    ore {{ \Carbon\Carbon::parse($notifica->prenotazione->orario_prenotazione)->format('H:i') }}
+                </p>
+            @else
+                <p class="notification-date">Nessuna data disponibile.</p>
+            @endif
+        </div>
+    @empty
+        <p class="no-notifications">Nessuna notifica disponibile.</p>
+    @endforelse
+    
 </body>
 </html>
