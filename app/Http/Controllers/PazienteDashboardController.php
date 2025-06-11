@@ -26,6 +26,7 @@ class PazienteDashboardController extends Controller
         ->orderBy('orario_prenotazione', 'asc')
         ->get();
 
+
         return view('user_layouts.dashboard', compact('stampa')); 
     }
 

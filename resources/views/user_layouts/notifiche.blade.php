@@ -6,6 +6,7 @@
     <title>Dashboard Staff - Medilab</title>
     <link rel="stylesheet" href="{{ asset('css/notifiche.css') }}">
 </head>
+
 <body>
 
     <!-- Bottone per tornare alla Dashboard -->
@@ -19,21 +20,27 @@
         <h1>Notifiche</h1>
     </header>
 
-    @forelse(auth()->user()->notifications as $notifica)
-        <div class="notification {{ $notifica->type }}">
-            <p class="notification-type">
-                {{ ucfirst(str_replace('_', ' ', $notifica->type)) }}
-            </p>
-            <p class="notification-message">
-                {{ $notifica->message }}
-            </p>
+    @forelse(auth()->user()->notifications->sortByDesc('created_at') as $notifica)
+    <div class="notification {{ $notifica->type }}">
+        <p class="notification-type">
+            {{ ucfirst(str_replace('_', ' ', $notifica->type)) }}
+        </p>
+        <p class="notification-message">
+            {{ $notifica->message }}
+        </p>
+
+        @if($notifica->prenotazione)
             <p class="notification-date">
-                {{ $notifica->created_at->format('d/m/Y H:i') }}
+                Data prenotazione: {{ \Carbon\Carbon::parse($notifica->prenotazione->data_prenotazione)->format('d/m/Y') }}
+                ore {{ \Carbon\Carbon::parse($notifica->prenotazione->orario_prenotazione)->format('H:i') }}
             </p>
-        </div>
-    @empty
-        <p style="padding: 20px;">Nessuna notifica disponibile.</p>
-    @endforelse
+        @else
+            <p class="notification-date">Nessuna data disponibile.</p>
+        @endif
+    </div>
+@empty
+    <p class="no-notifications">Nessuna notifica disponibile.</p>
+@endforelse
 
 </body>
 </html>
