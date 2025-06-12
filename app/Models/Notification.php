@@ -8,6 +8,7 @@ class Notification extends Model
 {
     protected $fillable = ['user_id', 'prenotazione_id', 'type', 'message', 'is_read'];
 
+
     public function user()
     {
         return $this->belongsTo(User::class);

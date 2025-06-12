@@ -10,7 +10,6 @@
     {{-- IMPORTANTE: QUESTA PAGINA UTILIZZA SOLO JAVASCRIPT NATIVO, NESSUNA DIPENDENZA DA JQUERY --}}
     <!-- importa pagina blade in component header-admin-->
 
-
 </head>
 <body>
     <header>
@@ -33,7 +32,6 @@
                 <ul>
                     {{-- Il link per l'Agenda Prestazioni, potresti volerlo più specifico, non 'login' --}}
                     <li><a href="{{ route('staff.agenda') }}">Prenotazioni</a></li> {{-- Modificato da 'login' --}}
-                    <li><a href="#">Comunicazioni Interne</a></li>
 
                     {{-- Mostra il link Logout solo se l'utente è autenticato --}}
                     @auth
@@ -97,7 +95,9 @@
 <p id="no-appointments-message" style="display:none;">Nessun appuntamento trovato per la selezione.</p>
   </div>
 </section> {{-- Chiusura della sezione agenda-controls --}}
-    </main>
+
+</main>
+
     {{-- Collegamento al file JavaScript per la logica frontend --}}
     <script src="{{ asset('js/staff.js') }}"></script>
     <footer>

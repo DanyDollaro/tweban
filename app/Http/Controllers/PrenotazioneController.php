@@ -57,7 +57,7 @@ class PrenotazioneController extends Controller
         }
     }
 
-    // Se passo i controlli continuo con la query (come nel codice precedente)
+    // Se passo i controlli continuo con la query 
 
     $dipartimentiQuery = Dipartimento::query(); //inizializzazione nuova query
     $dipartimentiFiltered = collect(); //collezione vuota
@@ -76,6 +76,17 @@ class PrenotazioneController extends Controller
         }
     }
 
+    //se non esite un dipartimento
+    if ($searchDipartimento !== null && $dipartimentiFiltered->isEmpty()) {
+    return view('user_layouts.prenotazione', [
+        'dipartimenti' => $dipartimenti,
+        'prestazioni' => $prestazioni,
+        'prestazioniFiltered' => collect(),
+        'ricercaEffettuata' => true,
+        'erroreRicerca' => 'Nessun dipartimento trovato che corrisponde alla ricerca.',
+    ]);
+}
+
     $prestazioniQuery = Prestazione::query();
 
     if ($searchPrestazione !== null) {
@@ -90,6 +101,18 @@ class PrenotazioneController extends Controller
             $prestazioniQuery->where('tipologia', $searchPrestazione);
         }
     }
+
+    //se non esiste una prestazione
+    if ($searchPrestazione !== null && $prestazioniQuery->doesntExist()) {
+    return view('user_layouts.prenotazione', [
+        'dipartimenti' => $dipartimenti,
+        'prestazioni' => $prestazioni,
+        'prestazioniFiltered' => collect(),
+        'ricercaEffettuata' => true,
+        'erroreRicerca' => 'Nessuna prestazione trovata che corrisponde alla ricerca.',
+    ]);
+}
+
     //filtro per assegnare al dipartimento tutte la sue prestazioni
     if ($dipartimentiFiltered->isNotEmpty()) {
         $dipSpecializzazioni = $dipartimentiFiltered->pluck('specializzazione')->toArray();
@@ -117,7 +140,6 @@ class PrenotazioneController extends Controller
         'ricercaEffettuata'
     ));
 }
-
 
     public function store(Request $request)
     {
