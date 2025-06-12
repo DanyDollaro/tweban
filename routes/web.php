@@ -100,3 +100,5 @@ Route::get('/admin/personale', [AdminController::class, 'getStaffData']);
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
 require __DIR__.'/auth.php';
+
+//commento per commit
