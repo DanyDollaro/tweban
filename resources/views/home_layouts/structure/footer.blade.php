@@ -8,7 +8,7 @@
             <p>Via Brecce Bianche 12</p>
             <p>Ancona AN, 60131</p>
             <p class="mt-3"><strong>Tekefono:</strong> <span>+39 333 1234567</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p><strong>Email:</strong> <span>medilab@mail.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
             <a href=""><i class="bi bi-twitter-x"></i></a>
