@@ -27,7 +27,10 @@
         console.log(window.data);
 
         $(document).ready(function() {
-            setSelection($('.menu-item')[0]);
+            showNewUserContent();
+            if ($('.menu-item').length != 1) {
+                setSelection($('.menu-item')[0]);
+            }
         });
     </script>
 </body>
