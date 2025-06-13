@@ -26,14 +26,22 @@
     <!-- JS Scripts -->
     <script src="{{ asset('js/admin/departments.js') }}"></script>
     <script>
-        // Make department globally available
+        // Make the data globally available
         window.data = @json($data);
         console.log(window.data);
 
         $(document).ready(function() {
             // Set the first entry of the menu as selected
             setSelection($('.menu-item')[0]);
-        });
+
+            $('#department-form').on('submit', function () {
+                const department = $('#current_department').val();
+                const json = JSON.stringify(
+                        window.data.departments[department]
+                );
+                $('#department_data').val(json);
+            });
+         });
     </script>
 </body>
 </html>

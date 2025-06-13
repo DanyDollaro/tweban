@@ -100,9 +100,17 @@ Route::middleware('auth')->group(function () {
 
 }); // Fine del gruppo Route::middleware('auth')
 
-Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData']);
-Route::get('/admin/prestazioni', [AdminController::class, 'getPerformancesData']);
-Route::get('/admin/personale', [AdminController::class, 'getStaffData']);
+Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData'])->name('admin.departments');
+Route::get('/admin/prestazioni', [AdminController::class, 'getPerformancesData'])->name('admin.performances');
+Route::get('/admin/personale', [AdminController::class, 'getStaffData'])->name('admin.staff');
+Route::get('/admin/analytics', [AdminController::class, 'getAnalyticsData'])->name('admin.analytics');
+/// Richieste post
+// Prestazioni
+Route::post('/admin/prestazioni/update', [AdminController::class, 'updateReservation'])->name('admin.updateReservation');
+// Personale
+Route::post('/admin/personale/action', [AdminController::class, 'dispatchStaffAction'])->name('admin.staffAction');
+// Dipartimenti
+Route::post('/admin/dipartimenti/action', [AdminController::class, 'dispatchDepartmentAction'])->name('admin.departmentAction');
 
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
