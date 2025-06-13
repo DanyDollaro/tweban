@@ -1,5 +1,5 @@
 <div class="content">
-    <form id="department-form" method="POST" action="{{ route('admin.departmentAction') }}">
+    <form id="department-form" method="POST" action="{{ route('amministratore.departmentAction') }}">
 
         @csrf
 
