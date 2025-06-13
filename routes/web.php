@@ -59,9 +59,22 @@ Route::middleware('auth')->group(function () {
     // Queste rotte sono NELL'ULTIMO 'auth' middleware group.
 
     // Rotte per gli Amministratori
-    Route::middleware(['auth', 'admin_only'])->prefix('amministratore')->name('amministratore.')->group(function () {
-        Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData']);
-    });
+    Route::middleware(['auth', 'admin_only'])
+        ->prefix('amministratore')
+        ->name('amministratore.')
+        ->group(function () {
+            Route::get('/dashboard', [AdminController::class, 'getDepartmentsData'])->name('dashboard');
+
+            Route::get('/dipartimenti', [AdminController::class, 'getDepartmentsData'])->name('departments');
+            Route::get('/prestazioni', [AdminController::class, 'getPerformancesData'])->name('performances');
+            Route::get('/personale', [AdminController::class, 'getStaffData'])->name('staff');
+            Route::get('/analytics', [AdminController::class, 'getAnalyticsData'])->name('analytics');
+
+            // POST
+            Route::post('/prestazioni/update', [AdminController::class, 'updateReservation'])->name('updateReservation');
+            Route::post('/personale/action', [AdminController::class, 'dispatchStaffAction'])->name('staffAction');
+            Route::post('/dipartimenti/action', [AdminController::class, 'dispatchDepartmentAction'])->name('departmentAction');
+        });
 
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
@@ -96,18 +109,6 @@ Route::middleware('auth')->group(function () {
     });
 
 }); // Fine del gruppo Route::middleware('auth')
-
-Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData'])->name('admin.departments');
-Route::get('/admin/prestazioni', [AdminController::class, 'getPerformancesData'])->name('admin.performances');
-Route::get('/admin/personale', [AdminController::class, 'getStaffData'])->name('admin.staff');
-Route::get('/admin/analytics', [AdminController::class, 'getAnalyticsData'])->name('admin.analytics');
-/// Richieste post
-// Prestazioni
-Route::post('/admin/prestazioni/update', [AdminController::class, 'updateReservation'])->name('admin.updateReservation');
-// Personale
-Route::post('/admin/personale/action', [AdminController::class, 'dispatchStaffAction'])->name('admin.staffAction');
-// Dipartimenti
-Route::post('/admin/dipartimenti/action', [AdminController::class, 'dispatchDepartmentAction'])->name('admin.departmentAction');
 
 // --- Include le rotte di autenticazione predefinite di Breeze ---
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
