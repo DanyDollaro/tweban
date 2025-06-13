@@ -7,9 +7,9 @@
     </form>
     <nav class="navbar">
         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">Logout</a>
-        <a href="/admin/analytics" class="nav-link">Analytics</a>
-        <a href="/admin/dipartimenti" class="nav-link">Dipartimenti</a>
-        <a href="/admin/personale" class="nav-link">Personale</a>
-        <a href="/admin/prestazioni" class="nav-link">Prestazioni</a>
+        <a href="{{ route('amministratore.analytics') }}" class="nav-link">Analytics</a>
+        <a href="{{ route('amministratore.dashboard') }}" class="nav-link">Dipartimenti</a>
+        <a href="{{ route('amministratore.staff') }}" class="nav-link">Personale</a>
+        <a href="{{ route('amministratore.performances') }}" class="nav-link">Prestazioni</a>
     </nav>
 </div>
