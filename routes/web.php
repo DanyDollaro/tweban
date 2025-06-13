@@ -9,6 +9,7 @@ use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // Necessario per la logica nella rotta /dashboard
+use App\Http\Controllers\NotificationController; // Importa il controller delle notifiche
 
 // Importa il controller di sessione autenticata di Breeze
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -67,24 +68,36 @@ Route::middleware('auth')->group(function () {
 
     // Rotte per lo Staff
     Route::middleware(['auth', 'staff_only'])->prefix('staff')->name('staff.')->group(function () {
-        Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
-        // Stampa prestazione
-        Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
-        Route::get('/prenotazioni-oggi/{tipologia}', [StaffDashboardController::class, 'getAppointmentsByTipologia'])->name('prenotazioni.oggi');
+    Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
+    // Stampa prestazione
+    Route::get('/stampa-prestazione/{id}', [AgendaPrenotazioniStaffController::class, 'stampa'])->name('stampa-prestazione');
+    // Prenotazioni di oggi per tipologia
+    Route::get('/prenotazioni-oggi/{tipologia}', [StaffDashboardController::class, 'getAppointmentsByTipologia'])->name('prenotazioni.oggi');
+    Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
+    // Accetta una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
+    // Modifica lo stato di una prenotazione (POST)
+    Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
+    // Route per il bottone elimina
+    Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
+    // Route per ottenere giorni e orari disponibili per una prestazione
+    Route::get('/prenotazioni/{id}/disponibilita', [AgendaPrenotazioniStaffController::class, 'getDisponibilita'])->name('prenotazioni.disponibilita');
+    //route per le notifiche
+});
 
-        Route::get('/staff/agenda-prestazioni', [AgendaPrenotazioniStaffController::class, 'index'])->name('agenda');
-        // Accetta una prenotazione (POST)
-        Route::post('/prenotazioni/{id}/accetta', [AgendaPrenotazioniStaffController::class, 'accettaPrenotazione'])->name('prenotazioni.accetta');
-        //Modifica lo stato di una prenotazione (POST)
-        Route::post('/prenotazioni/{id}/modifica', [AgendaPrenotazioniStaffController::class, 'modifyReservationStatus'])->name('prenotazioni.modifica');
-        //Route per il bottone elimina
-        Route::post('/prenotazioni/{id}/elimina', [AgendaPrenotazioniStaffController::class, 'deleteReservation'])->name('prenotazioni.elimina');
-    });
-
-    // Rotte per i Pazienti
+ // Rotte per i Pazienti
     Route::middleware(['auth', 'paziente_only'])->prefix('paziente')->name('paziente.')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
+        Route::delete('/prenotazioni/{id}', [PazienteDashboardController::class, 'destroy'])->name('prenotazioni.destroy');
+        Route::get('/storico', [PazienteDashboardController::class, 'storico'])->name('prenotazioni.passate');
+        
+    
+        Route::get('/notifiche', [PazienteDashboardController::class, 'notifications'])->name('messaggi');
+        Route::get('/notifiche/count', [PazienteDashboardController::class, 'getUnreadNotificationsCount']);
+
+        
     });
+
 }); // Fine del gruppo Route::middleware('auth')
 
 Route::get('/admin/dipartimenti', [AdminController::class, 'getDepartmentsData'])->name('admin.departments');
@@ -103,3 +116,5 @@ Route::post('/admin/dipartimenti/action', [AdminController::class, 'dispatchDepa
 // Questo file contiene le rotte per login, logout, registrazione, reset password, ecc.
 // Non modificarlo direttamente, ma personalizza AuthenticatedSessionController per il reindirizzamento.
 require __DIR__.'/auth.php';
+
+//commento per commit

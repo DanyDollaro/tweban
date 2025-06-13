@@ -146,3 +146,11 @@ button:hover {
     margin-right: 6px;
 }
 
+.alert-warning {
+    color: #b94a48;
+    background-color: #f2dede;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #eed3d7;
+    border-radius: 4px;
+}

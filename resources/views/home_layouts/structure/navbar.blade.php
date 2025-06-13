@@ -18,6 +18,7 @@
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
+
        @auth
           @switch(Auth::user()->ruolo)
               @case('paziente')
@@ -26,16 +27,15 @@
               @case('staff')
                   <a class="cta-btn d-none d-sm-block" href="{{ url('/staff/dashboard') }}">Area Staff</a>
                   @break
-              @case('admin')
+              @case('amministratore')
                   <a class="cta-btn d-none d-sm-block" href="{{ url('/amministratore/dashboard') }}">Area Admin</a>
                   @break
           @endswitch
-      @endauth
+        @endauth
 
-      @guest
-          <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
-      @endguest
-
+        @guest
+            <a class="cta-btn d-none d-sm-block" href="{{ url('/login') }}">Login</a>
+        @endguest
 
     </div>
 

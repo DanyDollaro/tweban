@@ -14,11 +14,11 @@ class DipartimentiSeeder extends Seeder
     public function run(): void
     {
         DB::table('dipartimento')->insert([
-            ['specializzazione' => 'Cardiologia', 'descrizione' => 'DEPARTMENT XXX'],
-            ['specializzazione' => 'Ortopedia', 'descrizione' => 'DEPARTMENT XXX'],
-            ['specializzazione' => 'Dermatologia', 'descrizione' => 'DEPARTMENT XXX'],
-            ['specializzazione' => 'Ginecologia', 'descrizione' => 'DEPARTMENT XXX'],
-            ['specializzazione' => 'Neurologia', 'descrizione' => 'DEPARTMENT XXX'],
+            ['specializzazione' => 'Cardiologia', 'descrizione' => 'Diagnosi e cura delle malattie cardiovascolari'],
+            ['specializzazione' => 'Ortopedia', 'descrizione' => 'Trattamento di ossa, articolazioni e muscoli'],
+            ['specializzazione' => 'Dermatologia', 'descrizione' => 'Cura delle malattie della pelle e annessi cutanei'],
+            ['specializzazione' => 'Ginecologia', 'descrizione' => 'Salute del sistema riproduttivo femminile'],
+            ['specializzazione' => 'Neurologia', 'descrizione' => 'Diagnosi e trattamento delle malattie del sistema nervoso']
         ]);
     }
 }
