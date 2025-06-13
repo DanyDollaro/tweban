@@ -1,5 +1,5 @@
 <div class="user-edit-form">
-    <form method="POST" action="{{ route('admin.staffAction') }}">
+    <form method="POST" action="{{ route('amministratore.staffAction') }}">
         @csrf
         <input type="hidden" name="id" id="user-id">
 

@@ -1,7 +1,7 @@
 <!-- Used to store the current performance type -->
 <input type="hidden" id="hidden-performance-type">
 
-<form method="POST" action="{{ route('admin.updateReservation') }}" style="display: contents;">
+<form method="POST" action="{{ route('amministratore.updateReservation') }}" style="display: contents;">
     @csrf
 
     <!-- Used to store the reservation id -->
