@@ -75,7 +75,7 @@ class AdminController extends Controller
     {
         // Make a redirection in case the url does contains the date parameters
         if (!$request->has('start_date') || !$request->has('end_date')) {
-            return redirect()->route('admin.analytics', [
+            return redirect()->route('amministratore.analytics', [
                 'start_date' => now()->toDateString(),
                 'end_date' => now()->toDateString(),
             ]);

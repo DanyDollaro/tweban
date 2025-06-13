@@ -65,7 +65,6 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/dashboard', [AdminController::class, 'getDepartmentsData'])->name('dashboard');
 
-            Route::get('/dipartimenti', [AdminController::class, 'getDepartmentsData'])->name('departments');
             Route::get('/prestazioni', [AdminController::class, 'getPerformancesData'])->name('performances');
             Route::get('/personale', [AdminController::class, 'getStaffData'])->name('staff');
             Route::get('/analytics', [AdminController::class, 'getAnalyticsData'])->name('analytics');
