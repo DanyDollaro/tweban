@@ -1,31 +1,37 @@
 <div class="user-edit-form">
-    <form id="edit-user-form" method="POST" action="">
+    <form method="POST" action="{{ route('admin.staffAction') }}">
+        @csrf
         <input type="hidden" name="id" id="user-id">
 
-        <label for="username">Username</label><br>
+        <label class="label-text">Username</label><br>
         <input type="text" name="username" id="username" required><br><br>
 
-        <label for="nome">Nome</label><br>
-        <input type="text" name="nome" id="nome" required><br><br>
+        <label class="label-text">Nome</label><br>
+        <input type="text" name="name" id="name" required><br><br>
 
-        <label for="cognome">Cognome</label><br>
-        <input type="text" name="cognome" id="cognome" required><br><br>
+        <label class="label-text"> Cognome</label><br>
+        <input type="text" name="surname" id="surname" required><br><br>
 
-        <label for="data_nascita">Data di nascita</label><br>
-        <input type="date" name="data_nascita" id="data_nascita" required><br><br>
+        <label class="label-text">Data di nascita</label><br>
+        <input type="date" name="date_of_birth" id="date_of_birth" required><br><br>
 
-        <label for="telefono">Telefono</label><br>
-        <input type="text" name="telefono" id="telefono" required><br><br>
+        <label class="label-text">Codice Fiscale</label><br>
+        <input type="text" name="codice_fiscale" id="codice_fiscale" required><br><br>
 
-        <label for="email">Email</label><br>
+        <label class="label-text">Telefono</label><br>
+        <input type="text" name="phone" id="phone" required><br><br>
+
+        <label class="label-text">Email</label><br>
         <input type="email" name="email" id="email" required><br><br>
 
-        <label for="indirizzo">Indirizzo</label><br>
-        <input type="text" name="indirizzo" id="indirizzo" required><br><br>
+        <label class="label-text">Indirizzo</label><br>
+        <input type="text" name="address" id="address" required><br><br>
 
-        <label for="password">Nuova Password (lasciare vuoto per non modificarla)</label><br>
+        <label class="label-text">Nuova Password (lasciare vuoto per non modificarla)</label><br>
         <input type="password" name="password" id="password"><br><br>
 
-        <button type="submit">Salva modifiche</button>
+        <button type="submit" name="action" value="modify" id="modify-button">Modifica</button>
+        <button type="submit" name="action" value="delete" id="delete-button">Eilimina</button>
+        <button type="submit" name="action" value="create" id="create-button" hidden>Crea</button>
     </form>
 </div>

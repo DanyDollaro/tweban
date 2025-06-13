@@ -43,6 +43,8 @@
             });
             window.calendar.render();
 
+            $('#appointments-select').on('focus', appointmentSelectOnChange);
+
             // Set the first entry as selected
             setSelection($('.menu-item')[0]);
         });

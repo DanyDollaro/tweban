@@ -23,6 +23,11 @@
 
     <script src="{{ asset('js/admin/staff.js') }}"></script>
     <script>
-        console.log(@json($data));
+        window.data = @json($data);
+        console.log(window.data);
+
+        $(document).ready(function() {
+            setSelection($('.menu-item')[0]);
+        });
     </script>
 </body>

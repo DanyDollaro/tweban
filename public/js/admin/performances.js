@@ -23,7 +23,10 @@ function setSelection(el)
     $(el)
         .addClass('selected');
 
-    const performance = window.data.find(
+    $('#performance-post-form').show();
+    $('#new-performance-post-form').hide();
+
+    const performance = window.data.performances.find(
         obj => obj.tipologia === el.dataset.performance
     );
 
@@ -46,20 +49,38 @@ function calendarDateClick(info)
     // Empty the selector
     $('#appointments-select').empty();
 
-    window.data.forEach(function(i, ii) {
+    window.data.performances.forEach(function(i, ii) {
         i.prenotazioni.forEach(function(j, jj) {
             if ((j.data_prenotazione === date) && (j.tipologia_prestazione === $('#hidden-performance-type').val())) {
                 $('<option>', {
-                    // Store the index from window.data and the appointments array
-                    value: `${ii}-${jj}`,
+                    value: j.id,
                     text: date.toString()
                 }).appendTo('#appointments-select');
             }
         });
     });
+
+    $('#appointments-select').blur();
 }
 
 function appointmentSelectOnChange()
 {
-    console.log($(this).val());
+    // Get the currently selected prenotation
+    const reservation = window.data.reservations.find(r => { return r.id == $(this).val()});
+
+    // Get the associated client
+    const user = window.data.users.find(u => { return u.id == reservation.cliente_id });
+
+    $('#appointment-datetime').val(reservation.data_prenotazione);
+    $('#appointment-time').val(reservation.orario_prenotazione);
+
+    $('#p-name').text(user.nome);
+    $('#p-taxidcode').text(user.codice_fiscale);
+    $('#p-excluded-day').text(reservation.giorno_escluso);
+    $('#p-performance').text(reservation.tipologia_prestazione);
+
+    // Update the hidden input in order to store the reservation id
+    $('#reservation-id').val(reservation.id);
+
 }
+

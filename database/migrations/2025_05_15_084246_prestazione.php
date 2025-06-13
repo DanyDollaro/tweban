@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * @return void
      */
     public function up(): void
@@ -19,14 +19,12 @@ return new class extends Migration
             $table->string('descrizione',2000);
             $table->string('sp_dipartimento',100);
             $table->foreign('sp_dipartimento')->references('specializzazione')->on('dipartimento')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('staff_id')->nullable();
-            $table->foreign('staff_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     * 
+     *
      * @return void
      */
     public function down(): void

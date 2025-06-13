@@ -12,6 +12,8 @@ class Prenotazione extends Model
 
     protected $fillable = [
         'cliente_id',
+        'data_prenotazione',
+        'orario_prenotazione',
         'tipologia_prestazione',
         'giorno_escluso',
         'staff_id',
