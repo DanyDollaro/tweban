@@ -59,11 +59,8 @@ Route::middleware('auth')->group(function () {
     // Queste rotte sono NELL'ULTIMO 'auth' middleware group.
 
     // Rotte per gli Amministratori
-    Route::middleware('ruolo:amministratore')->prefix('amministratore')->name('amministratore.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin-layouts.departments'); // Assicurati che esista in resources/views/amministratore
-        })->name('dashboard');
-        // Aggiungi qui altre rotte specifiche per l'amministratore
+    Route::middleware(['auth', 'admin_only'])->prefix('amministratore')->name('amministratore.')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'getDepartmentsData'])->name('dashboard');
     });
 
     // Rotte per lo Staff
@@ -90,12 +87,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [PazienteDashboardController::class, 'index'])->name('dashboard');
         Route::delete('/prenotazioni/{id}', [PazienteDashboardController::class, 'destroy'])->name('prenotazioni.destroy');
         Route::get('/storico', [PazienteDashboardController::class, 'storico'])->name('prenotazioni.passate');
-        
-    
+
+
         Route::get('/notifiche', [PazienteDashboardController::class, 'notifications'])->name('messaggi');
         Route::get('/notifiche/count', [PazienteDashboardController::class, 'getUnreadNotificationsCount']);
 
-        
+
     });
 
 }); // Fine del gruppo Route::middleware('auth')

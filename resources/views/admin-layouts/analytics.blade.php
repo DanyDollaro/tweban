@@ -24,6 +24,9 @@
 
                     <label>A</label>
                     <input type="date" id="end_date" name="end_date" value="{{ request('end_date') }}">
+
+                    <button onclick="location.reload();">Ricarica</button>
+
                 </div>
             </form>
 
@@ -33,8 +36,6 @@
 
             <script>
                 window.data = @json($data);
-                console.log(window.data);
-
                 $('#search-bar').on('input', searchBarOnInput);
 
                 showGroup('performances');
