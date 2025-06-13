@@ -60,8 +60,8 @@ Route::middleware('auth')->group(function () {
 
     // Rotte per gli Amministratori
     Route::middleware(['auth', 'admin_only'])
-        ->prefix('amministratore')
-        ->name('amministratore.')
+        ->prefix('admin')
+        ->name('admin.')
         ->group(function () {
             Route::get('/dashboard', [AdminController::class, 'getDepartmentsData'])->name('dashboard');
 
